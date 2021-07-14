@@ -6,12 +6,12 @@ import reportWebVitals from './reportWebVitals';
 const mongoose = require('mongoose');
 //Falta body parser, dot env y port 
 
-//Conexion a base de datos.
-const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@veterinaria.yhplo.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
-const option = { useNewUrlParser: true, useUnifiedTopology: true }
-mongoose.connect(uri, option)
-.then(() => console.log('Base de datos conectada'))
-.catch(e => console.log('error db:', e));
+// //Conexion a base de datos.
+// const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@veterinaria.yhplo.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
+// const option = { useNewUrlParser: true, useUnifiedTopology: true }
+// mongoose.connect(uri, option)
+// .then(() => console.log('Base de datos conectada'))
+// .catch(e => console.log('error db:', e));
 
 
 ReactDOM.render(
