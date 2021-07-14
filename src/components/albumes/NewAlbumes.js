@@ -57,34 +57,34 @@ const NewAlbumes = () => {
            
             <div className="container mt-5">
                 <h3>DATOS DEL ALBUM</h3>
-            <div className="row mt-5">
-                <div className="col-xs-6 col-md-6 px-5">
-                    <div className="form-group ">
-                        <h6 >Nombre del Album</h6>
-                        <input
-                            type="text"
-                            autoComplete="off"
-                            placeholder="Nombre del album"
-                            className="form-control "
-                            name="nombre"
-                            onChange={handleChange}
-                        />
-                        <div className="form-group mt-4">
-                        <h6>Categoría</h6>
-                        <select
-                            className="form-control mb-5"
-                            name="categoria"
-                            onChange={handleChange}
-                        >
-                            <option value="" >--Seleccionar Categoría--</option>
-                            {categorias.map(categoria =>(
-                                <option
-                                    value={categoria.nombre}
-                                >{categoria.nombre}</option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
+                <div className="row mt-5">
+                    <div className="col-xs-6 col-md-6 px-5">
+                        <div className="form-group ">
+                            <h6 >Nombre del Album</h6>
+                            <input
+                                type="text"
+                                autoComplete="off"
+                                placeholder="Nombre del album"
+                                className="form-control "
+                                name="nombre"
+                                onChange={handleChange}
+                            />
+                            <div className="form-group mt-4">
+                                <h6>Categoría</h6>
+                                <select
+                                    className="form-control mb-5"
+                                    name="categoria"
+                                    onChange={handleChange}
+                                >
+                                    <option value="" >--Seleccionar Categoría--</option>
+                                    {categorias.map(categoria =>(
+                                        <option
+                                            value={categoria.nombre}
+                                        >{categoria.nombre}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div className="col-xs-6 col-md-6 px-5">
                         <div className="row">
@@ -92,14 +92,16 @@ const NewAlbumes = () => {
                                 <div className="form-group ">
                                     <div className="NewAlbumes_divinputPortada" htmlFor="inputPortada">
                                         <h5 className="newAlbumes_h5_subirportada">Subir Portada</h5>
+                                       
                                         <input
                                         type="file"
                                         id="inputPortada"
                                         className="NewAlbumes_inputPortada"
                                         name="portada"
                                         onChange={handleChangePortada}
+                                        
                                     />
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -120,17 +122,18 @@ const NewAlbumes = () => {
                 </div> 
                 <div className="row">
                     <div className="col-6 col-xs-12">
-                    {portada===null ? null :
-                    (<div className="container">
-                    <h6>Portada seleccionada:</h6>
-                    <img src={portada} className="NewAlbumes_previewPortada" alt="portada"></img>
-                    </div>
-                    )
-                    }
+                        {portada===null 
+                            ? null 
+                            :
+                                (
+                                    <div className="container">
+                                        <h6>Portada seleccionada:</h6>
+                                        <img src={portada} className="NewAlbumes_previewPortada" alt="portada"></img>
+                                    </div>
+                                )
+                        }
                     </div>
                     <div className="col-6 col-xs-12">
-                        
-                        
                     </div>
                 </div>
             </div>
