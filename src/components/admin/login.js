@@ -9,13 +9,13 @@ function Login() {
     })
 
     //funcion para actualizar los campos de texto del mail y password cada vez que cambian
-    function handleChange(event){
-        setUser({...user, [event.target.name]: event.target.value})
+    function handleChange(event) {
+        setUser({ ...user, [event.target.name]: event.target.value })
     }
 
     //esta funcion se ejecuta cuando haces click en el boton ingresar, 
     //falta impementar la validación del mail y password para que lo deje entrar a la pantalla de admin
-    function handleClick(){}
+    function handleClick() { }
 
 
     return (
@@ -30,7 +30,7 @@ function Login() {
                     value={user.email}
                     onChange={handleChange}
                     name="email"
-                     
+
                 />
                 <input
                     className="form-control"
@@ -39,7 +39,7 @@ function Login() {
                     value={user.password}
                     onChange={handleChange}
                     name="password"
-                     
+
                 />
                 <button
                     className="btn btn-warning btn-lg col-12 mt-4"
