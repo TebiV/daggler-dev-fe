@@ -1,0 +1,11 @@
+.inputFotos{
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 4vh 4vw;
+    font-size: 7vh;
+    cursor: pointer;
+}
+
+#inputFotos{
+    display:none
+}

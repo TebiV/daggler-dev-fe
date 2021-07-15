@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import {Link} from 'react-router-dom'
 import '../../css/NewAlbumes_css.css'
 import '../../css/BootstrapOverride.css'
+import Header from '../Header';
 
 //!COMENTARIOS GENERALES
 /*
@@ -30,6 +31,7 @@ const NewAlbumes = () => {
 
     });
     const [ portada , setPortada] = useState(null)
+    const [ portadaMostrar, setPortadaMostrar] = useState(null)
     
     //? NKP me dijo que los cargara por separado a los datos del album y a la portada, si encontramos alguna otra forma se vera
 
@@ -46,13 +48,19 @@ const NewAlbumes = () => {
     //*!Hay que reveer si el URL.createObjetct etc sirve para la carga a la base de datos o si hay que pasarlo sin eso
     const handleChangePortada = e =>{
         setPortada([
-            URL.createObjectURL(e.target.files[0])
+           e.target.files[0]
         ])
+        setPortadaMostrar(
+           URL.createObjectURL(e.target.files[0])
+        )
+        
         
     }
 
     //* No voy a comentar el codigo de html porque es una paja y no tiene sentido
     return (  
+        <>
+        <Header/>
        <form
         
        >
@@ -191,7 +199,7 @@ const NewAlbumes = () => {
                                 (
                                     <div className="container">
                                         <h6>Portada seleccionada:</h6>
-                                        <img src={portada} className="NewAlbumes_previewPortada" alt="portada"></img>
+                                        <img src={portadaMostrar} className="NewAlbumes_previewPortada" alt="portada"></img>
                                     </div>
                                 )
                         }
@@ -204,7 +212,7 @@ const NewAlbumes = () => {
             
 
       
-
+    </>
     );
 }
  
