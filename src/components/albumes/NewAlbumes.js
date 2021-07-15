@@ -60,7 +60,7 @@ const NewAlbumes = () => {
     //* No voy a comentar el codigo de html porque es una paja y no tiene sentido
     return (  
         <>
-        <Header/>
+        
        <form
         
        >
