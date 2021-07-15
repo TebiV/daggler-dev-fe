@@ -9,10 +9,11 @@
     height: 30vh;
     overflow: hidden;
     margin-bottom: 1rem;
-    transition: border 1.5s ease ;
+    transition: box-shadow 1s ease ;
   }
   .NewAlbumes_divinputPortada:hover {
-    border: 0.5px solid #eec63c
+    
+    box-shadow: 0 0 0 .2rem #eec63c;
   
   }
   .NewAlbumes_inputPortada{

@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import {Link} from 'react-router-dom'
 import '../../css/NewAlbumes_css.css'
+import '../../css/BootstrapOverride.css'
 
 //!COMENTARIOS GENERALES
 /*
@@ -56,10 +57,45 @@ const NewAlbumes = () => {
         
        >
            
-            <div className="container mt-5">
+            <div className="container-fluid mt-5">
                 <h3>DATOS DEL ALBUM</h3>
-                <div className="row mt-5">
-                    <div className="col-xs-6 col-md-6 px-5">
+                <div className="row mt-5  align-items-center ">
+                    <div className="col-xs-2 col-md-2  px-5 ">
+                        <div className="form-check mb-3">
+                            <input 
+                                className="form-check-input  " 
+                                type="checkbox"
+                                value=""
+                                name="privadoCheckbox"
+                                id="privadoCheckbox"
+                            />
+                            <label className="form-check-label" htmlFor="privadoCheckbox">Privado</label>
+                        </div>
+                        
+
+                       <div className="form-check mb-3">
+                            <input 
+                                className="form-check-input  " 
+                                type="checkbox"
+                                value=""
+                                name="descargasCheckbox"
+                                id="descargasCheckbox"
+                            />
+                            <label className="form-check-label" htmlFor="descargasCheckbox">Permitir Descargas</label>
+                       </div>
+
+                       <div className="form-check mb-3">
+                            <input 
+                                className="form-check-input  " 
+                                type="checkbox"
+                                value=""
+                                name="comprasCheckbox"
+                                id="comprasCheckbox"
+                            />
+                            <label className="form-check-label" htmlFor="comprasCheckbox">Permitir Compras</label>
+                       </div>
+                    </div>
+                    <div className="col-xs-4 col-md-4 px-5">
                         <div className="form-group ">
                             <h6 >Nombre del Album</h6>
                             <input
@@ -73,7 +109,7 @@ const NewAlbumes = () => {
                             <div className="form-group mt-4">
                                 <h6>Categoría</h6>
                                 <select
-                                    className="form-control mb-5"
+                                    className="form-control "
                                     name="categoria"
                                     onChange={handleChange}
                                 >
@@ -85,9 +121,34 @@ const NewAlbumes = () => {
                                     ))}
                                 </select>
                             </div>
+                            <div className="form-group mt-4">
+                                <h6 >Contraseña</h6>
+                                <input
+                                    type="password"
+                                    autoComplete="off"
+                                    placeholder="Contraseña del album"
+                                    className="form-control "
+                                    name="contraseña"
+                                    onChange={handleChange}
+
+                                />
+                            </div>
+                            <div className="form-group mt-4">
+                                <h6 >Repita la contraseña</h6>
+                                <input
+                                    type="password"
+                                    autoComplete="off"
+                                    placeholder="Contraseña del album"
+                                    className="form-control "
+                                    name="Repetir"
+                                    onChange={handleChange}
+
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className="col-xs-6 col-md-6 px-5">
+
+                    <div className="col-xs-5 col-md-5 px-5">
                         <div className="row">
                             <div className="col-12">
                                 <div className="form-group ">
@@ -120,6 +181,7 @@ const NewAlbumes = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="col-xs-1 col-md-1"></div>
                 </div> 
                 <div className="row">
                     <div className="col-6 col-xs-12">
