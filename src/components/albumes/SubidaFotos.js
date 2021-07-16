@@ -1,42 +1,32 @@
-import React,{useState, useEffect} from 'react';
+import React from 'react';
 import '../../css/SubidaFotos_css.css'
-import Slider from "react-slick";
 
+import Dropzone from "react-dropzone-uploader";
+import 'react-dropzone-uploader/dist/styles.css'
 
+// TODO: RECORDAR -> se debe pasar a "url" la url donde se va a subir, lo que podemos hacer es un http://amazon o base de datos/${idAlbum} 
 
 const SubidaFotos = () => {
 
 
-    //*State de fotos
-    const [fotos, setFotos] = useState([])
+    //*State de fotos comentado porque no lo uso
+    //const [fotos, setFotos] = useState([])
 
-    const [preview_urls, set_preview_urls] = useState([]);
-    const handleChange = (e: React.ChangeEvent) => {
-    set_preview_urls((prev) =>
-      prev.concat(
-        Array.from(e.target.files ?? []).map((f) =>
-          window.URL.createObjectURL( f )
-                )
-            )
-        );
+    //* de aca para abajo, es todo del componente dropzone-uploader
+    const getUploadParams = ({ file }) => {
+    const body = new FormData()
+    body.append('image', file)
+    return {
+      url: 'https://httpbin.org/post',
+      body
     };
-  useEffect(() => {
-    return () => {
-      preview_urls.forEach((url) => window.URL.revokeObjectURL(url));
-    };
-  }, []);
+    }
 
-    var settings = {
-        dots: true,
-        infinite: false,
-        speed: 100,
-        slidesToShow: 5,
-        slidesToScroll: 15,
-        centerMode: true,
-        focusOnSelect: true,
-        swipeToSlide:true
-        
-    };
+    const handleSubmit = (files, allFiles) => {
+    console.log(files.map(f => f.meta))
+    allFiles.forEach(f => f.remove())
+    }
+
 
     return ( 
         <div className="container-fluid">
@@ -46,26 +36,41 @@ const SubidaFotos = () => {
             </div>
 
             <div className="row">
-                <div className="col-xs-12 col-md-3">
+                
+                <div className="col-xs-12">
+                    
+                    <Dropzone 
+                        getUploadParams={getUploadParams}
+                        submitButtonDisabled="true"
+                        accept="image/*"
+                        onSubmit={handleSubmit}
+                        multiple={true}
+                        styles={{
+                            dropzone: { 
+                                minHeight: "80vh", 
+                                maxHeight: "80vh",
+                                maxWidth:"80vw",
+                                border: 0,
+                                overflowX:"hidden"
+                                }
+                            ,
+                            previewImage: {
+                                minHeight: 200,
+                                maxWidth: 500
+                            },
+                            preview:{
+                                minHeight:230,
+                                objectFit:"cover"
+                            },
+                            submitButton:{
+                                borderRadius:35
+                                
+                            }
+                            
+                        }}            
 
-                    <label className="inputFotos" htmlFor="inputFotos">+</label>
-                    <input
-                        type="file"
-                        id="inputFotos"
-                        multiple
-                        onChange={handleChange}
-                        accept=".png, .jpg, .raw"
                     />
-
-                </div>
-                <div className="col-xs-12 col-md-9">
-                    <Slider {...settings} className="mx-4">
-                        {preview_urls.map((url) => (
-                        <div>
-                            <img key={url} src={url} alt="" className="preview"></img>
-                        </div>
-                    ))}
-                    </Slider>
+                    
                 </div>
             </div>
 
