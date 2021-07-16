@@ -9,3 +9,15 @@
 #inputFotos{
     display:none
 }
+
+.previewContainer{
+    display:inline;
+    height: 40vh;
+    width: 30vw;
+    overflow-x: scroll;
+
+}
+.preview{
+    aspect-ratio: 1/1;
+    max-height: 20vh;
+}
