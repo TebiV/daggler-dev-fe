@@ -5,6 +5,7 @@ import NewAlbumes from './components/albumes/NewAlbumes';
 import Login from "./components/admin/login";
 import Header from './components/Header';
 import SubidaFotos from './components/albumes/SubidaFotos';
+import FormDatosCliente from './components/compras/FormDatosCliente';
 function App() {
   return (
     <div>
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/new-album" component={NewAlbumes}/>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/subir-fotos" component={SubidaFotos}/>
+        <Route exact path="/carrito-2" component={FormDatosCliente}/>
         <Route exact  component={Header} />
       </Switch>
     </Router>

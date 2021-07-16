@@ -66,7 +66,7 @@ const NewAlbumes = () => {
        >
            
             <div className="container-fluid mt-5">
-                <h3>DATOS DEL ALBUM</h3>
+                <h3 className="font-weight-bold">DATOS DEL ALBUM</h3>
                 <div className="row mt-5  align-items-center ">
                     <div className="col-xs-2 col-md-2  px-5 ">
                         <div className="form-check mb-3">
@@ -77,7 +77,7 @@ const NewAlbumes = () => {
                                 name="privadoCheckbox"
                                 id="privadoCheckbox"
                             />
-                            <label className="form-check-label" htmlFor="privadoCheckbox">Privado</label>
+                            <label className="form-check-label font-weight-bold" htmlFor="privadoCheckbox">Privado</label>
                         </div>
                         
 
@@ -89,7 +89,7 @@ const NewAlbumes = () => {
                                 name="descargasCheckbox"
                                 id="descargasCheckbox"
                             />
-                            <label className="form-check-label" htmlFor="descargasCheckbox">Permitir Descargas</label>
+                            <label className="form-check-label font-weight-bold" htmlFor="descargasCheckbox">Permitir Descargas</label>
                        </div>
 
                        <div className="form-check mb-3">
@@ -100,12 +100,12 @@ const NewAlbumes = () => {
                                 name="comprasCheckbox"
                                 id="comprasCheckbox"
                             />
-                            <label className="form-check-label" htmlFor="comprasCheckbox">Permitir Compras</label>
+                            <label className="form-check-label font-weight-bold" htmlFor="comprasCheckbox">Permitir Compras</label>
                        </div>
                     </div>
                     <div className="col-xs-4 col-md-4 px-5">
                         <div className="form-group ">
-                            <h6 >Nombre del Album</h6>
+                            <h6 className="font-weight-bold">Nombre del Album</h6>
                             <input
                                 type="text"
                                 autoComplete="off"
@@ -115,7 +115,7 @@ const NewAlbumes = () => {
                                 onChange={handleChange}
                             />
                             <div className="form-group mt-4">
-                                <h6>Categoría</h6>
+                                <h6 className="font-weight-bold">Categoría</h6>
                                 <select
                                     className="form-control "
                                     name="categoria"
@@ -130,7 +130,7 @@ const NewAlbumes = () => {
                                 </select>
                             </div>
                             <div className="form-group mt-4">
-                                <h6 >Contraseña</h6>
+                                <h6 className="font-weight-bold">Contraseña</h6>
                                 <input
                                     type="password"
                                     autoComplete="off"
@@ -142,7 +142,7 @@ const NewAlbumes = () => {
                                 />
                             </div>
                             <div className="form-group mt-4">
-                                <h6 >Repita la contraseña</h6>
+                                <h6 className="font-weight-bold">Repita la contraseña</h6>
                                 <input
                                     type="password"
                                     autoComplete="off"
