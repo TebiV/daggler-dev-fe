@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-const mongoose = require('mongoose');
+
+//const mongoose = require('mongoose');
 //Falta body parser, dot env y port 
 
 // //Conexion a base de datos.
@@ -14,9 +15,13 @@ const mongoose = require('mongoose');
 // .catch(e => console.log('error db:', e));
 
 
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    
+      <App />
+    
+    
   </React.StrictMode>,
   document.getElementById('root')
 );

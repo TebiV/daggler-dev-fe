@@ -1,8 +1,10 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
+import axios from 'axios';
 import {Link} from 'react-router-dom'
+import Error from '../layout/Error';
 import '../../css/NewAlbumes_css.css'
 import '../../css/BootstrapOverride.css'
-import Header from '../Header';
+
 
 //!COMENTARIOS GENERALES
 /*
@@ -15,23 +17,29 @@ TODO: Intentar replantear el input porque da mas problemas que la mierda
 const NewAlbumes = () => {
 
     //Array de categorias hardcodeado
-    const categorias= [
-        {nombre:'XV'},
-        {nombre:'Casamientos'},
-        {nombre:'Egresos'},
-        {nombre:'Fiestas'}
-    ]
+    
 
     
 
     //* State para guardar el album con su nombre, categoria y foto
     const [album, setAlbum] = useState({
         nombre:'',
-        categoria:''
+        categoria:'',
+        password:'',
+        passwordrepeat:'',
+        privadoCheckbox:false,
+        descargasCheckbox:false,
+        comprasCheckbox:false,
+        portada:''
 
     });
-    const [ portada , setPortada] = useState(null)
+
     const [ portadaMostrar, setPortadaMostrar] = useState(null)
+    const [ categorias, setCategorias] = useState([])
+    const [error, setError] = useState({
+        isError: false,
+        errorMessage: ''
+    })
     
     //? NKP me dijo que los cargara por separado a los datos del album y a la portada, si encontramos alguna otra forma se vera
 
@@ -42,27 +50,93 @@ const NewAlbumes = () => {
             [e.target.name] : e.target.value,
             
         })
-        console.log(album.portada)
+        
     }
     //* Handle la carga de la portada, el URL ese lo saque de internet,
     //*!Hay que reveer si el URL.createObjetct etc sirve para la carga a la base de datos o si hay que pasarlo sin eso
     const handleChangePortada = e =>{
-        setPortada([
-           e.target.files[0]
-        ])
         setPortadaMostrar(
            URL.createObjectURL(e.target.files[0])
         )
+        setAlbum({
+            ...album,
+            portada: e.target.files[0]
+        })
         
         
     }
 
+    const handleChangeCheckbox = e => {
+        setAlbum({
+            ...album,
+            [e.target.name]:e.target.checked
+        })
+    }
+
+    const handleSubmit = e =>{
+        e.preventDefault();
+        //verificar campos vacios
+        if(album.nombre.trim()==='' || album.password.trim()===''|| album.passwordrepeat === '' || album.categoria.trim()===''){
+            //setear error
+            setError({
+                isError: true,
+                errorMessage: 'Todos los campos deben estar completos'
+            })
+            return;
+        }
+
+        //verificar contraseñas iguales
+        if(album.password!==album.passwordrepeat){
+            setError({
+                isError: true,
+                errorMessage: 'La confirmación de la contraseña debe ser igual a la contraseña'
+            })
+            return;
+        }
+        //verificar existencia de portada
+        if(album.portada===''){
+            setError({
+                isError: true,
+                errorMessage: 'El album debe tener una portada'
+            })
+            return;         
+        }
+
+        setError({
+            isError:false,
+            errorMessage:''
+        })
+        //enviar al back
+        console.log('Se subio con exito!')
+    }
+
+    
+    useEffect(() => {
+        const consultarAPI = async() =>{
+            const url= 'https://sod-daggler-be.herokuapp.com/api/category/allCategory'
+
+            const resultado = await axios.get(url)
+            setCategorias(resultado.data)
+        }
+        consultarAPI()
+    }, [])
+
     //* No voy a comentar el codigo de html porque es una paja y no tiene sentido
     return (  
         <>
-        
+        {error.isError ?
+            <>
+                <Error 
+                    mensaje={error.errorMessage}
+                    setError={setError}
+                />
+            </>
+            
+            :null
+        }
        <form
         
+        onSubmit={handleSubmit}
        >
            
             <div className="container-fluid mt-5">
@@ -76,6 +150,8 @@ const NewAlbumes = () => {
                                 value=""
                                 name="privadoCheckbox"
                                 id="privadoCheckbox"
+                                defaultChecked={false}
+                                onClick={handleChangeCheckbox}
                             />
                             <label className="form-check-label font-weight-bold" htmlFor="privadoCheckbox">Privado</label>
                         </div>
@@ -88,6 +164,7 @@ const NewAlbumes = () => {
                                 value=""
                                 name="descargasCheckbox"
                                 id="descargasCheckbox"
+                                onClick={handleChangeCheckbox}
                             />
                             <label className="form-check-label font-weight-bold" htmlFor="descargasCheckbox">Permitir Descargas</label>
                        </div>
@@ -99,6 +176,7 @@ const NewAlbumes = () => {
                                 value=""
                                 name="comprasCheckbox"
                                 id="comprasCheckbox"
+                                onClick={handleChangeCheckbox}
                             />
                             <label className="form-check-label font-weight-bold" htmlFor="comprasCheckbox">Permitir Compras</label>
                        </div>
@@ -124,8 +202,9 @@ const NewAlbumes = () => {
                                     <option value="" >--Seleccionar Categoría--</option>
                                     {categorias.map(categoria =>(
                                         <option
-                                            value={categoria.nombre}
-                                        >{categoria.nombre}</option>
+                                            key={categoria._id}
+                                            value={categoria.name}
+                                        >{categoria.name}</option>
                                     ))}
                                 </select>
                             </div>
@@ -136,7 +215,7 @@ const NewAlbumes = () => {
                                     autoComplete="off"
                                     placeholder="Contraseña del album"
                                     className="form-control "
-                                    name="contraseña"
+                                    name="password"
                                     onChange={handleChange}
 
                                 />
@@ -148,7 +227,7 @@ const NewAlbumes = () => {
                                     autoComplete="off"
                                     placeholder="Contraseña del album"
                                     className="form-control "
-                                    name="Repetir"
+                                    name="passwordrepeat"
                                     onChange={handleChange}
 
                                 />
@@ -170,7 +249,7 @@ const NewAlbumes = () => {
                                         name="portada"
                                         onChange={handleChangePortada}
                                         
-                                    />
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -193,7 +272,7 @@ const NewAlbumes = () => {
                 </div> 
                 <div className="row">
                     <div className="col-6 col-xs-12">
-                        {portada===null 
+                        {portadaMostrar===null 
                             ? null 
                             :
                                 (
