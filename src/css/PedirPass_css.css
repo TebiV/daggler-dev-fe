@@ -1,4 +1,4 @@
-.errorContainer{
+.passContainer{
     display: flex;
     position: absolute;
     height: 100%;
@@ -6,10 +6,10 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(92, 92, 92, 0.562);
-    z-index: 1;
+    z-index: 2;
 }
 
-.error{
+.pass{
     display: flex;
     width: 30vw;
     height: 20vh;
@@ -19,18 +19,21 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    z-index: 2;
+    z-index: 3;
+}
+.passform{
+    display: flex;
+    flex-direction: column;
 
 }
-
-.errorMensaje{
+.btnpass{
+    width:50%;
+    align-self: center;
+}
+.texto{
     font-weight: bold;
-    text-align: center;
-    padding: 1rem;
-  
 }
-
-.errorBtn{
-    margin: 1rem;
-    justify-content: center ;
+.cerrar{
+    align-self:flex-end;
+    cursor: pointer;
 }
