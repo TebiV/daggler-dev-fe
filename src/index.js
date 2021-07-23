@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-const mongoose = require('mongoose');
+import {createStore} from 'redux';
+import {albumesReducer} from './reducers/albumesReducer'
+import {Provider} from 'react-redux'
+//const mongoose = require('mongoose');
 //Falta body parser, dot env y port 
 
 // //Conexion a base de datos.
@@ -13,10 +16,14 @@ const mongoose = require('mongoose');
 // .then(() => console.log('Base de datos conectada'))
 // .catch(e => console.log('error db:', e));
 
+const store = createStore(albumesReducer)
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );

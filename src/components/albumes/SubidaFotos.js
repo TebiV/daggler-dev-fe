@@ -1,6 +1,6 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import '../../css/SubidaFotos_css.css'
-import axios from 'axios'
+
 
 import Dropzone from "react-dropzone-uploader";
 import 'react-dropzone-uploader/dist/styles.css'
@@ -29,15 +29,6 @@ const SubidaFotos = () => {
     allFiles.forEach(f => f.remove())
     }
 
-    useEffect(() => {
-        const consultarAPI = async() =>{
-            const url= 'https://sod-daggler-be.herokuapp.com/api/album/newAlbum/Data'
-
-            const resultado = await axios.get(url)
-            console.log(resultado)
-        }
-        consultarAPI()
-    }, [])
 
 
     return ( 
