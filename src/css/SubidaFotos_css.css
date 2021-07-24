@@ -13,3 +13,7 @@
 .dropzone{
     background-color: red;
 }
+
+.form-control{
+    display: inline;
+}

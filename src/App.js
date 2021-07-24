@@ -4,7 +4,7 @@ import Admin from './components/admin/Admin';
 import NewAlbumes from './components/albumes/NewAlbumes';
 import Login from "./components/auth/Login";
 import Header from './components/Header';
-import SubidaFotos from './components/albumes/SubidaFotos';
+import SubidaFotos from './components/fotografias/SubidaFotos';
 import FormDatosCliente from './components/compras/FormDatosCliente';
 import Albumes from './components/albumes/Albumes';
 import Logout from './components/auth/Logout';
