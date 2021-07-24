@@ -7,20 +7,23 @@ import Header from './components/Header';
 import SubidaFotos from './components/albumes/SubidaFotos';
 import FormDatosCliente from './components/compras/FormDatosCliente';
 import Albumes from './components/albumes/Albumes';
+import Logout from './components/auth/Logout';
 function App() {
   return (
     <div>
       <Router>
-      <Header ruta="XV"></Header>
         <Switch>
           {/* //CADA UNA DE LAS DIFERENTES PAGINAS. */}
           {/* <Route exact path = '/' component {Home}/>
         <Route exact path = '/' component {Login}/>
         
         <Route exact path = '/fotografias' component {Albumes}/> */}
+        {/* {rutas admin} */}
         <Route exact path="/admin" component={Admin}/>
         <Route exact path="/new-album" component={NewAlbumes}/>
-        <Route exact path="/login" component={Login}/>
+        <Route exact path="/admin/login" component={Login}/>
+        <Route exact path="/admin/logout" component={Logout}/>
+
         <Route exact path="/subir-fotos" component={SubidaFotos}/>
         <Route exact path="/carrito-2" component={FormDatosCliente}/>
         <Route exact path = "/albumes" component={Albumes}/>
