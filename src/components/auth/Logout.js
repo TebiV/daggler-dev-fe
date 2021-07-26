@@ -7,6 +7,8 @@ import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 //* todos lo hacen asi, asi que por las dudas hago lo mismo XD.
 const Logout = () => {
     localStorage.removeItem(DAGGLER_ADMIN);
+    localStorage.removeItem("IS_LOGGED_IN");
+
     return <Redirect to='/admin/login'></Redirect>;
 }
  

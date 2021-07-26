@@ -8,6 +8,7 @@ import SubidaFotos from './components/fotografias/SubidaFotos';
 import FormDatosCliente from './components/compras/FormDatosCliente';
 import Albumes from './components/albumes/Albumes';
 import Logout from './components/auth/Logout';
+import RequireAuth from './components/auth/RequireAuth';
 function App() {
   return (
     <div>
@@ -18,9 +19,9 @@ function App() {
         <Route exact path = '/' component {Login}/>
         
         <Route exact path = '/fotografias' component {Albumes}/> */}
-        {/* {rutas admin} */}
-        <Route exact path="/admin" component={Admin}/>
-        <Route exact path="/new-album" component={NewAlbumes}/>
+        {/* rutas admin (LAS DE LOGIN Y LOGOUT NO HAY QUE PROTEGERLAS)*/}
+        <Route exact path="/admin" component={() => <RequireAuth Component={Admin}/>}/>
+        <Route exact path="/new-album" component={() => <RequireAuth Component={NewAlbumes}/>}/>
         <Route exact path="/admin/login" component={Login}/>
         <Route exact path="/admin/logout" component={Logout}/>
 

@@ -1,5 +1,4 @@
-import React from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { DAGGLER_ADMIN } from "../token tags/DAGGLER_ADMIN";
 import Error from "../layout/Error";
 function Login() {
@@ -12,7 +11,7 @@ function Login() {
 
     //destructuring del user
     const { email, password } = user;
-    
+
     //este hook sirve para mandar una pantalla de error cuando se ingresen mail o pw incorrectos 
     const [loginFallido, setLoginFallido] = React.useState({
         isError: false,
@@ -31,35 +30,34 @@ function Login() {
 
         const url = 'https://sod-daggler-be.herokuapp.com/api/auth/login';
 
-        axios.post(
-            url,
-            {
-                email: email,
-                password: password
-            },
-            {
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            }
-        ).then(response => {
-            //guarda el token en el localStorage
-            localStorage.setItem(DAGGLER_ADMIN, response.data.token)
-            //si todo salio ok, redirige a la pantalla del admin
-            if (response.status === 200) {
-                window.location.href = '/admin'
-            }
+            },
+            body: JSON.stringify({ email: email, password: password })
+
+        }).then(res => {return res.json()})
+        .then(response => {
+            window.localStorage.setItem('DAGGLER_ADMIN', response.data.token);
+            window.location.href = '/admin';
         }).catch(error => {
             //muestra pantalla de error
             setLoginFallido({
                 isError: true,
-                errorMessage: "El E_Mail o contraseña ingresados son incorrectos"
+                errorMessage: "El E-Mail o contraseña ingresados son incorrectos"
             })
             //blanquea los inputs
             setUser({
                 email: "",
                 password: ""
             })
+            console.error(error)
         })
+
+
     }
 
 
@@ -69,7 +67,7 @@ function Login() {
 
             <div className="text-center" style={{ maxWidth: "320px", margin: "auto" }}>
                 <form onSubmit={handleIniciarSesion}>
-                    
+
                     <h1 className="mt-4 mb-4">Ingreso</h1>
                     <input
                         className="form-control mb-2"
