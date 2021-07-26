@@ -1,24 +1,19 @@
 import React,{useEffect,useState} from 'react';
 import axios from 'axios'
 import '../../css/SubidaFotos_css.css'
-
-
-import Dropzone from "react-dropzone-uploader";
-import 'react-dropzone-uploader/dist/styles.css'
-
+import Uploader from './Uploader';
 // TODO: RECORDAR -> se debe pasar a "url" la url donde se va a subir, lo que podemos hacer es un http://amazon o base de datos/${idAlbum}
 //* https://sod-daggler-be.herokuapp.com/ 
 
 const SubidaFotos = ({album_id}) => {
 
 
-    //*State de fotos comentado porque no lo uso
-    //const [fotos, setFotos] = useState([])
+    
 
     //*LOGICA DE GETEO DE CATEGORIAS Y SELECCION
     const [categorias, setCategorias] = useState([])
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('')
-    
+
     useEffect(() => {
         const getCategorias = async() =>{
             const url= 'https://sod-daggler-be.herokuapp.com/api/category/allCategory'
@@ -29,6 +24,7 @@ const SubidaFotos = ({album_id}) => {
         getCategorias()
     }, [])
 
+    //Guarda la categoria seleccionada para poder hacer el GET de los albumes
     const handleChangeCategoria = e =>{
         setCategoriaSeleccionada(e.target.value)
         if(e.target.value===""){
@@ -38,9 +34,10 @@ const SubidaFotos = ({album_id}) => {
 
     //*LOGICA DE GETEO DE ALBUMES Y SELECCION
     const [albumes, setAlbumes]  = useState([])
-    const [albumSeleccionado, setAlbumSeleccionado] = useState('[]')
+    const [albumSeleccionado, setAlbumSeleccionado] = useState({})
 
     useEffect(() => {
+        if(categoriaSeleccionada==='') return;
         const getAlbumes = async() =>{
             
             const url= `https://sod-daggler-be.herokuapp.com/api/album/${categoriaSeleccionada}`
@@ -53,31 +50,13 @@ const SubidaFotos = ({album_id}) => {
     }, [categoriaSeleccionada])
 
     const handleChangeAlbumes = e =>{
-        setAlbumSeleccionado(e.target.key)
-    }
-
-    //* de aca para abajo, es todo del componente dropzone-uploader
-    //!falta obtener correctamente la ID del album, se guarda en el state como undefined
-    const getUploadParams = ({ file }) => {
-    const body = new FormData()
-    body.append('image', file)
-    return {
-      url: `https://sod-daggler-be.herokuapp.com/api/album/${categoriaSeleccionada}/${albumSeleccionado}/uploadPhotos`,
-      body
-    };
-    }
-
-    const handleSubmit = (files, allFiles) => {
-    console.log(files.map(f => f.meta))
-    allFiles.forEach(f => f.remove())
-    }
-
+        setAlbumSeleccionado(e.target.value)
+    } 
     
-
-    
-
-
-
+    //* La categoria y el album seleccionados se pasan como props hacia el componente Uploader.js que los usa como parte de la Url de la API, 
+    //TODO: Tebi cambio la API, ahora puede omitirse la categoria, es decir, podemos no pasarla como prop, pero la necesitamos para getear los albumes
+    //? Quizas deberiamos preguntar si quiere que le agreguemos en la seleccion las fechas de cada album, para evitar confusion en nombres repetidos
+  
     return ( 
 
         <div className="container-fluid">
@@ -87,7 +66,7 @@ const SubidaFotos = ({album_id}) => {
             </div>
 
             <div className="row">
-                <div className="col-xs-12 col-md-6">
+                <div className="col-xs-12 col-md-6 mb-2">
                     <select
                     className="form-control "
                     name="categoria"
@@ -102,7 +81,7 @@ const SubidaFotos = ({album_id}) => {
                                     ))}
                 </select>
                 </div>
-                <div className="col-xs-12 col-md-6">
+                <div className="col-xs-12 col-md-6 ">
                     <select
                         className="form-control "
                         name="albumes"
@@ -112,7 +91,7 @@ const SubidaFotos = ({album_id}) => {
                         {albumes.map(album =>(
                             <option
                                 key={album._id}
-                                value={album.name}
+                                value={album._id}
                             >{album.name}</option>
                                         ))}
                     </select>
@@ -125,40 +104,24 @@ const SubidaFotos = ({album_id}) => {
             <div className="row">
                 
                 <div className="col-xs-12">
-                    
-                    <Dropzone 
-                        getUploadParams={getUploadParams}
-                        submitButtonDisabled="true"
-                        accept="image/*"
+                    {/*<form
                         onSubmit={handleSubmit}
-                        multiple={true}
-                        text="Click aquí o arrastra archivos para subirlos"
-                        inputContent={(image, extra) => (extra.reject ? 'Solo archivos de imagen' : 'Clickea aquí para buscar o arrastra archivos para subirlos')}
+                    >
+                    <input
+                        type="file"
+                        onChange={handleChange}
+                        multiple="true"
+                        accept="image/*"
+                    />
+                    <input 
+                        type="submit"
                         
-                        styles={{
-                            dropzone: { 
-                                minHeight: "80vh", 
-                                maxHeight: "80vh",
-                                maxWidth:"80vw",
-                                border: 0,
-                                overflowX:"hidden"
-                                }
-                            ,
-                            previewImage: {
-                                minHeight: 200,
-                                maxWidth: 500
-                            },
-                            preview:{
-                                minHeight:230,
-                                objectFit:"cover"
-                            },
-                            submitButton:{
-                                borderRadius:35
-                                
-                            }
-                            
-                        }}            
-
+                    />
+                    </form>
+                    */}
+                    <Uploader 
+                        categoriaSeleccionada={categoriaSeleccionada}
+                        albumSeleccionado={albumSeleccionado}
                     />
                     
                 </div>

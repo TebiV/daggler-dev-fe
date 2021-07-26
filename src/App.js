@@ -9,6 +9,7 @@ import FormDatosCliente from './components/compras/FormDatosCliente';
 import Albumes from './components/albumes/Albumes';
 import Logout from './components/auth/Logout';
 import RequireAuth from './components/auth/RequireAuth';
+
 function App() {
   return (
     <div>

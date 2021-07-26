@@ -6,11 +6,10 @@ import '../../css/NewAlbumes_css.css'
 import '../../css/BootstrapOverride.css'
 
 
+
 //!COMENTARIOS GENERALES
 /*
-TODO: Hay que agregar una clase al LINK para hacerlo un boton despues, en css
-TODO: hay que ver como modificar el input para que se quede centrado el texto
-TODO: Intentar replantear el input porque da mas problemas que la mierda
+TODO: Esto es caotico, hay que separarlo en partes
 */
 
 
@@ -23,6 +22,7 @@ const NewAlbumes = () => {
 
     //* State para guardar el album con su nombre, categoria y foto
     const [album, setAlbum] = useState({
+        id:'',
         nombre:'',
         categoria:'',
         password:'',
@@ -33,7 +33,8 @@ const NewAlbumes = () => {
         portada:''
 
     });
-
+    
+    //States. El de categorias se usa para el get en la API
     const [ portadaMostrar, setPortadaMostrar] = useState(null)
     const [ categorias, setCategorias] = useState([])
     const [error, setError] = useState({
@@ -41,7 +42,8 @@ const NewAlbumes = () => {
         errorMessage: ''
     })
     
-    //? NKP me dijo que los cargara por separado a los datos del album y a la portada, si encontramos alguna otra forma se vera
+    
+    
 
     //* A medida que vayan cambiando los campos, se van a ir guardando en el state con esta funcion
     const handleChange = e =>{
@@ -53,11 +55,12 @@ const NewAlbumes = () => {
         
     }
     //* Handle la carga de la portada, el URL ese lo saque de internet,
-    //*!Hay que reveer si el URL.createObjetct etc sirve para la carga a la base de datos o si hay que pasarlo sin eso
     const handleChangePortada = e =>{
         setPortadaMostrar(
            URL.createObjectURL(e.target.files[0])
         )
+
+        //Setea dentro del state del album la portada
         setAlbum({
             ...album,
             portada: e.target.files[0]
@@ -66,6 +69,7 @@ const NewAlbumes = () => {
         
     }
 
+    //Setea los valores por separados de los checkboxes al album
     const handleChangeCheckbox = e => {
         setAlbum({
             ...album,
@@ -75,7 +79,9 @@ const NewAlbumes = () => {
 
     const handleSubmit = e =>{
         e.preventDefault();
+
         //verificar campos vacios
+        
         if(album.nombre.trim()==='' || album.password.trim()===''|| album.passwordrepeat === '' || album.categoria.trim()===''){
             //setear error
             setError({
@@ -93,24 +99,82 @@ const NewAlbumes = () => {
             })
             return;
         }
+        //verificar largo de contraseña
+        if(album.password.length<6){
+            setError({
+                isError:true,
+                errorMessage:'La contraseña debe ser de un largo mayor a 6 caracteres'
+            })
+        }
         //verificar existencia de portada
         if(album.portada===''){
             setError({
                 isError: true,
                 errorMessage: 'El album debe tener una portada'
             })
-            return;         
+            return;     
         }
-
+        
+        //Limpia el error
         setError({
             isError:false,
             errorMessage:''
         })
-        //enviar al back
-        console.log('Se subio con exito!')
+
+
+        //*ENVIO AL BACK
+        //!El token va a tener que obtenerlo del localStorage 
+        //TODO: Change url 
+
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZjEyNmUzMjRiOTUwMjA3NDIwY2YyOSIsImlhdCI6MTYyNzI2MjU0NSwiZXhwIjoxNjI3MzQ4OTQ1fQ.91Hmt_gPlCXlCSx8Wbt6tXfQ5EXw6oMeip_mKMxIS5E'
+        const url = `http://190.105.215.221:9000/api/album/newAlbum/Data`
+
+        const albumEnvio = {
+            name: album.nombre,
+            password: album.password,
+            repeat_password: album.passwordrepeat,
+            category: album.categoria,
+            download: album.descargasCheckbox,
+            purchase: album.comprasCheckbox 
+        }
+        const headers= {
+            'Authorization' : `${token}`
+        };
+        async function submitAlbum() {
+            //*Esta primera parte sube los datos del formulario
+            const response = await axios.post(
+            url,
+            albumEnvio,
+            {headers}
+        )
+            //le doy al album el id de respuesta
+            setAlbum({
+                ...album,
+                id:`${response.data.data._id}`
+            })
+            
+            //*Esta segunda parte sube la portada con el id que devolvio el backend
+            const formData = new FormData()
+            formData.append('image',album.portada)
+            const options = {
+                method:'POST',
+                body: formData,
+                headers: {"Authorization": `${token}`}};
+            fetch(`http://190.105.215.221:9000/api/album/${response.data.data._id}/updateCover`,options)
+                .then((response) => response.json())
+                
+        }
+        submitAlbum()
+
+        
+
+        
+
+
+        
     }
 
-    
+    //*Consulta a la API por las categorias
     useEffect(() => {
         const consultarAPI = async() =>{
             const url= 'https://sod-daggler-be.herokuapp.com/api/category/allCategory'
@@ -139,10 +203,10 @@ const NewAlbumes = () => {
         onSubmit={handleSubmit}
        >
            
-            <div className="container-fluid mt-5">
+            <div className="container mt-5">
                 <h3 className="font-weight-bold">DATOS DEL ALBUM</h3>
                 <div className="row mt-5  align-items-center ">
-                    <div className="col-xs-2 col-md-2  px-5 ">
+                    <div className="col-xs-2 col-md-2  px-5 container-gris ">
                         <div className="form-check mb-3">
                             <input 
                                 className="form-check-input  " 
@@ -181,7 +245,7 @@ const NewAlbumes = () => {
                             <label className="form-check-label font-weight-bold" htmlFor="comprasCheckbox">Permitir Compras</label>
                        </div>
                     </div>
-                    <div className="col-xs-4 col-md-4 px-5">
+                    <div className="col-xs-4 col-md-4 px-5 container-gris">
                         <div className="form-group ">
                             <h6 className="font-weight-bold">Nombre del Album</h6>
                             <input
@@ -203,7 +267,7 @@ const NewAlbumes = () => {
                                     {categorias.map(categoria =>(
                                         <option
                                             key={categoria._id}
-                                            value={categoria.name}
+                                            value={categoria._id}
                                         >{categoria.name}</option>
                                     ))}
                                 </select>
@@ -236,7 +300,7 @@ const NewAlbumes = () => {
                     </div>
 
                     <div className="col-xs-5 col-md-5 px-5">
-                        <div className="row">
+                        <div className="row arriba">
                             <div className="col-12">
                                 <div className="form-group ">
                                     <div className="NewAlbumes_divinputPortada" htmlFor="inputPortada">

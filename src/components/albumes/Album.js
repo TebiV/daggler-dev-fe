@@ -5,7 +5,8 @@ import '../../css/Album_css.css'
 const Album = ({album,setPedirPass}) => {
 
     const {cover,_id,name,category,password,download,purchase,date} = album;
-
+    
+    //Pide la contrasenia
     const handleClick = () =>{
         setPedirPass({
             isActive:true,
