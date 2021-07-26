@@ -2,10 +2,24 @@
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
 
-
+//TODO: Actualmente esta enviando el formData vacio
+ 
 const Uploader = ({categoriaSeleccionada, albumSeleccionado}) => {
-    // specify upload params and url for your files
-    const getUploadParams = ({ meta }) => { return { url: `https://sod-daggler-be.herokuapp.com/api/album/${categoriaSeleccionada}/${albumSeleccionado}/uploadPhotos` } }
+
+  //URL de subida temporal
+  //const uploadUrl = `https://sod-daggler-be.herokuapp.com/api/album/${albumSeleccionado}/uploadPhotos`
+
+   // Mete al FormData todos los archivos
+   const getUploadParams = ({ file }) => {
+    const body = new FormData();
+    for (let i = 0; i < file.length; i++) {
+      body.append(`multi-images`, file[i]);
+      console.log('Image appended')
+      
+  }
+    return { url: `http://190.105.215.221:9000/api/album/XV/60faf8f46a6e4041e8765992/uploadPhotos`, body
+   }
+  }
     
     // called every time a file's `status` changes
     const handleChangeStatus = ({ meta, file }, status) => { console.log(status, meta, file) }
@@ -19,12 +33,11 @@ const Uploader = ({categoriaSeleccionada, albumSeleccionado}) => {
     return (
       <Dropzone
         getUploadParams={getUploadParams}
-        submitButtonDisabled="true"
-        
+        submitButtonDisabled={true}
+        name="multi-image"
+        inputContent={(image, extra) => (extra.reject ? 'Solo archivos de imagen' : 'Clickea aquí para buscar o arrastra archivos para subirlos')}
         onSubmit={handleSubmit}
         multiple={true}
-        text="Click aquí o arrastra archivos para subirlos"
-        inputContent={(image, extra) => (extra.reject ? 'Solo archivos de imagen' : 'Clickea aquí para buscar o arrastra archivos para subirlos')}
         onChangeStatus={handleChangeStatus}
         styles={{
             dropzone: { 

@@ -8,13 +8,12 @@ import Uploader from './Uploader';
 const SubidaFotos = ({album_id}) => {
 
 
-    //*State de fotos comentado porque no lo uso
-    //const [fotos, setFotos] = useState([])
+    
 
     //*LOGICA DE GETEO DE CATEGORIAS Y SELECCION
     const [categorias, setCategorias] = useState([])
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('')
-    
+
     useEffect(() => {
         const getCategorias = async() =>{
             const url= 'https://sod-daggler-be.herokuapp.com/api/category/allCategory'
@@ -25,6 +24,7 @@ const SubidaFotos = ({album_id}) => {
         getCategorias()
     }, [])
 
+    //Guarda la categoria seleccionada para poder hacer el GET de los albumes
     const handleChangeCategoria = e =>{
         setCategoriaSeleccionada(e.target.value)
         if(e.target.value===""){
@@ -37,6 +37,7 @@ const SubidaFotos = ({album_id}) => {
     const [albumSeleccionado, setAlbumSeleccionado] = useState({})
 
     useEffect(() => {
+        if(categoriaSeleccionada==='') return;
         const getAlbumes = async() =>{
             
             const url= `https://sod-daggler-be.herokuapp.com/api/album/${categoriaSeleccionada}`
@@ -50,15 +51,12 @@ const SubidaFotos = ({album_id}) => {
 
     const handleChangeAlbumes = e =>{
         setAlbumSeleccionado(e.target.value)
-    }
-
-    //* de aca para abajo, es todo del componente dropzone-uploader
+    } 
     
+    //* La categoria y el album seleccionados se pasan como props hacia el componente Uploader.js que los usa como parte de la Url de la API, 
+    //TODO: Tebi cambio la API, ahora puede omitirse la categoria, es decir, podemos no pasarla como prop, pero la necesitamos para getear los albumes
+    //? Quizas deberiamos preguntar si quiere que le agreguemos en la seleccion las fechas de cada album, para evitar confusion en nombres repetidos
   
-    
-  
-
-
     return ( 
 
         <div className="container-fluid">
@@ -106,7 +104,21 @@ const SubidaFotos = ({album_id}) => {
             <div className="row">
                 
                 <div className="col-xs-12">
-                    
+                    {/*<form
+                        onSubmit={handleSubmit}
+                    >
+                    <input
+                        type="file"
+                        onChange={handleChange}
+                        multiple="true"
+                        accept="image/*"
+                    />
+                    <input 
+                        type="submit"
+                        
+                    />
+                    </form>
+                    */}
                     <Uploader 
                         categoriaSeleccionada={categoriaSeleccionada}
                         albumSeleccionado={albumSeleccionado}

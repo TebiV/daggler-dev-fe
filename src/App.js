@@ -8,6 +8,7 @@ import SubidaFotos from './components/fotografias/SubidaFotos';
 import FormDatosCliente from './components/compras/FormDatosCliente';
 import Albumes from './components/albumes/Albumes';
 import Logout from './components/auth/Logout';
+
 function App() {
   return (
     <div>
