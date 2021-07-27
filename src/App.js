@@ -26,7 +26,7 @@ function App() {
         <Route exact path="/admin/login" component={Login}/>
         <Route exact path="/admin/logout" component={Logout}/>
 
-        <Route exact path="/subir-fotos" component={SubidaFotos}/>
+        <Route path="/subir-fotos" component={SubidaFotos}/>
         <Route exact path="/carrito-2" component={FormDatosCliente}/>
         <Route exact path = "/albumes" component={Albumes}/>
         <Route exact  component={Header} />
