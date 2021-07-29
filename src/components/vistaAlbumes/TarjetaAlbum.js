@@ -14,7 +14,10 @@ const TarjetaAlbum = ({ album }) => {
                 <div className="col-5 my-auto">
                     <h5>{album.name}</h5>
                 </div>
-                <button className="btn btn-outline-secondary col-1 my-auto ms-auto" onClick={()=> alert('editar no implementado')}>Editar</button>
+                
+                <button className="btn btn-secondary col-1 my-auto ms-auto" onClick={()=> alert('editar no implementado')}>Editar</button>
+                <button className="btn btn-outline-secondary col-1 my-auto ms-2" onClick={()=> alert('editar no implementado')}>Eliminar</button>
+
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
-import NewAlbumes from '../../albumes/NewAlbumes';
-import NavbarAdmin from '../NavbarAdmin';
+import NewAlbumes from '../admin/albumes/NewAlbumes';
+import NavbarAdmin from '../layout/NavbarAdmin';
  
 const AdminCrearAlbum = () => {
 

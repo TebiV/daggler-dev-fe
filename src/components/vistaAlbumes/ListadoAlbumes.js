@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { rutaAdminCrearAlbum } from '../../rutas/RutasAdmin';
+import { rutaAdminCrearAlbum } from '../rutas/RutasAdmin';
 import TarjetaAlbum from './TarjetaAlbum';
 
 const ListadoAlbumes = () => {
@@ -47,6 +47,7 @@ const ListadoAlbumes = () => {
     //estilo hardcodeado para el div con la lista de albumes
     const style = { maxHeight: 0.7 * (window.innerHeight) }
 
+    
     return (
         <>
             <div className="container mt-3 ">
@@ -59,7 +60,7 @@ const ListadoAlbumes = () => {
 
                         <div className="dropdown">
                             <button
-                                className="btn btn-warning dropdown-toggle"
+                                className="btn btn-secondary dropdown-toggle"
                                 type="button"
                                 id="dropdownFiltroCategoria"
                                 data-bs-toggle="dropdown"
@@ -95,20 +96,14 @@ const ListadoAlbumes = () => {
                         </form>
                     </div>
 
-                    <div className="btn-group">
+
                         <button
-                            className="btn btn-secondary"
+                            className="btn btn-warning"
                             onClick={() => window.location.pathname = rutaAdminCrearAlbum}
                         >
                             <i class="fas fa-plus me-1"></i> Añadir
                         </button>
-                        <button
-                            className="btn btn-secondary"
-                            onClick={() => alert("eliminar no implementado")}
-                        >
-                            <i class="fas fa-trash me-1"></i> Eliminar
-                        </button>
-                    </div>
+
                 </div>
 
                 <div style={style} className="overflow-auto mt-3">

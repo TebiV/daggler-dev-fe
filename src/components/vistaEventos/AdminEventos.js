@@ -1,5 +1,5 @@
 import React from 'react';
-import NavbarAdmin from './NavbarAdmin';
+import NavbarAdmin from '../layout/NavbarAdmin';
 
 const AdminEventos = () => {
 
