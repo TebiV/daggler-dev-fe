@@ -35,7 +35,7 @@ const Albumes = () => {
                 />
             :null
         }
-            <div className="container">
+            <div className="container-fluid">
                 <ListadoAlbumes 
                     albumes={albumes}
                     setPedirPass={setPedirPass}

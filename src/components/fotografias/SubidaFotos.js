@@ -1,12 +1,15 @@
 import React,{useEffect,useState} from 'react';
+import { useParams } from 'react-router';
 import axios from 'axios'
 import '../../css/SubidaFotos_css.css'
 import Uploader from './Uploader';
 // TODO: RECORDAR -> se debe pasar a "url" la url donde se va a subir, lo que podemos hacer es un http://amazon o base de datos/${idAlbum}
 //* https://sod-daggler-be.herokuapp.com/ 
 
-const SubidaFotos = ({album_id}) => {
+const SubidaFotos = () => {
 
+
+    
 
     
 
@@ -36,6 +39,10 @@ const SubidaFotos = ({album_id}) => {
     const [albumes, setAlbumes]  = useState([])
     const [albumSeleccionado, setAlbumSeleccionado] = useState({})
 
+    //*UseParams para extraer la id del album creado
+    const {album_id} = useParams();
+    console.log(album_id)
+    
     useEffect(() => {
         if(categoriaSeleccionada==='') return;
         const getAlbumes = async() =>{
@@ -53,6 +60,8 @@ const SubidaFotos = ({album_id}) => {
         setAlbumSeleccionado(e.target.value)
     } 
     
+
+
     //* La categoria y el album seleccionados se pasan como props hacia el componente Uploader.js que los usa como parte de la Url de la API, 
     //TODO: Tebi cambio la API, ahora puede omitirse la categoria, es decir, podemos no pasarla como prop, pero la necesitamos para getear los albumes
     //? Quizas deberiamos preguntar si quiere que le agreguemos en la seleccion las fechas de cada album, para evitar confusion en nombres repetidos
@@ -93,7 +102,7 @@ const SubidaFotos = ({album_id}) => {
                                 key={album._id}
                                 value={album._id}
                             >{album.name}</option>
-                                        ))}
+                                        )).reverse()}
                     </select>
                 </div>
                 
@@ -104,21 +113,7 @@ const SubidaFotos = ({album_id}) => {
             <div className="row">
                 
                 <div className="col-xs-12">
-                    {/*<form
-                        onSubmit={handleSubmit}
-                    >
-                    <input
-                        type="file"
-                        onChange={handleChange}
-                        multiple="true"
-                        accept="image/*"
-                    />
-                    <input 
-                        type="submit"
-                        
-                    />
-                    </form>
-                    */}
+                    
                     <Uploader 
                         categoriaSeleccionada={categoriaSeleccionada}
                         albumSeleccionado={albumSeleccionado}

@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import Error from '../layout/Error';
 import '../../css/NewAlbumes_css.css'
 import '../../css/BootstrapOverride.css'
@@ -15,8 +15,8 @@ TODO: Esto es caotico, hay que separarlo en partes
 
 const NewAlbumes = () => {
 
-    //Array de categorias hardcodeado
-    
+    //useHistory
+    const history = useHistory();
 
     
 
@@ -126,8 +126,8 @@ const NewAlbumes = () => {
         //!El token va a tener que obtenerlo del localStorage 
         //TODO: Change url 
 
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZjEyNmUzMjRiOTUwMjA3NDIwY2YyOSIsImlhdCI6MTYyNzI2MjU0NSwiZXhwIjoxNjI3MzQ4OTQ1fQ.91Hmt_gPlCXlCSx8Wbt6tXfQ5EXw6oMeip_mKMxIS5E'
-        const url = `http://190.105.215.221:9000/api/album/newAlbum/Data`
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZjEyNmUzMjRiOTUwMjA3NDIwY2YyOSIsImlhdCI6MTYyNzQxMTk1NywiZXhwIjoxNjI3NDk4MzU3fQ.FUJnNN5cvtsr90KOKjUIGdOngJbiyzJQPANmjEX8Bpo'
+        const url = `https://sod-daggler-be.herokuapp.com/api/album/newAlbum/Data`
 
         const albumEnvio = {
             name: album.nombre,
@@ -160,8 +160,9 @@ const NewAlbumes = () => {
                 method:'POST',
                 body: formData,
                 headers: {"Authorization": `${token}`}};
-            fetch(`http://190.105.215.221:9000/api/album/${response.data.data._id}/updateCover`,options)
+            fetch(`https://sod-daggler-be.herokuapp.com/api/album/${response.data.data._id}/updateCover`,options)
                 .then((response) => response.json())
+                .then((history.push({ pathname: '/subir-foto', state: album.id})))
                 
         }
         submitAlbum()

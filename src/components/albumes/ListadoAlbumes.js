@@ -7,9 +7,7 @@ const ListadoAlbumes = ({albumes,setPedirPass}) => {
 
     return ( 
         <>
-        
-            <div className="col-12 p-5 row">
-            
+            <div className="col-12 p-5 row ">
                 {albumes.map(album=>(
                     <Album
                     key={album._id}

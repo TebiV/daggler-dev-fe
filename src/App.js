@@ -14,10 +14,13 @@ import AdminPedidos from './components/admin/AdminPedidos';
 import AdminEventos from './components/admin/AdminEventos';
 import AdminPrecios from './components/admin/AdminPrecios';
 import AdminCrearAlbum from './components/admin/albumes/AdminCrearAlbum';
+import FotografiasAlbum from './components/fotografias/fotosEnAlbumes/FotografiasAlbum';
+
 function App() {
   return (
     <div>
       <Router>
+      <Route exact  component={Header} />
         <Switch>
           {/* //CADA UNA DE LAS DIFERENTES PAGINAS. */}
           {/* <Route exact path = '/' component {Home}/>
@@ -34,10 +37,11 @@ function App() {
         <Route exact path={rutaAdminEventos} component={() => <RequireAuth Component={AdminEventos}/>}/>
         <Route exact path={rutaAdminPrecios} component={() => <RequireAuth Component={AdminPrecios}/>}/>
 
-        <Route exact path="/subir-fotos" component={SubidaFotos}/>
+        <Route path="/subir-fotos" component={SubidaFotos}/>
         <Route exact path="/carrito-2" component={FormDatosCliente}/>
         <Route exact path = "/albumes" component={Albumes}/>
-        <Route exact  component={Header} />
+        <Route exact path="/photos/:albumid" component={FotografiasAlbum}/>
+        
         
       </Switch>
     </Router>
