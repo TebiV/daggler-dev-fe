@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
+import { rutaAdminLogin, rutaAdminLogout } from '../rutas/RutasAdmin';
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 
 //este componente sive para proteger las rutas del admin
@@ -11,9 +12,10 @@ const RequireAuth = ({ Component }) => {
 
     useEffect(() => {
         async function verifyTokenStillValid() {
-            //si no encuentra el token, lo manda a la pantalla de inicio
+            //si no encuentra el token, redirige a la pantalla de inicio,
+            //si lo encuentra, se fija si es valido
             if (!window.localStorage.getItem(DAGGLER_ADMIN)) {
-                return <Redirect to="/admin/login" />
+                console.log('puto')
             } else {
                 const url = 'https://sod-daggler-be.herokuapp.com/api/auth/middleware/verifyToken';
 
@@ -32,10 +34,23 @@ const RequireAuth = ({ Component }) => {
         verifyTokenStillValid();
     }, [])
 
+    //funcion que se ejecuta cuando se hace click en el boton OK del msj de error
+    function handleClick() {
+        //cuando se hace click en el boton redirike al logout para que se borre el tocken viejo
+        window.location.pathname = rutaAdminLogout
+    }
+
+
     return (
         <>
-            {!istokenValid
+            {window.localStorage.getItem(DAGGLER_ADMIN)
+            ?
+            <>
+            {istokenValid
                 ?
+                //si el token encontrado es valido no muestra nada
+                null
+                :
                 //esto que manda acá es un mensaje de error igual al componente Error.js que creó el Fran, 
                 //lo tuve que copypastear aca porque necesitaba que el boton de OK tuviese otra funcion
                 <div className="errorContainer">
@@ -45,17 +60,17 @@ const RequireAuth = ({ Component }) => {
                         </div>
                         <div className="row errorBtn">
                             <button className='btn btn-warning '
-                                onClick={window.location.href = 'admin/login'}
+                                onClick={handleClick}
                             >
                                 Ok
                             </button>
                         </div>
                     </div>
-                </div>
-                :
-                null
-            }
-            <Component />
+                </div>}
+            
+            <Component /></>
+            : 
+            <Redirect to= {rutaAdminLogin} />}
         </>)
 }
 

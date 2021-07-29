@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import Error from '../layout/Error';
 import '../../css/NewAlbumes_css.css'
 import '../../css/BootstrapOverride.css'
-
+import { rutaAdminAlbumes } from '../rutas/RutasAdmin';
 
 
 //!COMENTARIOS GENERALES
@@ -320,7 +320,7 @@ const NewAlbumes = () => {
                         </div>
                         <div className="row">
                             <div className="col-12 NewAlbumes_botones">
-                                <Link to={'/admin'}>
+                                <Link to={rutaAdminAlbumes}>
                                     <button type="button" className="btn btn-light">Volver</button>
                                 </Link>
                                 <input 

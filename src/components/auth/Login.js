@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { DAGGLER_ADMIN } from "../token tags/DAGGLER_ADMIN";
 import Error from "../layout/Error";
+import { rutaAdminAlbumes } from "../rutas/RutasAdmin";
 function Login() {
 
     //hook con objeto que maneja el mail y contraseña ingresados
-    const [user, setUser] = React.useState({
+    const [user, setUser] = useState({
         email: "",
         password: ""
     })
@@ -13,7 +14,7 @@ function Login() {
     const { email, password } = user;
 
     //este hook sirve para mandar una pantalla de error cuando se ingresen mail o pw incorrectos 
-    const [loginFallido, setLoginFallido] = React.useState({
+    const [loginFallido, setLoginFallido] = useState({
         isError: false,
         errorMessage: ''
     })
@@ -41,8 +42,8 @@ function Login() {
 
         }).then(res => {return res.json()})
         .then(response => {
-            window.localStorage.setItem('DAGGLER_ADMIN', response.data.token);
-            window.location.href = '/admin';
+            window.localStorage.setItem(DAGGLER_ADMIN, response.data.token);
+            window.location.href = rutaAdminAlbumes;
         }).catch(error => {
             //muestra pantalla de error
             setLoginFallido({
