@@ -9,11 +9,13 @@ import FormDatosCliente from './components/compras/FormDatosCliente';
 import Albumes from './components/albumes/Albumes';
 import Logout from './components/auth/Logout';
 import RequireAuth from './components/auth/RequireAuth';
+import FotografiasAlbum from './components/fotografias/fotosEnAlbumes/FotografiasAlbum';
 
 function App() {
   return (
     <div>
       <Router>
+      <Route exact  component={Header} />
         <Switch>
           {/* //CADA UNA DE LAS DIFERENTES PAGINAS. */}
           {/* <Route exact path = '/' component {Home}/>
@@ -21,6 +23,7 @@ function App() {
         
         <Route exact path = '/fotografias' component {Albumes}/> */}
         {/* rutas admin (LAS DE LOGIN Y LOGOUT NO HAY QUE PROTEGERLAS)*/}
+        
         <Route exact path="/admin" component={() => <RequireAuth Component={Admin}/>}/>
         <Route exact path="/new-album" component={() => <RequireAuth Component={NewAlbumes}/>}/>
         <Route exact path="/admin/login" component={Login}/>
@@ -29,7 +32,8 @@ function App() {
         <Route path="/subir-fotos" component={SubidaFotos}/>
         <Route exact path="/carrito-2" component={FormDatosCliente}/>
         <Route exact path = "/albumes" component={Albumes}/>
-        <Route exact  component={Header} />
+        <Route exact path="/photos/:albumid" component={FotografiasAlbum}/>
+        
         
       </Switch>
     </Router>
