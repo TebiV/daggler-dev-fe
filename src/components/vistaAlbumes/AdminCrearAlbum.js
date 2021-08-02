@@ -1,5 +1,5 @@
 import React from 'react';
-import NewAlbumes from '../admin/albumes/NewAlbumes';
+import NewAlbumes from './NewAlbumes';
 import NavbarAdmin from '../layout/NavbarAdmin';
  
 const AdminCrearAlbum = () => {

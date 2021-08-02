@@ -1,10 +1,10 @@
 import React,{useState, useEffect} from 'react';
 import axios from 'axios';
 import {Link, useHistory} from 'react-router-dom'
-import Error from '../../layout/Error';
-import '../../../css/NewAlbumes_css.css'
-import '../../../css/BootstrapOverride.css'
-import { rutaAdminAlbumes } from '../../rutas/RutasAdmin';
+import Error from '../layout/Error';
+import '../../css/NewAlbumes_css.css'
+import '../../css/BootstrapOverride.css'
+import { rutaAdminAlbumes } from '../rutas/RutasAdmin';
 
 
 //!COMENTARIOS GENERALES

@@ -8,9 +8,9 @@ import RequireAuth from './components/auth/RequireAuth';
 import { rutaAdminAlbumes, rutaAdminCrearAlbum, rutaAdminEventos, rutaAdminLogin, rutaAdminLogout, rutaAdminPedidos, rutaAdminPrecios } from './components/rutas/RutasAdmin';
 
 import AdminAlbumes from './components/vistaAlbumes/AdminAlbumes';
-import AdminPedidos from './components/admin/AdminPedidos';
+import AdminPedidos from './components/vistaPedidos/AdminPedidos';
 import AdminEventos from './components/vistaEventos/AdminEventos';
-import AdminPrecios from './components/admin/AdminPrecios';
+import AdminPrecios from './components/vistaPrecios/AdminPrecios';
 import AdminCrearAlbum from './components/vistaAlbumes/AdminCrearAlbum';
 
 function App() {

@@ -1,11 +1,11 @@
 import React from 'react';
-import HeaderAdmin from './NavbarAdmin';
+import NavbarAdmin from '../layout/NavbarAdmin';
 
 const AdminPedidos = () => {
 
     return (
         <>
-            <HeaderAdmin />
+            <NavbarAdmin />
             <h1>Pedidos</h1>
         </>);
 }
