@@ -5,10 +5,10 @@ import {rutaAdminAlbumes, rutaAdminEventos, rutaAdminLogout, rutaAdminPedidos, r
 const NavbarAdmin = () => {
 
     const categoriasAdmin = [
-        { nombre: 'Álbumes', ruta: rutaAdminAlbumes },
-        { nombre: 'Pedidos', ruta: rutaAdminPedidos },
-        { nombre: 'Eventos', ruta: rutaAdminEventos },
-        { nombre: 'Precios', ruta: rutaAdminPrecios }
+        { nombre: 'Álbumes', ruta: rutaAdminAlbumes, _id: "0" },
+        { nombre: 'Pedidos', ruta: rutaAdminPedidos, _id: "1"  },
+        { nombre: 'Eventos', ruta: rutaAdminEventos, _id: "2"  },
+        { nombre: 'Precios', ruta: rutaAdminPrecios, _id: "3"  }
     ]
     return (
         <nav className="navbar  navbar-expand-lg navbar-light bg-light">
@@ -33,6 +33,7 @@ const NavbarAdmin = () => {
                         {categoriasAdmin.map((categoria) => {
                             return (
                                 <NavLink
+                                    key={categoria._id}
                                     to={categoria.ruta}
                                     className="nav-link"
                                     activeClassName="active"

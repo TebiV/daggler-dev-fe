@@ -9,16 +9,27 @@ import Albumes from './components/albumes/Albumes';
 import Logout from './components/auth/Logout';
 import RequireAuth from './components/auth/RequireAuth';
 import { rutaAdminAlbumes, rutaAdminCrearAlbum, rutaAdminEventos, rutaAdminLogin, rutaAdminLogout, rutaAdminPedidos, rutaAdminPrecios } from './components/rutas/RutasAdmin';
-import AdminAlbumes from './components/admin/albumes/AdminAlbumes';
-import AdminPedidos from './components/admin/AdminPedidos';
-import AdminEventos from './components/admin/AdminEventos';
-import AdminPrecios from './components/admin/AdminPrecios';
-import AdminCrearAlbum from './components/admin/albumes/AdminCrearAlbum';
+
+
+import AdminAlbumes from './components/vistaAlbumes/AdminAlbumes';
+import AdminPedidos from './components/vistaPedidos/AdminPedidos';
+import AdminEventos from './components/vistaEventos/AdminEventos';
+import AdminPrecios from './components/vistaPrecios/AdminPrecios';
+import AdminCrearAlbum from './components/vistaAlbumes/AdminCrearAlbum';
+import { AlbumesProvider, useAlbumes } from './context/AlbumesContext';
+
+import SubidaFotos from './components/fotografias/SubidaFotos';
+import { CategoriasProvider } from './context/CategoriasContext';
+
+export default () => <CategoriasProvider><App></App></CategoriasProvider>
+
+
 function App() {
   return (
     <div>
       <Router>
         <Switch>
+
           {/* //CADA UNA DE LAS DIFERENTES PAGINAS. */}
           {/* <Route exact path = '/' component {Home}/>
         <Route exact path = '/' component {Login}/>
@@ -41,8 +52,8 @@ function App() {
         
       </Switch>
     </Router>
+
     </div>
   );
 }
 
-export default App;
