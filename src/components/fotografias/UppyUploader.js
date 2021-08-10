@@ -19,12 +19,12 @@ const uppy = new Uppy({
     restrictions: { allowedFileTypes: ["image/*"] },
     autoProceed: false,
     locale: Spanish,
+    proudlyDisplayPoweredByUppy: false,
   
   })
+  //TODO: Auth
   const token = localStorage.getItem(DAGGLER_ADMIN)
-  ///api/album/:albumId/uploadPhotos
-  //TODO: Solucionar error de subida de uppy Allow cors origin etc.
-  uppy.use(XHRUpload, { endpoint: 'https://sod-daggler-be.herokuapp.com/api/album/60fee394e6dd4e00156e0980/uploadPhotos',formData: true,timeout:0,method:'post' })
+  uppy.use(XHRUpload, { endpoint: 'https://sod-daggler-be.herokuapp.com/api/album/60fee394e6dd4e00156e0980/uploadPhotos',formData: true,fieldName:'multi-images', timeout:0,method:'post' })
 
 
 const UppyUploader = () => {
