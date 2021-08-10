@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios'
 import '../../css/SubidaFotos_css.css'
-import Uploader from './Uploader';
+import UppyUploader from './UppyUploader';
 // TODO: RECORDAR -> se debe pasar a "url" la url donde se va a subir, lo que podemos hacer es un http://amazon o base de datos/${idAlbum}
 //* https://sod-daggler-be.herokuapp.com/ 
 
@@ -66,6 +66,8 @@ const SubidaFotos = () => {
     //TODO: Tebi cambio la API, ahora puede omitirse la categoria, es decir, podemos no pasarla como prop, pero la necesitamos para getear los albumes
     //? Quizas deberiamos preguntar si quiere que le agreguemos en la seleccion las fechas de cada album, para evitar confusion en nombres repetidos
   
+   
+   
     return ( 
 
         <div className="container-fluid">
@@ -112,12 +114,9 @@ const SubidaFotos = () => {
 
             <div className="row">
                 
-                <div className="col-xs-12">
+                <div className="col-xs-12 uppyuploader-container">
                     
-                    <Uploader 
-                        categoriaSeleccionada={categoriaSeleccionada}
-                        albumSeleccionado={albumSeleccionado}
-                    />
+                        <UppyUploader />
                     
                 </div>
             </div>
@@ -125,7 +124,7 @@ const SubidaFotos = () => {
             <div className="row">
 
             </div>
-            <div className="row"></div>
+            
         </div>
      );
 }

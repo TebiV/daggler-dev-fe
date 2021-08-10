@@ -17,3 +17,23 @@
 .form-control{
     display: inline;
 }
+
+.uppyuploader-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5rem;
+}
+.uppy-StatusBar-actionBtn--upload{
+    background-color:  #ffc107 !important;
+    border-radius: 35px !important;
+    color: black !important;
+}
+
+.uppy-StatusBar-actionBtn--upload:hover{
+    
+    background-color: #e6ac00 !important;
+    border-radius: 35px !important;
+    color: black !important
+    
+}
