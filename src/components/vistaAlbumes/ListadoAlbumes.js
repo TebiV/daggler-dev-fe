@@ -2,61 +2,61 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { rutaAdminCrearAlbum } from '../rutas/RutasAdmin';
 import TarjetaAlbum from './TarjetaAlbum';
+import { useCategorias } from '../../context/CategoriasContext';
+import { apiDeleteAlbumId, apiDeleteAlbumIdd } from '../apis/apis';
+import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+
 
 const ListadoAlbumes = () => {
     //hook que guarda los albumes
     const [albumes, setAlbumes] = useState([])
 
-    //hook que guarda la categoria seleccionada, originalmente esta seleccionado XV
-    const [filtroCateg, setFiltroCateg] = useState('XV')
-
-    //hook que guarda todas las categorias
-    const [categorias, setCategorias] = useState([])
-
     //hook de busqueda 
     const [inputSearch, setInputSearch] = useState('')
 
-
-    //obtiene las categorias para filtrar
-    useEffect(() => {
-        const getCategorias = async () => {
-            const url = 'https://sod-daggler-be.herokuapp.com/api/category/allCategory'
-            const resultado = await axios.get(url)
-            setCategorias(resultado.data)
-        }
-        getCategorias();
-    }, [])
+    //hook creado en CategoriasContext
+    const { filtroCategoria, categorias, selectCategoria } = useCategorias()
 
     //obtiene los albumes segun el filtro seleccionado
     useEffect(() => {
         const getAlbumes = async () => {
-            const url = `https://sod-daggler-be.herokuapp.com/api/album/${filtroCateg}`
+            const url = `https://sod-daggler-be.herokuapp.com/api/album/${filtroCategoria}`
             const resultado = await axios.get(url)
             setAlbumes(resultado.data)
         }
         getAlbumes()
-    }, [filtroCateg])
-
-
-    //actualiza el hook que contiene la categoria filtro 
-    //(no se si hace falta, se podria poner el setFiltroCateg directamente en el onChange)
-    function selectFiltro(e) {
-        setFiltroCateg(e.target.value)
-    }
+    }, [filtroCategoria])
 
     //estilo hardcodeado para el div con la lista de albumes
     const style = { maxHeight: 0.7 * (window.innerHeight) }
 
-    
+
+    function eliminarAlbum(albumId) {
+
+
+        const url = apiDeleteAlbumId(albumId)
+        console.log(url)
+        const h = new Headers();
+        h.append('Authorization', window.localStorage.getItem(DAGGLER_ADMIN));
+        fetch(url, {
+            method: 'DELETE',
+            headers: h
+        }).then(res => console.log(res))
+
+        // axios.delete(url, h).then(res => console.log(res))
+        setAlbumes(albumes.filter((album) =>
+            album._id !== albumId
+        ))
+    }
     return (
         <>
-            <div className="container mt-3 ">
+            <div className="container mt-3">
 
                 <h1>Álbumes</h1>
 
-                <div className="mt-4 mr-5 d-flex">
+                <div className="mt-4 row px-2 px-sm-0">
 
-                    <div className="col-lg-5 me-auto d-flex">
+                    <div className="col-lg-5 col-sm-8 me-auto pe-1 d-flex" >
 
                         <div className="dropdown">
                             <button
@@ -66,16 +66,16 @@ const ListadoAlbumes = () => {
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                {filtroCateg}
+                                {filtroCategoria}
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownFiltroCategoria">
+                            <ul className="dropdown-menu" aria-labelledby="dropdownFiltroCategoria">
                                 {categorias.map(categoria => (
-                                    <li>
+                                    <li key={categoria._id}>
                                         <button
-                                            key={categoria._id}
+
                                             value={categoria.name}
                                             className="dropdown-item"
-                                            onClick={selectFiltro}
+                                            onClick={selectCategoria}
                                         >
                                             {categoria.name}
                                         </button>
@@ -84,7 +84,7 @@ const ListadoAlbumes = () => {
                             </ul>
                         </div>
 
-                        <form className="d-flex ps-3">
+                        <form className="d-flex flex-fill ps-3 ">
                             <input
                                 className="form-control me-2"
                                 type="search"
@@ -97,19 +97,22 @@ const ListadoAlbumes = () => {
                     </div>
 
 
+
+                    <div className="row col-lg-7 col-sm-4 col-12 m-0 mt-2 mt-sm-0 mt-md-0" >
                         <button
-                            className="btn btn-warning"
+                            className="btn btn-warning col-xl-2 col-lg-3 col-sm-8 col-md-6 ms-sm-auto "
                             onClick={() => window.location.pathname = rutaAdminCrearAlbum}
                         >
-                            <i class="fas fa-plus me-1"></i> Añadir
+                            <i className="fas fa-plus me-1"></i> Añadir
                         </button>
-
+                        
+                    </div>
                 </div>
 
-                <div style={style} className="overflow-auto mt-3">
+                <div style={style} className="overflow-auto mt-3 p-2">
 
                     {albumes.length !== 0
-                        ? albumes.map((album) => <TarjetaAlbum album={album} />)
+                        ? albumes.map((album) => <TarjetaAlbum key={album._id} album={album} onEliminar={eliminarAlbum} />)
                         : "noai nada xD"}
                 </div>
             </div>

@@ -5,6 +5,7 @@ import Error from '../layout/Error';
 import '../../css/NewAlbumes_css.css'
 import '../../css/BootstrapOverride.css'
 import { rutaAdminAlbumes } from '../rutas/RutasAdmin';
+import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 
 
 //!COMENTARIOS GENERALES
@@ -126,7 +127,7 @@ const NewAlbumes = () => {
         //!El token va a tener que obtenerlo del localStorage 
         //TODO: Change url 
 
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZjEyNmUzMjRiOTUwMjA3NDIwY2YyOSIsImlhdCI6MTYyNzQxMTk1NywiZXhwIjoxNjI3NDk4MzU3fQ.FUJnNN5cvtsr90KOKjUIGdOngJbiyzJQPANmjEX8Bpo'
+        const token = localStorage.getItem(DAGGLER_ADMIN)
         const url = `https://sod-daggler-be.herokuapp.com/api/album/newAlbum/Data`
 
         const albumEnvio = {

@@ -13,3 +13,4 @@ export const apiAlbumesCategoria = (categoria) =>  `https://sod-daggler-be.herok
 //ver data de album en especifico
 export const apiAlbumId = (id) => `https://sod-daggler-be.herokuapp.com/api/album/${id}`
 
+export const apiDeleteAlbumId = (id) => `https://sod-daggler-be.herokuapp.com/api/album/${id}/delete`
