@@ -116,7 +116,10 @@ const SubidaFotos = () => {
                 
                 <div className="col-xs-12 uppyuploader-container">
                     
-                        <UppyUploader />
+                        <UppyUploader
+                        
+                            album={albumSeleccionado}
+                        />
                     
                 </div>
             </div>

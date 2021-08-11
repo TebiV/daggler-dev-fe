@@ -14,7 +14,11 @@ import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
     
 */
 
-const uppy = new Uppy({
+
+
+const UppyUploader = ({album}) => {
+
+  const uppy = new Uppy({
     id: 'subirfotos',
     restrictions: { allowedFileTypes: ["image/*"] },
     autoProceed: false,
@@ -24,12 +28,15 @@ const uppy = new Uppy({
   })
   //TODO: Auth
   const token = localStorage.getItem(DAGGLER_ADMIN)
-  uppy.use(XHRUpload, { endpoint: 'https://sod-daggler-be.herokuapp.com/api/album/60fee394e6dd4e00156e0980/uploadPhotos',formData: true,fieldName:'multi-images', timeout:0,method:'post' })
+  uppy.use(XHRUpload, 
+    { endpoint: `https://sod-daggler-be.herokuapp.com/api/album/${album}/uploadPhotos`,
+    formData: true,
+    method:'post',
+    fieldName: 'multi-images',
+    timeout: 0,
+    limit: 1,
+    })
 
-
-const UppyUploader = () => {
-
-    
 
     return ( 
         <>
