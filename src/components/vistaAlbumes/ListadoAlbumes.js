@@ -5,9 +5,12 @@ import TarjetaAlbum from './TarjetaAlbum';
 import { useCategorias } from '../../context/CategoriasContext';
 import { apiDeleteAlbumId, apiDeleteAlbumIdd } from '../apis/apis';
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
-
-
+import ModalConfirmacion from '../layout/ModalConfirmacion';
+import $ from 'jquery';
 const ListadoAlbumes = () => {
+    //estilo hardcodeado para el div con la lista de albumes
+    const style = { maxHeight: 0.7 * (window.innerHeight) }
+
     //hook que guarda los albumes
     const [albumes, setAlbumes] = useState([])
 
@@ -16,6 +19,9 @@ const ListadoAlbumes = () => {
 
     //hook creado en CategoriasContext
     const { filtroCategoria, categorias, selectCategoria } = useCategorias()
+
+    //si el usuario hace clic en el boton eliminar de algun album, su id se guarda aca
+    const [albumAEliminar, setalbumAEliminar] = useState({})
 
     //obtiene los albumes segun el filtro seleccionado
     useEffect(() => {
@@ -27,12 +33,9 @@ const ListadoAlbumes = () => {
         getAlbumes()
     }, [filtroCategoria])
 
-    //estilo hardcodeado para el div con la lista de albumes
-    const style = { maxHeight: 0.7 * (window.innerHeight) }
 
 
     function eliminarAlbum(albumId) {
-
 
         const url = apiDeleteAlbumId(albumId)
         console.log(url)
@@ -43,14 +46,19 @@ const ListadoAlbumes = () => {
             headers: h
         }).then(res => console.log(res))
 
-        // axios.delete(url, h).then(res => console.log(res))
         setAlbumes(albumes.filter((album) =>
             album._id !== albumId
         ))
     }
+
+
+
     return (
         <>
+
             <div className="container mt-3">
+
+                <ModalConfirmacion album={albumAEliminar} onEliminar={eliminarAlbum} />
 
                 <h1>Álbumes</h1>
 
@@ -101,21 +109,23 @@ const ListadoAlbumes = () => {
                     <div className="row col-lg-7 col-sm-4 col-12 m-0 mt-2 mt-sm-0 mt-md-0" >
                         <button
                             className="btn btn-warning col-xl-2 col-lg-3 col-sm-8 col-md-6 ms-sm-auto "
+                            id="aaasd"
                             onClick={() => window.location.pathname = rutaAdminCrearAlbum}
                         >
                             <i className="fas fa-plus me-1"></i> Añadir
                         </button>
-                        
+
                     </div>
                 </div>
 
                 <div style={style} className="overflow-auto mt-3 p-2">
 
                     {albumes.length !== 0
-                        ? albumes.map((album) => <TarjetaAlbum key={album._id} album={album} onEliminar={eliminarAlbum} />)
+                        ? albumes.map((album) => <TarjetaAlbum key={album._id} album={album} onEliminar={setalbumAEliminar} />)
                         : "noai nada xD"}
                 </div>
             </div>
+
         </>
     );
 }

@@ -1,7 +1,9 @@
-import React from 'react';
-import '../../css/TarjetaAlbum_css.css';
-const TarjetaAlbum = ({ album }) => {
+import React, { useState } from 'react';
 
+import '../../css/TarjetaAlbum_css.css';
+const TarjetaAlbum = ({ album, onEliminar }) => {
+
+    const [asd, setasd] = useState("")
     return (
 
         <div className="card my-2">
@@ -10,7 +12,7 @@ const TarjetaAlbum = ({ album }) => {
                 <div className="row col-xl-6 col-lg-7 col-md-7 col-sm-9 col-12 ms-auto">
 
                     <div className=" col-xl-3 col-lg-4 col-md-5 col-sm-5 col-5 my-2">
-                        <img className="rounded img-cover-album" src={album.cover} alt=""></img>
+                        <img width="100" height="100" className="rounded img-cover-album" src={album.cover} alt=""></img>
                     </div>
                     <div className="col-lg-8 col-md-7 col-sm-7 col-7 my-auto">
                         <h6>{album.name}</h6>
@@ -37,9 +39,17 @@ const TarjetaAlbum = ({ album }) => {
                             col-sm-10 mb-sm-auto mt-sm-1 mx-sm-0
                             col-5 mx-auto 
                             my-auto mb-2"
-                        onClick={() => alert("eliminar no implementado")}
+                        data-bs-toggle="modal" data-bs-target={asd}
+                        id="asd"
+                        onClick={() => {
+                          setasd("#ModalConfirmEliminarAlbum")
+                            onEliminar(album)
+                        }}
                     >Eliminar</button>
+
                 </div>
+
+
             </div>
         </div>
     );
