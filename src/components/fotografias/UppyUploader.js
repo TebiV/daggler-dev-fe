@@ -14,7 +14,11 @@ import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
     
 */
 
-const uppy = new Uppy({
+
+
+const UppyUploader = ({album}) => {
+
+  const uppy = new Uppy({
     id: 'subirfotos',
     restrictions: { allowedFileTypes: ["image/*"] },
     autoProceed: false,
@@ -22,14 +26,14 @@ const uppy = new Uppy({
   
   })
   const token = localStorage.getItem(DAGGLER_ADMIN)
-  ///api/album/:albumId/uploadPhotos
-  //TODO: Solucionar error de subida de uppy Allow cors origin etc.
-  uppy.use(XHRUpload, { endpoint: 'https://sod-daggler-be.herokuapp.com/api/album/60fee394e6dd4e00156e0980/uploadPhotos',formData: true,timeout:0,method:'post' })
+  uppy.use(XHRUpload, 
+    { endpoint: `https://sod-daggler-be.herokuapp.com/api/album/${album}/uploadPhotos`,
+    formData: true,
+    method:'post',
+    fieldName: 'multi-images',
+    timeout: 0,
+    })
 
-
-const UppyUploader = () => {
-
-    
 
     return ( 
         <>
