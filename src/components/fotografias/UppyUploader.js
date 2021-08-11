@@ -32,6 +32,7 @@ const UppyUploader = ({album}) => {
     method:'post',
     fieldName: 'multi-images',
     timeout: 0,
+    limit: 1,
     })
 
 
