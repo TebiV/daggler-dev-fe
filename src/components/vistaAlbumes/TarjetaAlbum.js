@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import {useHistory} from 'react-router-dom'
 
 import '../../css/TarjetaAlbum_css.css';
 const TarjetaAlbum = ({ album, onEliminar }) => {
 
+    const history = useHistory()
     const [asd, setasd] = useState("")
     return (
 
@@ -20,24 +22,28 @@ const TarjetaAlbum = ({ album, onEliminar }) => {
                 </div>
 
                 <div className="row col-xl-6 col-lg-5 col-md-5 col-sm-3 col-12 ms-auto">
-                    <div className="dropdown" >
+                    <div className="dropdown col-xl-2 my-xl-auto 
+                            col-lg-3 my-lg-auto
+                            col-md-4 ms-md-2 my-md-auto ms-md-auto
+                            col-sm-10 mt-sm-auto mb-sm-1 mx-sm-0
+                            col-5  
+                            my-auto mx-auto mb-2 px-0" >
                         <button
-                            className="btn btn-warning btn-sm btn-editar
-                                col-xl-2 my-xl-auto
-                                col-lg-3 my-lg-auto 
-                                col-md-4 ms-md-2 my-md-auto ms-md-auto
-                                col-sm-10 mt-sm-auto mb-sm-1 mx-sm-0
-                                col-5  
-                                my-auto mx-auto -1 mb-2
-                                dropdown-toggle"
+                            className="btn btn-warning btn-sm dropdown-toggle w-100"
                             id="editarDropdown"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
 
                         >Editar</button>
                         <ul className="dropdown-menu" aria-labelledby="editarDropdown">
-                            <li className="dropdown-item"><button>Añadir Fotos</button></li>
-                            <li className="dropdown-item"><button>Eliminar Fotos</button></li>
+                            <li >
+                                <button className="dropdown-item" 
+                                    onClick={()=>{history.push({pathname:`/subir-foto/${album._id}`})}}
+                                >Añadir Fotos</button></li>
+                                <button className="dropdown-item"
+
+                                >Modificar Datos</button>
+                            <li ><button className="dropdown-item">Eliminar Fotos</button></li>
                         </ul>
                     </div>
                     <button
@@ -48,12 +54,10 @@ const TarjetaAlbum = ({ album, onEliminar }) => {
                             col-sm-10 mb-sm-auto mt-sm-1 mx-sm-0
                             col-5 mx-auto 
                             my-auto mb-2"
-                        data-bs-toggle="modal" data-bs-target={asd}
-                        id="asd"
-                        onClick={() => {
-                          setasd("#ModalConfirmEliminarAlbum")
-                            onEliminar(album)
-                        }}
+                            data-bs-toggle="modal" data-bs-target="#ModalConfirmEliminarAlbum"
+                            onClick={() => {
+                                onEliminar(album)
+                            }}
                     >Eliminar</button>
 
                 </div>

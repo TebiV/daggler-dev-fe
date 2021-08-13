@@ -122,7 +122,7 @@ const ListadoAlbumes = () => {
 
                     {albumes.length !== 0
                         ? albumes.map((album) => <TarjetaAlbum key={album._id} album={album} onEliminar={setalbumAEliminar} />)
-                        : "noai nada xD"}
+                        : null}
                 </div>
             </div>
 
