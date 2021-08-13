@@ -6,7 +6,7 @@ import { useCategorias } from '../../context/CategoriasContext';
 import { apiDeleteAlbumId, apiDeleteAlbumIdd } from '../apis/apis';
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 import ModalConfirmacion from '../layout/ModalConfirmacion';
-
+import '../../css/ListadoAlbumes_css.css'
 const ListadoAlbumes = () => {
     //estilo hardcodeado para el div con la lista de albumes
     const style = { maxHeight: 0.7 * (window.innerHeight) }
@@ -14,11 +14,17 @@ const ListadoAlbumes = () => {
     //hook que guarda los albumes
     const [albumes, setAlbumes] = useState([])
 
+    //hook que contiene los albumes que coinciden con el string ingresado en el cuadro de busqueda
+    const [albumesSearch, setAlbumesSearch] = useState([])
+
     //hook de busqueda 
     const [inputSearch, setInputSearch] = useState('')
 
     //hook creado en CategoriasContext
     const { filtroCategoria, categorias, selectCategoria } = useCategorias()
+
+    //sirve para szaber cuando mostrar el spinner de carga 
+    const [isLoading, setIsLoading] = useState(true)
 
     //si el usuario hace clic en el boton eliminar de algun album, su id se guarda aca
     const [albumAEliminar, setalbumAEliminar] = useState({})
@@ -29,11 +35,18 @@ const ListadoAlbumes = () => {
             const url = `https://sod-daggler-be.herokuapp.com/api/album/${filtroCategoria}`
             const resultado = await axios.get(url)
             setAlbumes(resultado.data)
+            setIsLoading(false)
         }
         getAlbumes()
     }, [filtroCategoria])
 
-
+    useEffect(() => {
+        setAlbumesSearch(
+            albumes.filter(
+                (album) => album.name.toLowerCase().includes(inputSearch.toLowerCase())
+            )
+        )
+    }, [inputSearch])
 
     function eliminarAlbum(albumId) {
 
@@ -66,31 +79,45 @@ const ListadoAlbumes = () => {
 
                     <div className="col-lg-5 col-sm-8 me-auto pe-1 d-flex" >
 
-                        <div className="dropdown">
-                            <button
-                                className="btn btn-secondary dropdown-toggle"
-                                type="button"
-                                id="dropdownFiltroCategoria"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                                {filtroCategoria}
+                        {/* el ternary operator que aparece aca abajo sirve para mostrar un spinner 
+                        en el selector de categoria cuando aun no cargo los albumes, xq a veces 
+                        las categorias tmb se tardan en cargar y en el dropdown no se ve nada */}
+                        {isLoading ?
+                            <button className="btn btn-secondary">
+                                <div className="m-auto d-flex height-spinner d-flex flex-row">
+                                    <div className="spinner-border spinner-border-sm text-light m-auto py-auto" role="status">
+                                        <span className="visually-hidden">Cargando...</span>
+                                    </div>
+                                </div>
                             </button>
-                            <ul className="dropdown-menu" aria-labelledby="dropdownFiltroCategoria">
-                                {categorias.map(categoria => (
-                                    <li key={categoria._id}>
-                                        <button
+                            :
+                            <div className="dropdown">
+                                <button
+                                    className="btn btn-secondary dropdown-toggle"
+                                    type="button"
+                                    id="dropdownFiltroCategoria"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    {filtroCategoria}
+                                </button>
+                                <ul className="dropdown-menu" aria-labelledby="dropdownFiltroCategoria">
+                                    {categorias.map(categoria => (
+                                        <li key={categoria._id}>
+                                            <button
 
-                                            value={categoria.name}
-                                            className="dropdown-item"
-                                            onClick={selectCategoria}
-                                        >
-                                            {categoria.name}
-                                        </button>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                                                value={categoria.name}
+                                                className="dropdown-item"
+                                                onClick={selectCategoria}
+                                            >
+                                                {categoria.name}
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        }
+
 
                         <form className="d-flex flex-fill ps-3 ">
                             <input
@@ -118,12 +145,41 @@ const ListadoAlbumes = () => {
                     </div>
                 </div>
 
-                <div style={style} className="overflow-auto mt-3 p-2">
+                {isLoading
+                    ?
+                    <div className="m-auto d-flex height-spinner" style={{ height: "72vh" }}>
+                        <div className="spinner-cargando-albumes spinner-border text-warning m-auto py-auto" role="status">
+                            <span className="visually-hidden">Cargando...</span>
+                        </div>
+                    </div>
+                    :
 
-                    {albumes.length !== 0
-                        ? albumes.map((album) => <TarjetaAlbum key={album._id} album={album} onEliminar={setalbumAEliminar} />)
-                        : null}
-                </div>
+
+                    (
+                        inputSearch.length > 0
+                            ?
+                            (albumesSearch.length > 0
+                                ?
+                                <div style={{ height: "72vh" }} className="overflow-auto mt-3 p-2">
+                                    {albumes.map((album) => <TarjetaAlbum key={album._id} album={album} onEliminar={setalbumAEliminar} />)}
+                                </div>
+                                :
+                                <div className="m-auto d-flex" style={{ height: "72vh" }}>
+                                    <div className="text-danger m-auto text-center">
+                                        <h1 className="bi bi-x-circle m-auto icono-sinResultados"></h1>
+                                        <h3>Sin resultados</h3>
+                                    </div>
+                                </div>
+                            )
+                            :
+                            <div style={{ height: "72vh" }} className="overflow-auto mt-3 p-2">
+                                {albumes.map((album) => <TarjetaAlbum key={album._id} album={album} onEliminar={setalbumAEliminar} />)}
+                            </div>
+                    )
+
+
+                }
+
             </div>
 
         </>

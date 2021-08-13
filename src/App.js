@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import Login from "./components/auth/Login";
 import Navbar from './components/layout/NavbarAdmin';
@@ -31,6 +31,8 @@ function App() {
 
         <Route exact path={rutaAdminLogin} component={Login}/>
         <Route exact path={rutaAdminLogout} component={Logout}/>
+        <Route exact path={'/'} component={() => <Redirect to={rutaAdminAlbumes}/>}/>
+
         <Route exact path={rutaAdminAlbumes} component={() => <RequireAuth Component={AdminAlbumes}/>}/>
         <Route exact path={rutaAdminCrearAlbum} component={() => <RequireAuth Component={AdminCrearAlbum}/>}/>
         <Route exact path={rutaAdminPedidos} component={() => <RequireAuth Component={AdminPedidos}/>}/>
