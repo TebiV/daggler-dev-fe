@@ -163,7 +163,7 @@ const NewAlbumes = () => {
                 headers: {"Authorization": `${token}`}};
             fetch(`https://sod-daggler-be.herokuapp.com/api/album/${response.data.data._id}/updateCover`,options)
                 .then((response) => response.json())
-                .then((history.push({ pathname: '/subir-foto', state: album.id})))
+                .then((history.push({ pathname: '/subir-foto', state: {album}})))
                 
         }
         submitAlbum()

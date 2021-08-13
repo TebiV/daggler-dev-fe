@@ -3,15 +3,13 @@ import { useParams } from 'react-router';
 import axios from 'axios'
 import '../../css/SubidaFotos_css.css'
 import UppyUploader from './UppyUploader';
+
 // TODO: RECORDAR -> se debe pasar a "url" la url donde se va a subir, lo que podemos hacer es un http://amazon o base de datos/${idAlbum}
 //* https://sod-daggler-be.herokuapp.com/ 
 
 const SubidaFotos = () => {
 
 
-    
-
-    
 
     //*LOGICA DE GETEO DE CATEGORIAS Y SELECCION
     const [categorias, setCategorias] = useState([])
@@ -54,13 +52,13 @@ const SubidaFotos = () => {
             
         }
         getAlbumes()
+        console.log(this.props.value.location.key)
     }, [categoriaSeleccionada])
 
     const handleChangeAlbumes = e =>{
         setAlbumSeleccionado(e.target.value)
     } 
-    
-
+   
 
     //* La categoria y el album seleccionados se pasan como props hacia el componente Uploader.js que los usa como parte de la Url de la API, 
     //TODO: Tebi cambio la API, ahora puede omitirse la categoria, es decir, podemos no pasarla como prop, pero la necesitamos para getear los albumes
@@ -75,7 +73,7 @@ const SubidaFotos = () => {
             <div className="row">
                 <h3>SUBIR FOTOS</h3>
             </div>
-
+           
             <div className="row">
                 <div className="col-xs-12 col-md-6 mb-2">
                     <select
@@ -111,6 +109,7 @@ const SubidaFotos = () => {
 
                 
             </div>
+            
 
             <div className="row">
                 

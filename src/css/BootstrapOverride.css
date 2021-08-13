@@ -5,10 +5,9 @@
 
 .form-control:focus{
   
-    box-shadow:0 0 0 .2rem rgba(241, 209, 64, 0.726);
-    border-color: rgb(63, 62, 62);;
+    box-shadow:0 0 0 .2rem rgba(255,193,7, 0.5);
+    border-color: rgb(255,193,7);
 }
-
 .btn{
     border-radius: 35px;
 }

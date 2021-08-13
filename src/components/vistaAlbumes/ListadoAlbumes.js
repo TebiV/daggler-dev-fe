@@ -6,7 +6,7 @@ import { useCategorias } from '../../context/CategoriasContext';
 import { apiDeleteAlbumId, apiDeleteAlbumIdd } from '../apis/apis';
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 import ModalConfirmacion from '../layout/ModalConfirmacion';
-import $ from 'jquery';
+
 const ListadoAlbumes = () => {
     //estilo hardcodeado para el div con la lista de albumes
     const style = { maxHeight: 0.7 * (window.innerHeight) }
