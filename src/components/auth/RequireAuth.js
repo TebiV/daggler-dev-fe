@@ -15,7 +15,7 @@ const RequireAuth = ({ Component }) => {
             //si no encuentra el token, redirige a la pantalla de inicio,
             //si lo encuentra, se fija si es valido
             if (!window.localStorage.getItem(DAGGLER_ADMIN)) {
-                console.log('puto')
+                console.log('hola')
             } else {
                 const url = 'https://sod-daggler-be.herokuapp.com/api/auth/middleware/verifyToken';
 

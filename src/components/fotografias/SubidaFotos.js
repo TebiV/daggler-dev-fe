@@ -1,133 +1,40 @@
-import React,{useEffect,useState} from 'react';
-import { useParams } from 'react-router';
-import axios from 'axios'
-import '../../css/SubidaFotos_css.css'
+import{ React,useState,useEffect} from 'react';
 import UppyUploader from './UppyUploader';
+import axios from 'axios';
+import { useParams } from 'react-router';
 
-// TODO: RECORDAR -> se debe pasar a "url" la url donde se va a subir, lo que podemos hacer es un http://amazon o base de datos/${idAlbum}
-//* https://sod-daggler-be.herokuapp.com/ 
 
 const SubidaFotos = () => {
 
+    const albumid = useParams();
+    const [album, setAlbum] = useState({})
 
-
-    //*LOGICA DE GETEO DE CATEGORIAS Y SELECCION
-    const [categorias, setCategorias] = useState([])
-    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('')
-
-    useEffect(() => {
-        const getCategorias = async() =>{
-            const url= 'https://sod-daggler-be.herokuapp.com/api/category/allCategory'
-
-            const resultado = await axios.get(url)
-            setCategorias(resultado.data)
+    useEffect(()=>{
+        const getSpecificAlbum= async(album_id)=>{
+            const url = `https://sod-daggler-be.herokuapp.com/api/album/specificAlbum/${album_id}`
+            const res = await axios.get(url)
+            setAlbum(res.data[0])
         }
-        getCategorias()
-    }, [])
-
-    //Guarda la categoria seleccionada para poder hacer el GET de los albumes
-    const handleChangeCategoria = e =>{
-        setCategoriaSeleccionada(e.target.value)
-        if(e.target.value===""){
-            setCategoriaSeleccionada('')
-        }
-    }
-
-    //*LOGICA DE GETEO DE ALBUMES Y SELECCION
-    const [albumes, setAlbumes]  = useState([])
-    const [albumSeleccionado, setAlbumSeleccionado] = useState({})
-
-    //*UseParams para extraer la id del album creado
-    const {album_id} = useParams();
-    console.log(album_id)
-    
-    useEffect(() => {
-        if(categoriaSeleccionada==='') return;
-        const getAlbumes = async() =>{
-            
-            const url= `https://sod-daggler-be.herokuapp.com/api/album/${categoriaSeleccionada}`
-
-            const resultado = await axios.get(url)
-            setAlbumes(resultado.data)
-            
-        }
-        getAlbumes()
-        
-    }, [categoriaSeleccionada])
-
-    const handleChangeAlbumes = e =>{
-        setAlbumSeleccionado(e.target.value)
-    } 
-   
-
-    //* La categoria y el album seleccionados se pasan como props hacia el componente Uploader.js que los usa como parte de la Url de la API, 
-    //TODO: Tebi cambio la API, ahora puede omitirse la categoria, es decir, podemos no pasarla como prop, pero la necesitamos para getear los albumes
-    //? Quizas deberiamos preguntar si quiere que le agreguemos en la seleccion las fechas de cada album, para evitar confusion en nombres repetidos
-  
-   
-   
+        getSpecificAlbum(albumid.albumid)
+    },[])
     return ( 
-
-        <div className="container-fluid">
-            
-            <div className="row">
-                <h3>SUBIR FOTOS</h3>
-            </div>
-           
-            <div className="row">
-                <div className="col-xs-12 col-md-6 mb-2">
-                    <select
-                    className="form-control "
-                    name="categoria"
-                    onChange={handleChangeCategoria}         
-                    >
-                    <option value="" >--Seleccionar Categoría--</option>
-                    {categorias.map(categoria =>(
-                        <option
-                            key={categoria._id}
-                            value={categoria.name}
-                        >{categoria.name}</option>
-                                    ))}
-                </select>
+        <>
+            <div className="container-fluid d-flex align-items-center mt-4 flex-column w-100">
+                <div className="row">
+                    <h1>Subiendo fotos para album: <b>{album.name}</b></h1>
                 </div>
-                <div className="col-xs-12 col-md-6 ">
-                    <select
-                        className="form-control "
-                        name="albumes"
-                        onChange={handleChangeAlbumes}         
-                    >
-                        <option value="" >--Seleccionar Album--</option>
-                        {albumes.map(album =>(
-                            <option
-                                key={album._id}
-                                value={album._id}
-                            >{album.name}</option>
-                                        )).reverse()}
-                    </select>
-                </div>
-                
-
-                
-            </div>
-            
-
-            <div className="row">
-                
-                <div className="col-xs-12 uppyuploader-container">
-                    
+                <div className="row">
+                    <div className="col-12">
                         <UppyUploader
-                        
-                            album={albumSeleccionado}
+                            album={album}
                         />
-                    
+                    </div>
                 </div>
             </div>
-
-            <div className="row">
-
-            </div>
             
-        </div>
+            
+
+        </>
      );
 }
  

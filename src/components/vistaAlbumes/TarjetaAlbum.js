@@ -19,18 +19,27 @@ const TarjetaAlbum = ({ album, onEliminar }) => {
                     </div>
                 </div>
 
-                <div className="row col-xl-6 col-lg-5 col-md-5 col-sm-3 col-12 ms-auto ">
-                    <button
-                        className="btn btn-warning btn-sm btn-editar
-                            col-xl-2 my-xl-auto
-                            col-lg-3 my-lg-auto 
-                            col-md-4 ms-md-2 my-md-auto ms-md-auto
-                            col-sm-10 mt-sm-auto mb-sm-1 mx-sm-0
-                            col-5  
-                            my-auto mx-auto -1 mb-2"
-                        onClick={() => alert('editar no implementado')}
+                <div className="row col-xl-6 col-lg-5 col-md-5 col-sm-3 col-12 ms-auto">
+                    <div className="dropdown" >
+                        <button
+                            className="btn btn-warning btn-sm btn-editar
+                                col-xl-2 my-xl-auto
+                                col-lg-3 my-lg-auto 
+                                col-md-4 ms-md-2 my-md-auto ms-md-auto
+                                col-sm-10 mt-sm-auto mb-sm-1 mx-sm-0
+                                col-5  
+                                my-auto mx-auto -1 mb-2
+                                dropdown-toggle"
+                            id="editarDropdown"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
 
-                    >Editar</button>
+                        >Editar</button>
+                        <ul className="dropdown-menu" aria-labelledby="editarDropdown">
+                            <li className="dropdown-item"><button>Añadir Fotos</button></li>
+                            <li className="dropdown-item"><button>Eliminar Fotos</button></li>
+                        </ul>
+                    </div>
                     <button
                         className="btn btn-outline-danger btn-sm
                             col-xl-2 my-xl-auto 

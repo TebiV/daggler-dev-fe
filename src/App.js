@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Login from "./components/auth/Login";
 import Navbar from './components/layout/NavbarAdmin';
-import SubidaFotos from './components/fotografias/SubidaFotos';
+
 import Logout from './components/auth/Logout';
 import RequireAuth from './components/auth/RequireAuth';
 import { rutaAdminAlbumes, rutaAdminCrearAlbum, rutaAdminEventos, rutaAdminLogin, rutaAdminLogout, rutaAdminPedidos, rutaAdminPrecios } from './components/rutas/RutasAdmin';
@@ -17,6 +17,8 @@ import AdminCrearAlbum from './components/vistaAlbumes/AdminCrearAlbum';
 import { AlbumesProvider, useAlbumes } from './context/AlbumesContext';
 
 import { CategoriasProvider } from './context/CategoriasContext';
+
+import AdminSubidaFotos from './components/fotografias/AdminSubidaFotos';
 
 export default () => <CategoriasProvider><App></App></CategoriasProvider>
 
@@ -35,7 +37,8 @@ function App() {
         <Route exact path={rutaAdminEventos} component={() => <RequireAuth Component={AdminEventos}/>}/>
         <Route exact path={rutaAdminPrecios} component={() => <RequireAuth Component={AdminPrecios}/>}/>
 
-        <Route exact path="/subir-foto" component={SubidaFotos}/>
+        
+        <Route exact path="/subir-foto/:albumid" component={()=><RequireAuth Component={AdminSubidaFotos}/> }/>
         
       </Switch>
     </Router>
