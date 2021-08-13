@@ -52,7 +52,7 @@ const SubidaFotos = () => {
             
         }
         getAlbumes()
-        console.log(this.props.value.location.key)
+        
     }, [categoriaSeleccionada])
 
     const handleChangeAlbumes = e =>{
