@@ -28,7 +28,7 @@ const NewAlbumes = () => {
         categoria:'',
         password:'',
         passwordrepeat:'',
-        privadoCheckbox:false,
+        privadoCheckbox:true,
         descargasCheckbox:false,
         comprasCheckbox:false,
         portada:''
@@ -41,6 +41,12 @@ const NewAlbumes = () => {
     const [error, setError] = useState({
         isError: false,
         errorMessage: ''
+    })
+    const [visibility, setVisibility] = useState({
+        passwordClass: 'password',
+        passwordIcon: 'bi bi-eye-slash',
+        repeatPasswordClass: 'password',
+        repeatpasswordIcon: 'bi bi-eye-slash'
     })
     
     
@@ -163,7 +169,7 @@ const NewAlbumes = () => {
                 headers: {"Authorization": `${token}`}};
             fetch(`https://sod-daggler-be.herokuapp.com/api/album/${response.data.data._id}/updateCover`,options)
                 .then((res) => res.json())
-                .then(await (history.push({ pathname: `/subir-foto/${response.data.data._id}`, state: {album}})))
+                .then(await (history.push({ pathname: `/albumes/subir-foto/${response.data.data._id}`, state: {album}})))
                 
         }
         submitAlbum()
@@ -208,7 +214,7 @@ const NewAlbumes = () => {
             <div className="container mt-5">
                 <h3 className="font-weight-bold">DATOS DEL ALBUM</h3>
                 <div className="row mt-5  align-items-center ">
-                    <div className="col-xs-2 col-md-2  px-5 container-gris ">
+                    <div className="col-xs-12  col-lg-2  px-5 container-gris-top ">
                         <div className="form-check mb-3">
                             <input 
                                 className="form-check-input  " 
@@ -216,7 +222,7 @@ const NewAlbumes = () => {
                                 value=""
                                 name="privadoCheckbox"
                                 id="privadoCheckbox"
-                                defaultChecked={false}
+                                defaultChecked={true}
                                 onClick={handleChangeCheckbox}
                             />
                             <label className="form-check-label font-weight-bold" htmlFor="privadoCheckbox">Privado</label>
@@ -247,7 +253,7 @@ const NewAlbumes = () => {
                             <label className="form-check-label font-weight-bold" htmlFor="comprasCheckbox">Permitir Compras</label>
                        </div>
                     </div>
-                    <div className="col-xs-4 col-md-4 px-5 container-gris">
+                    <div className="col-xs-12  col-lg-4 px-5 container-gris-bottom">
                         <div className="form-group ">
                             <h6 className="font-weight-bold">Nombre del Album</h6>
                             <input
@@ -276,32 +282,73 @@ const NewAlbumes = () => {
                             </div>
                             <div className="form-group mt-4">
                                 <h6 className="font-weight-bold">Contraseña</h6>
-                                <input
-                                    type="password"
-                                    autoComplete="off"
-                                    placeholder="Contraseña del album"
-                                    className="form-control "
-                                    name="password"
-                                    onChange={handleChange}
+                                <div className="input-group">
+                                    <input
+                                        type={visibility.passwordClass}
+                                        autoComplete="off"
+                                        placeholder="Contraseña del album"
+                                        className="form-control "
+                                        name="password"
+                                        onChange={handleChange}
 
-                                />
+                                    />
+                                    <div className="input-group-append">
+                                        <div
+                                            className='btn btn-visibility'
+                                            onMouseEnter={()=>{setVisibility({
+                                                passwordClass: 'text',
+                                                passwordIcon: 'bi bi-eye',
+                                                repeatPasswordClass: visibility.repeatPasswordClass,
+                                                repeatpasswordIcon: visibility.repeatpasswordIcon
+                                            })}} 
+                                            onMouseLeave={()=>{setVisibility({
+                                                passwordClass: 'password',
+                                                passwordIcon: 'bi bi-eye-slash',
+                                                repeatPasswordClass: visibility.repeatPasswordClass,
+                                                repeatpasswordIcon: visibility.repeatpasswordIcon
+                                            })}}
+                                            
+                                        ><i className={visibility.passwordIcon}></i></div>
+                                    </div>
+                                
+                                </div>
                             </div>
                             <div className="form-group mt-4">
                                 <h6 className="font-weight-bold">Repita la contraseña</h6>
-                                <input
-                                    type="password"
-                                    autoComplete="off"
-                                    placeholder="Contraseña del album"
-                                    className="form-control "
-                                    name="passwordrepeat"
-                                    onChange={handleChange}
+                                <div className="input-group">
+                                    <input
+                                        type={visibility.repeatPasswordClass}
+                                        autoComplete="off"
+                                        placeholder="Contraseña del album"
+                                        className="form-control password-form"
+                                        name="passwordrepeat"
+                                        onChange={handleChange}
 
-                                />
+                                    />
+                                    <div className="input-group-append">
+                                        <div 
+                                            className='btn btn-visibility' 
+                                            onMouseEnter={()=>{setVisibility({
+                                                passwordClass: visibility.passwordClass,
+                                                passwordIcon: visibility.passwordIcon,
+                                                repeatPasswordClass: 'text',
+                                                repeatpasswordIcon: 'bi bi-eye'
+                                            })}} 
+                                            onMouseLeave={()=>{setVisibility({
+                                                passwordClass: visibility.passwordClass,
+                                                passwordIcon: visibility.passwordIcon,
+                                                repeatPasswordClass: 'password',
+                                                repeatpasswordIcon: 'bi bi-eye-slash'
+                                            })}}>
+                                        <i className={visibility.repeatpasswordIcon}></i></div>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
 
-                    <div className="col-xs-5 col-md-5 px-5">
+                    <div className="col-xs-12  col-lg-5 px-5 mt-2">
                         <div className="row arriba">
                             <div className="col-12">
                                 <div className="form-group ">
@@ -322,9 +369,7 @@ const NewAlbumes = () => {
                         </div>
                         <div className="row">
                             <div className="col-12 NewAlbumes_botones">
-                                <Link to={rutaAdminAlbumes}>
-                                    <button type="button" className="btn btn-light">Volver</button>
-                                </Link>
+                                <button type="button" onClick={()=>history.goBack()} className="btn btn-light">Volver</button>
                                 <input 
                                     type="submit"
                                     className="btn btn-warning mx-2"
@@ -334,7 +379,6 @@ const NewAlbumes = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-xs-1 col-md-1"></div>
                 </div> 
                 <div className="row">
                     <div className="col-6 col-xs-12">
@@ -348,8 +392,6 @@ const NewAlbumes = () => {
                                     </div>
                                 )
                         }
-                    </div>
-                    <div className="col-6 col-xs-12">
                     </div>
                 </div>
             </div>

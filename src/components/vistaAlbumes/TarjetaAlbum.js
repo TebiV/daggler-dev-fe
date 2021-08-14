@@ -41,8 +41,9 @@ const TarjetaAlbum = ({ album, onEliminar }) => {
                                 <button className="dropdown-item"
                                     onClick={() => { history.push({ pathname: `/subir-foto/${album._id}` }) }}
                                 >Añadir Fotos</button></li>
-                            <button className="dropdown-item"
-
+                            <button 
+                                className="dropdown-item"
+                                onClick={()=>{history.push({ pathname:`/albumes/modificar-album/${album._id}`})}}
                             >Modificar Datos</button>
                             <li ><button className="dropdown-item">Eliminar Fotos</button></li>
                         </ul>
