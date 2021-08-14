@@ -39,7 +39,7 @@ const TarjetaAlbum = ({ album, onEliminar }) => {
                         <ul className="dropdown-menu" aria-labelledby="editarDropdown">
                             <li >
                                 <button className="dropdown-item"
-                                    onClick={() => { history.push({ pathname: `/subir-foto/${album._id}` }) }}
+                                    onClick={() => { history.push({ pathname: `/albumes/subir-fotos/${album._id}` }) }}
                                 >Añadir Fotos</button></li>
                             <button 
                                 className="dropdown-item"

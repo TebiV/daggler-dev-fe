@@ -93,7 +93,7 @@ const ListadoAlbumes = () => {
                             :
                             <div className="dropdown">
                                 <button
-                                    className="btn btn-secondary dropdown-toggle"
+                                    className="btn btn-light dropdown-toggle"
                                     type="button"
                                     id="dropdownFiltroCategoria"
                                     data-bs-toggle="dropdown"
