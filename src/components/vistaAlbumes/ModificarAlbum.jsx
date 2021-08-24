@@ -9,7 +9,16 @@ const ModificarAlbum = () => {
     const albumid = useParams();
     const history = useHistory();
     const [album, setAlbum] = useState({})
-    const [datosNuevos, setDatosNuevos] = useState({})
+    const [datosNuevos, setDatosNuevos] = useState({
+        id:'',
+        nombre:'',
+        category:'',
+        password:'',
+        passwordrepeat:'',
+        privado:'',
+        download:'',
+        purchase:'',
+    })
     const {categorias} = useCategorias()
 
     useEffect(()=>{
@@ -17,18 +26,38 @@ const ModificarAlbum = () => {
             const url = `https://sod-daggler-be.herokuapp.com/api/album/specificAlbum/${albumid.albumid}`;
             const res = await axios.get(url);
             setAlbum(res.data[0]);
+            setDatosNuevos(res.data[0])
         }
         getSpecificAlbum(albumid.albumid);
+
     },[])
 
+    const handleChangeText = e =>{
+        setDatosNuevos({
+            ...datosNuevos,
+            [e.target.name] : e.target.value
+        })
+    }
 
+    const handleChangeCheckbox = e =>{
+        setDatosNuevos({
+            ...datosNuevos,
+            [e.target.name] : e.target.checked
+        })
+    }
+    /*
+    
+    TODO:Obtener de nueva api de tebi donde manda el psword sin encriptar
+    TODO: hacer logica de que si el campo esta completo envia eso y si esta vacio envia el valor anterior (CONTROLAR COSAS COMO EL ID Y LA FECHA EN BACKEND)
+    TODO: Recordar que la portada va aparte.
+    */
     return ( 
         <>
             <h1>Modificando los datos de album: </h1>
             <form>
                 <div className="container">
                     <div className="row">
-                        <div className="col-xs-12 col-lg-3 container-gris-top">
+                        <div className="col-xs-12 col-lg-3 container-gris-top ">
                             <div className="form-check">
                                 <input 
                                     type="checkbox"
@@ -37,7 +66,7 @@ const ModificarAlbum = () => {
                                     value={""}
 
                                 />
-                                <label htmlFor="privado" className="form-check-label font-weight-bold">Privado</label>
+                                <label htmlFor="privado" className="form-check-label font-weight-bold">Privado (no implementado)</label>
                             </div>
                             <div className="form-check">
                                 <input 
@@ -45,6 +74,7 @@ const ModificarAlbum = () => {
                                     name="download"
                                     id="download"
                                     value={album.download}
+                                    onChange={handleChangeCheckbox}
 
                                 />
                                 <label htmlFor="download" className="form-check-label font-weight-bold">Permite Descargas</label>
@@ -54,7 +84,7 @@ const ModificarAlbum = () => {
                                     name="purchase"
                                     id="purchase"
                                     value={album.purchase}
-
+                                    onChange={handleChangeCheckbox}
                                 />
                                 <label htmlFor="purchase" className="form-check-label font-weight-bold">Permite Compras</label>
                             </div>
@@ -70,14 +100,14 @@ const ModificarAlbum = () => {
                                 className="form-control "
                                 name="nombre"
                                 value={album.name}
-                                onChange={''}
+                                onChange={handleChangeText}
                             />
                             <div className="form-group mt-4">
                                 <h6 className="font-weight-bold">Categoría</h6>
                                 <select
                                     className="form-control "
                                     name="categoria"
-                                    onChange={''}
+                                    onChange={handleChangeText}
                                     value={album.category}
                                 >
                                     <option value="" >--Seleccionar Categoría--</option>
@@ -98,7 +128,7 @@ const ModificarAlbum = () => {
                                     className="form-control "
                                     name="password"
                                     value={album.password}
-                                    onChange={''}
+                                    onChange={handleChangeText}
 
                                 />
                             </div>
@@ -111,12 +141,14 @@ const ModificarAlbum = () => {
                                     className="form-control "
                                     name="passwordrepeat"
                                     value={album.password}
-                                    onChange={''}
+                                    onChange={handleChangeText}
 
                                 />
                             </div>
                         </div>
-                        </div>
+                        
+                        
+                        </div><div className="row"><button className="btn btn-warning"></button></div>
                         <div className="col-xs-12 col-lg-5">
 
                         </div>

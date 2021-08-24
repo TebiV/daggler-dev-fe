@@ -1,7 +1,7 @@
 //albumes
 export const rutaAdminAlbumes = '/albumes';
 export const rutaAdminCrearAlbum = '/albumes/crear-album';
-export const rutaAdminSubirFotos = '/subir-foto/:albumid';
+export const rutaAdminSubirFotos = '/albumes/subir-fotos/:albumid';
 export const rutaAdminModificarAlbum = "/albumes/modificar-album/:albumid";
 
 //el resto

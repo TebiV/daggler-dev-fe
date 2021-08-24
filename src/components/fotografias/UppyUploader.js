@@ -29,7 +29,7 @@ const UppyUploader = ({album}) => {
   //TODO: Auth
   const token = localStorage.getItem(DAGGLER_ADMIN)
   uppy.use(XHRUpload, 
-    { endpoint: `https://sod-daggler-be.herokuapp.com/api/album/${album}/uploadPhotos`,
+    { endpoint: `https://sod-daggler-be.herokuapp.com/api/album/${album._id}/uploadPhotos`,
     formData: true,
     method:'post',
     fieldName: 'multi-images',

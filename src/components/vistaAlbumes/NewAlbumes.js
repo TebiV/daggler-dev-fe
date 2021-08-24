@@ -89,7 +89,7 @@ const NewAlbumes = () => {
 
         //verificar campos vacios
         
-        if(album.nombre.trim()==='' || album.password.trim()===''|| album.passwordrepeat === '' || album.categoria.trim()===''){
+        if(album.nombre.trim()==='' ||  album.categoria.trim()===''){
             //setear error
             setError({
                 isError: true,
@@ -107,7 +107,7 @@ const NewAlbumes = () => {
             return;
         }
         //verificar largo de contraseña
-        if(album.password.length<6){
+        if(album.password.length<6 && album.password.length>0){
             setError({
                 isError:true,
                 errorMessage:'La contraseña debe ser de un largo mayor a 6 caracteres'
@@ -169,7 +169,7 @@ const NewAlbumes = () => {
                 headers: {"Authorization": `${token}`}};
             fetch(`https://sod-daggler-be.herokuapp.com/api/album/${response.data.data._id}/updateCover`,options)
                 .then((res) => res.json())
-                .then(await (history.push({ pathname: `/albumes/subir-foto/${response.data.data._id}`, state: {album}})))
+                .then(await (history.push({ pathname: `/albumes/subir-fotos/${response.data.data._id}`, state: {album}})))
                 
         }
         submitAlbum()

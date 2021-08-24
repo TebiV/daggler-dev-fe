@@ -13,7 +13,7 @@ const NavbarAdmin = () => {
     return (
         <nav className="navbar  navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#"> <span style={{color: '#E6AC00', fontWeight: '700'}}>Daggler</span> Studio </a>
+                <a className="navbar-brand" href="/"> <span style={{color: '#E6AC00', fontWeight: '700'}}>Daggler</span> Studio </a>
 
                 <button
                     className="navbar-toggler"

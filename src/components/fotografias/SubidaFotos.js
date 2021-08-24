@@ -37,7 +37,7 @@ const SubidaFotos = () => {
                         <div className="col-2 col-xs-12">
                             <button
                                 className="btn btn-light"
-                                onClick={() => { history.goBack() }}
+                                onClick={() => { history.push({pathname: '/albumes'}) }}
                             ><i className="bi bi-caret-left-fill"></i>Menú de álbumes</button>
                         </div>
                         <div className="col-10 col-xs-12">
