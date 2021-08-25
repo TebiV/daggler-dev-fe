@@ -48,9 +48,49 @@ const NewAlbumes = () => {
         repeatPasswordClass: 'password',
         repeatpasswordIcon: 'bi bi-eye-slash'
     })
+    const [visPass, setVisPass] = useState(false)
+    const [visRepPass, setVisRepPass] = useState(false)
     
-    
-    
+    //*Manejo de los botones de visibilidad
+    const toggleVisbilityPassword = e=>{
+        e.preventDefault();
+        setVisPass(!visPass)
+        if(visPass){
+            setVisibility({
+                passwordClass: 'text',
+                passwordIcon: 'bi bi-eye',
+                repeatPasswordClass: visibility.repeatPasswordClass,
+                repeatpasswordIcon: visibility.repeatpasswordIcon
+            })
+        }else{
+            setVisibility({
+                passwordClass: 'password',
+                passwordIcon: 'bi bi-eye-slash',
+                repeatPasswordClass: visibility.repeatPasswordClass,
+                repeatpasswordIcon: visibility.repeatpasswordIcon
+            })
+        }
+    }
+
+    const toggleVisibilityRepeatPassword = e =>{
+        e.preventDefault()
+        setVisRepPass(!visRepPass)
+        if(visRepPass){
+            setVisibility({
+                passwordClass: visibility.passwordClass,
+                passwordIcon: visibility.passwordIcon,
+                repeatPasswordClass: 'text',
+                repeatpasswordIcon: 'bi bi-eye'
+            })
+        }else{
+            setVisibility({
+                passwordClass: visibility.passwordClass,
+                passwordIcon: visibility.passwordIcon,
+                repeatPasswordClass: 'password',
+                repeatpasswordIcon: 'bi bi-eye-slash'
+            })
+        }
+    }
 
     //* A medida que vayan cambiando los campos, se van a ir guardando en el state con esta funcion
     const handleChange = e =>{
@@ -167,7 +207,7 @@ const NewAlbumes = () => {
                 method:'POST',
                 body: formData,
                 headers: {"Authorization": `${token}`}};
-            fetch(`https://sod-daggler-be.herokuapp.com/api/album/${response.data.data._id}/updateCover`,options)
+            fetch(`https://sod-daggler-be.herokuapp.com/api/album/${response.data.data._id}/uploadCover`,options)
                 .then((res) => res.json())
                 .then(await (history.push({ pathname: `/albumes/subir-fotos/${response.data.data._id}`, state: {album}})))
                 
@@ -293,22 +333,12 @@ const NewAlbumes = () => {
 
                                     />
                                     <div className="input-group-append">
-                                        <div
+                                        <button
                                             className='btn btn-visibility'
-                                            onMouseEnter={()=>{setVisibility({
-                                                passwordClass: 'text',
-                                                passwordIcon: 'bi bi-eye',
-                                                repeatPasswordClass: visibility.repeatPasswordClass,
-                                                repeatpasswordIcon: visibility.repeatpasswordIcon
-                                            })}} 
-                                            onMouseLeave={()=>{setVisibility({
-                                                passwordClass: 'password',
-                                                passwordIcon: 'bi bi-eye-slash',
-                                                repeatPasswordClass: visibility.repeatPasswordClass,
-                                                repeatpasswordIcon: visibility.repeatpasswordIcon
-                                            })}}
+                                            onClick={toggleVisbilityPassword}
+                                            type="button"
                                             
-                                        ><i className={visibility.passwordIcon}></i></div>
+                                        ><i className={visibility.passwordIcon}></i></button>
                                     </div>
                                 
                                 </div>
@@ -326,21 +356,11 @@ const NewAlbumes = () => {
 
                                     />
                                     <div className="input-group-append">
-                                        <div 
+                                        <button 
                                             className='btn btn-visibility' 
-                                            onMouseEnter={()=>{setVisibility({
-                                                passwordClass: visibility.passwordClass,
-                                                passwordIcon: visibility.passwordIcon,
-                                                repeatPasswordClass: 'text',
-                                                repeatpasswordIcon: 'bi bi-eye'
-                                            })}} 
-                                            onMouseLeave={()=>{setVisibility({
-                                                passwordClass: visibility.passwordClass,
-                                                passwordIcon: visibility.passwordIcon,
-                                                repeatPasswordClass: 'password',
-                                                repeatpasswordIcon: 'bi bi-eye-slash'
-                                            })}}>
-                                        <i className={visibility.repeatpasswordIcon}></i></div>
+                                            type="button"
+                                            onClick={toggleVisibilityRepeatPassword}>
+                                        <i className={visibility.repeatpasswordIcon}></i></button>
                                     </div>
                                 </div>
                                 
@@ -352,13 +372,17 @@ const NewAlbumes = () => {
                         <div className="row arriba">
                             <div className="col-12">
                                 <div className="form-group ">
-                                    <div className="NewAlbumes_divinputPortada" htmlFor="inputPortada">
-                                        <h5 className="newAlbumes_h5_subirportada">Subir Portada</h5>
-                                       
+                                    <div className="album-cover-uploader__div" htmlFor="inputPortada">
+                                        
+                                        {portadaMostrar
+                                            ?
+                                                <img src={portadaMostrar} className="album-cover-uploader__img" alt="portada" htmlFor="inputPortada" />
+                                            : <h5 className="album-cover__h5">Subir Portada</h5>
+                                        }
                                         <input
                                         type="file"
                                         id="inputPortada"
-                                        className="NewAlbumes_inputPortada"
+                                        className="album-cover-uploader__input"
                                         name="portada"
                                         onChange={handleChangePortada}
                                         
@@ -368,7 +392,7 @@ const NewAlbumes = () => {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-12 NewAlbumes_botones">
+                            <div className="col-12 NewAlbumes_botones pt-2 d-flex justify-content-end">
                                 <button type="button" onClick={()=>history.goBack()} className="btn btn-light">Volver</button>
                                 <input 
                                     type="submit"
@@ -380,20 +404,6 @@ const NewAlbumes = () => {
                         </div>
                     </div>
                 </div> 
-                <div className="row">
-                    <div className="col-6 col-xs-12">
-                        {portadaMostrar===null 
-                            ? null 
-                            :
-                                (
-                                    <div className="container">
-                                        <h6>Portada seleccionada:</h6>
-                                        <img src={portadaMostrar} className="NewAlbumes_previewPortada" alt="portada"></img>
-                                    </div>
-                                )
-                        }
-                    </div>
-                </div>
             </div>
         </form>
             
