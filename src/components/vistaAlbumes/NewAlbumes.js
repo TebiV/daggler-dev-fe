@@ -207,7 +207,7 @@ const NewAlbumes = () => {
                 method:'POST',
                 body: formData,
                 headers: {"Authorization": `${token}`}};
-            fetch(`https://sod-daggler-be.herokuapp.com/api/album/${response.data.data._id}/uploadCover`,options)
+            fetch(`https://sod-daggler-be.herokuapp.com/api/album/${response.data.data._id}/updateCover`,options)
                 .then((res) => res.json())
                 .then(await (history.push({ pathname: `/albumes/subir-fotos/${response.data.data._id}`, state: {album}})))
                 
