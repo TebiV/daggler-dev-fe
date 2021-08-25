@@ -99,16 +99,19 @@ const ModificarAlbum = () => {
 
     
     async function submitCover(){
-        const formData = new FormData()
-        formData.append('image',datosNuevos.cover)
-        const options = {
-            method:'PUT',
-            body: formData,
-            headers: {"Authorization": `${token}`}};
-        fetch(`https://sod-daggler-be.herokuapp.com/api/album/${albumid.albumid}/updateCover`,options)
-            .then((res) => console.log(res))
+        if(datosNuevos.cover!==null && datosNuevos.cover!=="undefined" && datosNuevos.cover!==""){
+            const formData = new FormData()
+            formData.append('image',datosNuevos.cover[0])
+            const response = await axios.put(
+                `https://sod-daggler-be.herokuapp.com/api/album/${albumid.albumid}/actualizarCover`,
+                formData,
+                {headers}
+            )
+            .then(res=>console.log(res))
             
-            }
+            
+            
+            }}
     
     async function submitAlbum(){
         const response = await axios.put(
@@ -116,7 +119,9 @@ const ModificarAlbum = () => {
             datosNuevos,
             {headers}
         )
-        console.log(response)
+        .then(await submitCover())
+        .then(await history.push({pathname:'/albumes'}))
+        
     }
     const handleSubmitDatos = e =>{
         e.preventDefault()
@@ -147,16 +152,12 @@ const ModificarAlbum = () => {
             return;
         }
         
+        submitAlbum()
         
-        //Checkear si hay portada para enviar
-        if(datosNuevos.cover!==null && datosNuevos.cover!=="undefined" && datosNuevos.cover!==""){
-            alert('Cover subido')
-            submitCover()
-        }
-
+       
         if(datosNuevos.name!==album.name || datosNuevos.category !== album.category || datosNuevos.password!==album.password){
-            submitAlbum()
-            alert('Datos Actualizados')
+            
+            
         }
     }
    
