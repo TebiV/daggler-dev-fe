@@ -105,7 +105,7 @@ const ModificarAlbum = () => {
             method:'PUT',
             body: formData,
             headers: {"Authorization": `${token}`}};
-        fetch(`https://sod-daggler-be.herokuapp.com/api/album/${albumid.albumid}/updateCover`,options)
+        fetch(`https://sod-daggler-be.herokuapp.com/api/album/${albumid.albumid}/actualizarCover`,options)
             .then((res) => console.log(res))
             
             }
