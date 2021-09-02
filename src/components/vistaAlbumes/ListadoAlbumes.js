@@ -117,7 +117,7 @@ const ListadoAlbumes = () => {
                         }
 
 
-                        <form className="d-flex flex-fill ps-3 " onSubmit={(e)=>{e.preventDefault()}}>
+                        <form className="d-flex flex-fill ps-3 " onSubmit={(e) => { e.preventDefault() }}>
                             <input
                                 className="form-control me-2"
                                 type="search"
@@ -125,7 +125,7 @@ const ListadoAlbumes = () => {
                                 onChange={(e) => setInputSearch(e.target.value)}
                                 placeholder={"Buscar álbum..."}
                                 aria-label="Search"
-                                
+
                             ></input>
                         </form>
                     </div>
@@ -175,8 +175,6 @@ const ListadoAlbumes = () => {
                                 {albumes.map((album) => <TarjetaAlbum key={album._id} album={album} onEliminar={setalbumAEliminar} />)}
                             </div>
                     )
-
-
                 }
 
             </div>

@@ -1,14 +1,16 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import {rutaAdminAlbumes, rutaAdminEventos, rutaAdminLogout, rutaAdminPedidos, rutaAdminPrecios} from '../rutas/RutasAdmin';
+import {rutaAdminAlbumes, rutaAdminEventos, rutaAdminLogout, rutaAdminPedidos, rutaAdminPrecios, rutaAdminTamaniosPrecios} from '../rutas/RutasAdmin';
+import { useHistory } from 'react-router';
+
 const NavbarAdmin = () => {
 
+    const history = useHistory();
     const categoriasAdmin = [
         { nombre: 'Álbumes', ruta: rutaAdminAlbumes },
         { nombre: 'Pedidos', ruta: rutaAdminPedidos },
         { nombre: 'Eventos', ruta: rutaAdminEventos },
-        { nombre: 'Precios', ruta: rutaAdminPrecios }
+        { nombre: 'Configuración', ruta: rutaAdminPrecios }
     ]
     return (
         <nav className="navbar  navbar-expand-lg navbar-light bg-light">
@@ -49,15 +51,15 @@ const NavbarAdmin = () => {
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                         >
-                            <i className="fas fa-user me-2"></i>
-                            Perfil
+                            <i className="fas fa-user me-2"></i> Perfil 
                         </span>
                         <ul className=" dropdown-menu dropdown-menu-end" aria-labelledby="dropdownPerfil">
 
-                            <li><button className="dropdown-item" href="#">Cambiar contraseña</button></li>
-                            <li><button className="dropdown-item" href="#">alguna cosa mas</button></li>
+                            
+                            <li><button className="dropdown-item" onClick={()=>{history.push({pathname: rutaAdminTamaniosPrecios})}}>Tamaños y Precios</button></li>
                             <hr/>
-                            <li><a className="dropdown-item" href={rutaAdminLogout}><b>Cerrar Sesión</b> </a></li>
+                            <li><button className="dropdown-item" href="#">Cambiar contraseña</button></li>
+                            <li><button className="dropdown-item" href={rutaAdminLogout}><b><i class="fas fa-power-off"></i> Cerrar Sesión</b> </button></li>
                         </ul>
                     </div>
                 </div>

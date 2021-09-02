@@ -1,7 +1,7 @@
 import React from 'react';
 import NavbarAdmin from '../layout/NavbarAdmin';
 
-const AdminPrecios = () => {
+const AdminConfig = () => {
 
     return (
         <>
@@ -11,4 +11,4 @@ const AdminPrecios = () => {
     );
 }
 
-export default AdminPrecios;
+export default AdminConfig;
