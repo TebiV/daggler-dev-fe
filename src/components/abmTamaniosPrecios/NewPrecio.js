@@ -1,56 +1,45 @@
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import React, { useState } from 'react'
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 
-function AbmPrecio(props) {
+function NewPrecio(props) {
 
 
     const [nombre, setNombre] = useState("");
     const [precio, setPrecio] = useState("");
+    const [error, setError] = useState(false);
 
 
-    function handleCancelar() {
+    function handleClose() {
         setNombre("");
         setPrecio("");
-        console.log("puto");
-
+        setError(false);
         props.handleClose();
-        console.log(nombre);
-        console.log(precio);
     }
 
     function crearPrecio() {
+        if (nombre === "" || isNaN(precio) || precio === "") {
+            setError(true);
+        } else {
+            const url = 'https://sod-daggler-be.herokuapp.com/api/price';
 
-        const url = 'https://sod-daggler-be.herokuapp.com/api/price';
-
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': window.localStorage.getItem(DAGGLER_ADMIN)
-            },
-            body: JSON.stringify({ name: nombre, price: precio })
-
-        }).then(res => { return res.json() })
-            .then(resp => {
-                console.log(resp)
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': window.localStorage.getItem(DAGGLER_ADMIN)
+                },
+                body: JSON.stringify({ name: nombre, price: precio })
+            }).then(() => {
                 props.getPrecios();
-                setNombre("");
-                setPrecio("");
+                handleClose();
             })
-        // props.getPrecios();
-
-        props.handleClose();
-    }
-
-    function handlePrecio(e) {
-        setPrecio(parseInt(e.target.value));
-        // console.log(typeof precio)
+        }
     }
 
     return (
-        <Modal show={props.show} onHide={props.handleClose} centered>
+        <Modal show={props.show} onHide={handleClose} centered>
             <Modal.Header >
                 <Modal.Title>Nuevo Precio</Modal.Title>
             </Modal.Header>
@@ -65,7 +54,6 @@ function AbmPrecio(props) {
                         value={nombre}
                         onChange={e => setNombre(e.target.value)}
                     />
-
                     <h5>Precio ($):</h5>
                     <input
                         type="number"
@@ -74,12 +62,21 @@ function AbmPrecio(props) {
                         className="form-control"
                         placeholder="Ej: 150"
                         value={precio}
-                        onChange={handlePrecio}
+                        onChange={(e) => { setPrecio(parseInt(e.target.value)) }}
                     />
                 </form>
+                {error
+                    ?
+                    <div className="alert alert-warning mb-0 mt-3">
+                        <b><i className="bi bi-exclamation-triangle">
+                        </i> Los campos no pueden quedar incompletos.</b>
+                    </div>
+                    :
+                    null
+                }
             </Modal.Body>
             <Modal.Footer>
-                <button className="btn btn-outline-danger" onClick={handleCancelar}>
+                <button className="btn btn-outline-danger" onClick={handleClose}>
                     Cancelar
                 </button>
                 <button className="btn btn-primary" onClick={crearPrecio}>
@@ -90,4 +87,4 @@ function AbmPrecio(props) {
     );
 }
 
-export default AbmPrecio;
+export default NewPrecio;

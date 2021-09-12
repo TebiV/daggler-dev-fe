@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap';
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
-function ModalConfirmDeletePrice(props) {
+function DeletePrecio(props) {
 
     function handleEliminar() {
         const url = `https://sod-daggler-be.herokuapp.com/api/price/${props.precio._id}`
@@ -16,8 +16,10 @@ function ModalConfirmDeletePrice(props) {
                 },
                 body: JSON.stringify({ _id: props.precio._id })
             }
-        )
-        props.borrar(props.precio);
+        ).then(() => {
+            props.borrar(props.precio);
+            props.handleClose();
+        })
     }
 
 
@@ -30,7 +32,7 @@ function ModalConfirmDeletePrice(props) {
                 <Modal.Body>
                     <div className="mx-auto">
                         <h4>Nombre: <b>{props.precio.name}</b></h4>
-                        <h4 >Precio: <b>${props.precio.price}</b></h4>
+                        <h3 >Precio: <b>${props.precio.price}</b></h3>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
@@ -38,7 +40,7 @@ function ModalConfirmDeletePrice(props) {
                         Cancelar
                     </Button>
                     <Button variant="outline-danger" onClick={handleEliminar}>
-                        <i class="fas fa-trash"></i> Eliminar
+                        <i className="fas fa-trash"></i> Eliminar
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -46,4 +48,4 @@ function ModalConfirmDeletePrice(props) {
     );
 }
 
-export default ModalConfirmDeletePrice;
+export default DeletePrecio;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { rutaAdminLogin} from '../rutas/RutasAdmin';
+import { rutaAdminLogin} from '../routes/RutasAdmin';
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 
 

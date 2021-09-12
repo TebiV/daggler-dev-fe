@@ -2,28 +2,33 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import NavbarAdmin from '../layout/NavbarAdmin';
-import AbmPrecio from './AbmPrecio';
+import NewPrecio from './NewPrecio';
 import Precio from './Precio';
+import EditPrecio from './EditPrecio';
+import DeletePrecio from './DeletePrecio';
 function PantallaTamaniosPrecios() {
 
     const [precios, setPrecios] = useState([]);
-    const [selectedPrecio, setSelectedPrecio] = useState([]);
 
-    const [showAbm, setShowAbm] = useState(false);
-    function toggleAbm() {
-        setShowAbm(!showAbm)
-    }
+    const [showNew, setShowNew] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
-    function getPrecios() {
+
+    function toggleNew() { setShowNew(!showNew) }
+    function toggleEdit() { setShowEdit(!showEdit) }
+    function toggleDelete() { setShowDelete(!showDelete) }
+
+    const [selectedPrecio, selectPrecio] = useState({});
+
+    async function getPrecios() {
         const url = 'https://sod-daggler-be.herokuapp.com/api/price';
-        axios.get(url).then(res => setPrecios(res.data.data.filter(precio => precio.name !== "Digital")));
-        // setPrecios(res.data.data.filter(precio => precio.name !== "Digital"))
-        console.log(precios)
+        await axios.get(url).then(res => setPrecios(res.data.data));
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         getPrecios();
-    },[])
+    }, [])
 
     function borrarPrecioArray(precioDelete) {
         setPrecios(precios.filter(precio => precio._id !== precioDelete._id))
@@ -31,23 +36,25 @@ function PantallaTamaniosPrecios() {
     return (
         <>
             <NavbarAdmin />
-            <AbmPrecio mode="nuevo" show={showAbm} handleClose={toggleAbm} getPrecios={getPrecios}/>
+            <NewPrecio mode="nuevo" show={showNew} handleClose={toggleNew} getPrecios={getPrecios} />
+            <EditPrecio show={showEdit} handleClose={toggleEdit} getPrecios={getPrecios} precio={selectedPrecio}/>
+            <DeletePrecio show={showDelete} handleClose={toggleDelete} borrar={borrarPrecioArray} precio={selectedPrecio}/>
             <div className="container mt-5 mb-4">
                 <div className="row d-flex ">
-                    
+
                     <div className="col-sm-6 px-0">
                         <h1 className="my-auto">Tamaños y Precios de Fotografías</h1>
                     </div>
 
                     <div className="col-sm-6 d-flex my-auto px-0">
-                        <button className="btn btn-primary ms-auto" onClick={toggleAbm}><i className="fas fa-plus me-1"></i> Nuevo</button>
+                        <button className="btn btn-primary ms-auto" onClick={toggleNew}><i className="fas fa-plus me-1"></i> Nuevo</button>
                     </div>
 
                 </div>
             </div>
             <div className="container overflow-auto" style={{ height: "68vh" }}>
                 <div className="row ">
-                    {precios.map(precio => <Precio key={precio._id} precio={precio} borrar={borrarPrecioArray} getPrecios={getPrecios}/>)}
+                    {precios.map(precio => <Precio key={precio._id} precio={precio} borrar={borrarPrecioArray} getPrecios={getPrecios} selectPrecio={selectPrecio} toggleEdit={toggleEdit} toggleDelete={toggleDelete} />)}
                 </div>
             </div>
         </>

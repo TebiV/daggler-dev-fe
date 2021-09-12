@@ -1,21 +1,21 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import {rutaAdminAlbumes, rutaAdminEventos, rutaAdminLogout, rutaAdminPedidos, rutaAdminPrecios, rutaAdminTamaniosPrecios} from '../rutas/RutasAdmin';
+import { rutaAdminAlbumes, rutaAdminEventos, rutaAdminLogout, rutaAdminPedidos, rutaAdminPrecios, rutaAdminTamaniosPrecios, rutaAdminCategorias } from '../routes/RutasAdmin';
 import { useHistory } from 'react-router';
 
 const NavbarAdmin = () => {
 
     const history = useHistory();
     const categoriasAdmin = [
-        { nombre: 'Álbumes', ruta: rutaAdminAlbumes },
-        { nombre: 'Pedidos', ruta: rutaAdminPedidos },
-        { nombre: 'Eventos', ruta: rutaAdminEventos },
-        { nombre: 'Configuración', ruta: rutaAdminPrecios }
+        { id: "1", nombre: 'Álbumes', ruta: rutaAdminAlbumes },
+        { id: "2", nombre: 'Pedidos', ruta: rutaAdminPedidos },
+        { id: "3", nombre: 'Eventos', ruta: rutaAdminEventos },
+        { id: "4", nombre: 'Configuración', ruta: rutaAdminPrecios }
     ]
     return (
         <nav className="navbar  navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/"> <span style={{color: '#E6AC00', fontWeight: '700'}}>Daggler</span> Studio </a>
+                <a className="navbar-brand" href="/"> <span style={{ color: '#E6AC00', fontWeight: '700' }}>Daggler</span> Studio </a>
 
                 <button
                     className="navbar-toggler"
@@ -35,6 +35,7 @@ const NavbarAdmin = () => {
                         {categoriasAdmin.map((categoria) => {
                             return (
                                 <NavLink
+                                    key={categoria.id}
                                     to={categoria.ruta}
                                     className="nav-link"
                                     activeClassName="active"
@@ -51,15 +52,14 @@ const NavbarAdmin = () => {
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                         >
-                            <i className="fas fa-user me-2"></i> Perfil 
+                            <i className="fas fa-user me-2"></i> Perfil
                         </span>
                         <ul className=" dropdown-menu dropdown-menu-end" aria-labelledby="dropdownPerfil">
-
-                            
-                            <li><button className="dropdown-item" onClick={()=>{history.push({pathname: rutaAdminTamaniosPrecios})}}>Tamaños y Precios</button></li>
-                            <hr/>
+                            <li><button className="dropdown-item" onClick={() => { history.push({ pathname: rutaAdminTamaniosPrecios }) }}>Tamaños y Precios</button></li>
+                            <li><button className="dropdown-item" onClick={() => { history.push({ pathname: rutaAdminCategorias }) }}>Categorías</button></li>
+                            <hr />
                             <li><button className="dropdown-item" href="#">Cambiar contraseña</button></li>
-                            <li><button className="dropdown-item" href={rutaAdminLogout}><b><i class="fas fa-power-off"></i> Cerrar Sesión</b> </button></li>
+                            <li><button className="dropdown-item" onClick={() => { history.push({ pathname: rutaAdminLogout }) }}><b><i className="fas fa-power-off"></i> Cerrar Sesión</b> </button></li>
                         </ul>
                     </div>
                 </div>

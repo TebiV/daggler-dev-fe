@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
-import { rutaAdminLogin, rutaAdminLogout } from '../rutas/RutasAdmin';
+import { rutaAdminLogin, rutaAdminLogout } from '../routes/RutasAdmin';
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 
 //este componente sive para proteger las rutas del admin

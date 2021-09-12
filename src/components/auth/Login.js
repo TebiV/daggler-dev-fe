@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DAGGLER_ADMIN } from "../token tags/DAGGLER_ADMIN";
 import Error from "../layout/Error";
-import { rutaAdminAlbumes } from "../rutas/RutasAdmin";
+import { rutaAdminAlbumes } from "../routes/RutasAdmin";
 function Login() {
 
     //hook con objeto que maneja el mail y contraseña ingresados

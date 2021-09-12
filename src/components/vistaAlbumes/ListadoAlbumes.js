@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { rutaAdminCrearAlbum } from '../rutas/RutasAdmin';
+import { rutaAdminCrearAlbum } from '../routes/RutasAdmin';
 import TarjetaAlbum from './TarjetaAlbum';
 import { useCategorias } from '../../context/CategoriasContext';
 import { apiDeleteAlbumId, apiDeleteAlbumIdd } from '../apis/apis';

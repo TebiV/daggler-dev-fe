@@ -4,7 +4,7 @@ import {Link, useHistory} from 'react-router-dom'
 import Error from '../layout/Error';
 import '../../css/NewAlbumes_css.css'
 import '../../css/BootstrapOverride.css'
-import { rutaAdminAlbumes } from '../rutas/RutasAdmin';
+import { rutaAdminAlbumes } from '../routes/RutasAdmin';
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 
 

@@ -13,3 +13,4 @@ export const rutaAdminLogin = '/login';
 export const rutaAdminLogout = '/logout';
 
 
+export const rutaAdminCategorias = '/categorias';
