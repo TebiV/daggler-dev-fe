@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import { DAGGLER_ADMIN } from "../token tags/DAGGLER_ADMIN";
 import Error from "../layout/Error";
 import { rutaAdminAlbumes } from "../routes/RutasAdmin";
-function Login() {
+import {useSelector, useDispatch} from 'react-redux';
+import { SET_TOKEN } from "../../redux/actions/TokenActions";
+import { useHistory } from "react-router";
 
+function Login() {
+    //redux things
+    const dispatch = useDispatch();    
+    const token = useSelector(state => state);
+    const history = useHistory();
     //hook con objeto que maneja el mail y contraseña ingresados
     const [user, setUser] = useState({
         email: "",
@@ -42,8 +49,11 @@ function Login() {
 
         }).then(res => {return res.json()})
         .then(response => {
-            window.localStorage.setItem(DAGGLER_ADMIN, response.data.token);
-            window.location.href = rutaAdminAlbumes;
+            // window.localStorage.setItem(DAGGLER_ADMIN, response.data.token);
+            // window.location.href = rutaAdminAlbumes;
+            dispatch({type:SET_TOKEN, token: response.data.token})
+            console.log(token)
+            // history.push(rutaAdminAlbumes);
         }).catch(error => {
             //muestra pantalla de error
             setLoginFallido({
@@ -92,7 +102,6 @@ function Login() {
                     >
                         Ingresar
                     </button>
-
                 </form>
             </div>
         </>
