@@ -1,9 +1,10 @@
 import { Modal } from 'react-bootstrap';
 import React, { useState } from 'react'
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+import { useSelector } from 'react-redux';
 
 function NewPrecio(props) {
 
+    const token = useSelector(state => state.tokenReducer);
 
     const [nombre, setNombre] = useState("");
     const [precio, setPrecio] = useState("");
@@ -28,7 +29,7 @@ function NewPrecio(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': window.localStorage.getItem(DAGGLER_ADMIN)
+                    'Authorization': token
                 },
                 body: JSON.stringify({ name: nombre, price: precio })
             }).then(() => {

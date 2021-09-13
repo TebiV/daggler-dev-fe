@@ -1,9 +1,10 @@
 import { Modal } from 'react-bootstrap';
 import React, { useState } from 'react'
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+import { useSelector } from 'react-redux';
 
 function EditCategoria(props) {
 
+    const token = useSelector(state => state.tokenReducer);
 
     const [nombre, setNombre] = useState(props.categoria.name);
 
@@ -29,7 +30,7 @@ function EditCategoria(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': window.localStorage.getItem(DAGGLER_ADMIN)
+                    'Authorization': token
                 },
                 body: JSON.stringify({ name: nombre })
             }).then(() => {

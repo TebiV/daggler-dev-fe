@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { Modal, Button } from 'react-bootstrap';
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+import { useSelector } from 'react-redux';
+
 function DeleteCategoria(props) {
+    //token obtenido del store
+    const token = useSelector(state => state.tokenReducer);
 
     //si la categoria tiene albumes, pasa a true y se muestra un error
     const [error, setError] = useState(false);
@@ -16,7 +19,7 @@ function DeleteCategoria(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': window.localStorage.getItem(DAGGLER_ADMIN)
+                    'Authorization': token
                 },
                 body: JSON.stringify({ _id: props.categoria._id })
             }

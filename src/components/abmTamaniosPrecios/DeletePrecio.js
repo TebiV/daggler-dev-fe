@@ -1,7 +1,10 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap';
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+import { useSelector } from 'react-redux';
+
 function DeletePrecio(props) {
+
+    const token = useSelector(state => state.tokenReducer);
 
     function handleEliminar() {
         const url = `https://sod-daggler-be.herokuapp.com/api/price/${props.precio._id}`
@@ -12,7 +15,7 @@ function DeletePrecio(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': window.localStorage.getItem(DAGGLER_ADMIN)
+                    'Authorization': token
                 },
                 body: JSON.stringify({ _id: props.precio._id })
             }

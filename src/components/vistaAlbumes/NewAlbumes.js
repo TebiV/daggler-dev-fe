@@ -6,6 +6,7 @@ import '../../css/NewAlbumes_css.css'
 import '../../css/BootstrapOverride.css'
 import { rutaAdminAlbumes } from '../routes/RutasAdmin';
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+import { useSelector } from 'react-redux';
 
 
 //!COMENTARIOS GENERALES
@@ -19,6 +20,7 @@ const NewAlbumes = () => {
     //useHistory
     const history = useHistory();
 
+    
     
 
     //* State para guardar el album con su nombre, categoria y foto

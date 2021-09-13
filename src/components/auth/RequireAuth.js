@@ -7,7 +7,7 @@ import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 //este componente sive para proteger las rutas del admin
 const RequireAuth = ({ Component }) => {
     //redux things
-    const token = useSelector(state => state);
+    const token = useSelector(state => state.tokenReducer);
 
     //este hook sirve para saber si mostrar el mensaje de error diciendo que la sesion caducó
     const [istokenValid, setIsTokenValid] = useState(true)

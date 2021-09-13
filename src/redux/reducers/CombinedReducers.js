@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import tokenReducer from "./TokenReducer";
 
-const allReducers = combineReducers({
+const combinedReducers = combineReducers({
     tokenReducer
 });
 
-export default allReducers;
+export default combinedReducers;

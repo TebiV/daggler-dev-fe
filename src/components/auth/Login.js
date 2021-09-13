@@ -9,7 +9,7 @@ import { useHistory } from "react-router";
 function Login() {
     //redux things
     const dispatch = useDispatch();    
-    const token = useSelector(state => state);
+    const token = useSelector(state => state.tokenReducer);
     const history = useHistory();
     //hook con objeto que maneja el mail y contraseña ingresados
     const [user, setUser] = useState({
@@ -52,8 +52,7 @@ function Login() {
             // window.localStorage.setItem(DAGGLER_ADMIN, response.data.token);
             // window.location.href = rutaAdminAlbumes;
             dispatch({type:SET_TOKEN, token: response.data.token})
-            console.log(token)
-            // history.push(rutaAdminAlbumes);
+            history.push(rutaAdminAlbumes);
         }).catch(error => {
             //muestra pantalla de error
             setLoginFallido({
@@ -102,6 +101,7 @@ function Login() {
                     >
                         Ingresar
                     </button>
+                    {token}
                 </form>
             </div>
         </>
