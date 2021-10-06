@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { rutaAdminAlbumes, rutaAdminEventos, rutaAdminLogout, rutaAdminPedidos, rutaAdminTamaniosPrecios, rutaAdminCategorias, rutaAdminCupones } from '../routes/RutasAdmin';
+import { rutaAdminAlbumes, rutaAdminEventos, rutaAdminLogout, rutaAdminPedidos, rutaAdminPrecios, rutaAdminTamaniosPrecios, rutaAdminCategorias } from '../routes/RutasAdmin';
 import { useHistory } from 'react-router';
 
 const NavbarAdmin = () => {
@@ -9,12 +9,7 @@ const NavbarAdmin = () => {
     const categoriasAdmin = [
         { id: "1", nombre: 'Álbumes', ruta: rutaAdminAlbumes },
         { id: "2", nombre: 'Pedidos', ruta: rutaAdminPedidos },
-        { id: "3", nombre: 'Eventos', ruta: rutaAdminEventos },
-<<<<<<< Updated upstream
-        { id: "4", nombre: 'Configuración', ruta: rutaAdminPrecios }
-=======
-        { id: "4", nombre: 'Cupones', ruta: rutaAdminCupones }
->>>>>>> Stashed changes
+        { id: "3", nombre: 'Eventos', ruta: rutaAdminEventos }
     ]
     return (
         <nav className="navbar  navbar-expand-lg navbar-light bg-light">
@@ -48,10 +43,8 @@ const NavbarAdmin = () => {
                                 </NavLink>
                             )
                         })}
-<<<<<<< Updated upstream
-=======
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="/#" id="navbarDropdownConfiguracion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownConfiguracion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Configuración
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdownConfiguracion">
@@ -71,7 +64,6 @@ const NavbarAdmin = () => {
                                 </li>
                             </ul>
                         </li>
->>>>>>> Stashed changes
                     </ul>
                     <div className="navbar-nav btn-group ms-auto">
                         <span
@@ -83,9 +75,6 @@ const NavbarAdmin = () => {
                             <i className="fas fa-user me-2"></i> Perfil
                         </span>
                         <ul className=" dropdown-menu dropdown-menu-end" aria-labelledby="dropdownPerfil">
-                            <li><button className="dropdown-item" onClick={() => { history.push({ pathname: rutaAdminTamaniosPrecios }) }}>Tamaños y Precios</button></li>
-                            <li><button className="dropdown-item" onClick={() => { history.push({ pathname: rutaAdminCategorias }) }}>Categorías</button></li>
-                            <hr />
                             <li><button className="dropdown-item" href="#">Cambiar contraseña</button></li>
                             <li><button className="dropdown-item" onClick={() => { history.push({ pathname: rutaAdminLogout }) }}><b><i className="fas fa-power-off"></i> Cerrar Sesión</b> </button></li>
                         </ul>
