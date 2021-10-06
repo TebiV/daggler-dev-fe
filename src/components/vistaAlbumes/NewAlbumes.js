@@ -4,13 +4,8 @@ import { useHistory} from 'react-router-dom'
 import Error from '../layout/Error';
 import '../../css/NewAlbumes_css.css'
 import '../../css/BootstrapOverride.css'
-<<<<<<< Updated upstream
-import { rutaAdminAlbumes } from '../routes/RutasAdmin';
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
-=======
 // import { rutaAdminAlbumes } from '../routes/RutasAdmin';
 import { useSelector } from 'react-redux';
->>>>>>> Stashed changes
 
 
 //!COMENTARIOS GENERALES
@@ -24,11 +19,8 @@ const NewAlbumes = () => {
     //useHistory
     const history = useHistory();
 
-<<<<<<< Updated upstream
-=======
     //token obtenido del store
     const token = useSelector(state => state.tokenReducer);
->>>>>>> Stashed changes
     
 
     //* State para guardar el album con su nombre, categoria y foto
