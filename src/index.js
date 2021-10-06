@@ -21,9 +21,7 @@ let persistor = persistStore(store);
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <App />
     </PersistGate>
   </Provider>
   ,
