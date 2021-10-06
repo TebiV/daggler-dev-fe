@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { rutaAdminLogin} from '../routes/RutasAdmin';
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+// import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 
 
 //* Este componente esta solo para quitar el token del browser y enviar al usuario devuelta al login

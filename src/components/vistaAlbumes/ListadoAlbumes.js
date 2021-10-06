@@ -4,12 +4,13 @@ import { rutaAdminCrearAlbum } from '../routes/RutasAdmin';
 import TarjetaAlbum from './TarjetaAlbum';
 import { useCategorias } from '../../context/CategoriasContext';
 import { apiDeleteAlbumId, apiDeleteAlbumIdd } from '../apis/apis';
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+// import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 import ModalConfirmacion from '../layout/ModalConfirmacion';
-import '../../css/ListadoAlbumes_css.css'
+import '../../css/ListadoAlbumes_css.css';
+import { useSelector } from 'react-redux';
+
 const ListadoAlbumes = () => {
-    //estilo hardcodeado para el div con la lista de albumes
-    const style = { maxHeight: 0.7 * (window.innerHeight) }
+    const token = useSelector(state => state.tokenReducer);
 
     //hook que guarda los albumes
     const [albumes, setAlbumes] = useState([])
@@ -33,7 +34,7 @@ const ListadoAlbumes = () => {
     useEffect(() => {
         const getAlbumes = async () => {
             const url = `https://sod-daggler-be.herokuapp.com/api/album/${filtroCategoria}`
-            const resultado = await axios.get(url)
+            const resultado = await axios.get(url, {headers: {'Authorization': token}})
             setAlbumes(resultado.data)
             setIsLoading(false)
         }
@@ -53,7 +54,7 @@ const ListadoAlbumes = () => {
         const url = apiDeleteAlbumId(albumId)
         console.log(url)
         const h = new Headers();
-        h.append('Authorization', window.localStorage.getItem(DAGGLER_ADMIN));
+        h.append('Authorization', token);
         fetch(url, {
             method: 'DELETE',
             headers: h
@@ -138,7 +139,7 @@ const ListadoAlbumes = () => {
                             id="aaasd"
                             onClick={() => window.location.pathname = rutaAdminCrearAlbum}
                         >
-                            <i className="fas fa-plus me-1"></i> Añadir
+                            <i className="fas fa-plus me-1"></i> Nuevo
                         </button>
 
                     </div>

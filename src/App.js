@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import Login from "./components/auth/Login";
 import Logout from './components/auth/Logout';
 import RequireAuth from './components/auth/RequireAuth';
-import { rutaAdminAlbumes, rutaAdminCategorias, rutaAdminCrearAlbum, rutaAdminEventos, rutaAdminLogin, rutaAdminLogout, rutaAdminModificarAlbum, rutaAdminPedidos, rutaAdminPrecios, rutaAdminSubirFotos, rutaAdminTamaniosPrecios } from './components/routes/RutasAdmin';
+import { rutaAdminAlbumes, rutaAdminCategorias, rutaAdminCrearAlbum, rutaAdminCupones, rutaAdminEventos, rutaAdminLogin, rutaAdminLogout, rutaAdminModificarAlbum, rutaAdminPedidos, rutaAdminPrecios, rutaAdminSubirFotos, rutaAdminTamaniosPrecios } from './components/routes/RutasAdmin';
 
 
 import AdminAlbumes from './components/vistaAlbumes/AdminAlbumes';
@@ -19,6 +19,7 @@ import AdminSubidaFotos from './components/fotografias/AdminSubidaFotos';
 import AdminModificarAlbum from './components/vistaAlbumes/AdminModificarAlbum';
 import PantallaTamaniosPrecios from './components/abmTamaniosPrecios/PantallaTamaniosPrecios';
 import PantallaCategorias from './components/abmCategorias/PantallaCategorias';
+import PantallaCupones from './components/abmCupones/PantallaCupones';
 
 
 function App() {
@@ -41,6 +42,8 @@ function App() {
             <Route exact path={rutaAdminSubirFotos} component={() => <RequireAuth Component={AdminSubidaFotos} />} />
             <Route exact path={rutaAdminTamaniosPrecios} component={() => <RequireAuth Component={PantallaTamaniosPrecios} />} />
             <Route exact path={rutaAdminCategorias} component={() => <RequireAuth Component={PantallaCategorias} />} />
+            <Route exact path={rutaAdminCupones} component={() => <RequireAuth Component={PantallaCupones} />} />
+
 
           </Switch>
         </Router>

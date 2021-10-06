@@ -6,7 +6,8 @@ import '@uppy/core/dist/style.css'
 import '@uppy/dashboard/dist/style.css'
 import '../../css/SubidaFotos_css.css'
 import XHRUpload from '@uppy/xhr-upload'
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+// import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+// import { useSelector } from 'react-redux';
 
  /*
     TODO: Pasar el album como prop a uppy
@@ -18,6 +19,7 @@ import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 
 const UppyUploader = ({album}) => {
 
+  // const token = useSelector(state => state.tokenReducer); (ESTA COMENTADO XQ NO SE USABA -Julian)
   const uppy = new Uppy({
     id: 'subirfotos',
     restrictions: { allowedFileTypes: ["image/*"] },
@@ -27,7 +29,7 @@ const UppyUploader = ({album}) => {
   
   })
   //TODO: Auth
-  const token = localStorage.getItem(DAGGLER_ADMIN)
+  // const token = localStorage.getItem(DAGGLER_ADMIN)
   uppy.use(XHRUpload, 
     { endpoint: `https://sod-daggler-be.herokuapp.com/api/album/${album._id}/uploadPhotos`,
     formData: true,

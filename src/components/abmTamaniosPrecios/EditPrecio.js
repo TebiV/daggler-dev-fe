@@ -16,7 +16,7 @@ function EditPrecio(props) {
     }
 
     function editarPrecio() {
-        if (nombre == "" || isNaN(precio)) {
+        if (nombre === "" || isNaN(precio)) {
             setError(true);
         } else {
             const url = `https://sod-daggler-be.herokuapp.com/api/price/${props.precio._id}`;
