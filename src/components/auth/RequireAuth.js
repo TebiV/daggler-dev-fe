@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import { rutaAdminLogin, rutaAdminLogout } from '../routes/RutasAdmin';
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+// import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 
 //este componente sive para proteger las rutas del admin
 const RequireAuth = ({ Component }) => {
@@ -48,8 +48,31 @@ const RequireAuth = ({ Component }) => {
             <>
             {istokenValid
                 ?
+<<<<<<< Updated upstream
                 //si el token encontrado es valido no muestra nada
                 null
+=======
+                <>
+                    {istokenValid
+                        ?
+                        //si el token encontrado es valido no muestra nada
+                        null
+                        :
+                        //esto que manda acá es un mensaje de error igual al componente Error.js que creó el Fran, 
+                        //lo tuve que copypastear aca porque necesitaba que el boton de OK tuviese otra funcion
+                        <div className="errorContainer">
+                            <div className="error container">
+                                <div className="row errorMensaje">
+                                    La sesión ha expirado.
+                                </div>
+                                <div className="row errorBtn">
+                                    <button className='btn btn-warning' onClick={handleClick}>Ok</button>
+                                </div>
+                            </div>
+                        </div>}
+
+                    <Component /></>
+>>>>>>> Stashed changes
                 :
                 //esto que manda acá es un mensaje de error igual al componente Error.js que creó el Fran, 
                 //lo tuve que copypastear aca porque necesitaba que el boton de OK tuviese otra funcion

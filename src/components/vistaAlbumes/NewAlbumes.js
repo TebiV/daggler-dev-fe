@@ -1,11 +1,16 @@
 import React,{useState, useEffect} from 'react';
 import axios from 'axios';
-import {Link, useHistory} from 'react-router-dom'
+import { useHistory} from 'react-router-dom'
 import Error from '../layout/Error';
 import '../../css/NewAlbumes_css.css'
 import '../../css/BootstrapOverride.css'
+<<<<<<< Updated upstream
 import { rutaAdminAlbumes } from '../routes/RutasAdmin';
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+=======
+// import { rutaAdminAlbumes } from '../routes/RutasAdmin';
+import { useSelector } from 'react-redux';
+>>>>>>> Stashed changes
 
 
 //!COMENTARIOS GENERALES
@@ -19,6 +24,11 @@ const NewAlbumes = () => {
     //useHistory
     const history = useHistory();
 
+<<<<<<< Updated upstream
+=======
+    //token obtenido del store
+    const token = useSelector(state => state.tokenReducer);
+>>>>>>> Stashed changes
     
 
     //* State para guardar el album con su nombre, categoria y foto
@@ -173,7 +183,7 @@ const NewAlbumes = () => {
         //!El token va a tener que obtenerlo del localStorage 
         //TODO: Change url 
 
-        const token = localStorage.getItem(DAGGLER_ADMIN)
+        // const token = localStorage.getItem(DAGGLER_ADMIN) (YA NO SE USA)
         const url = `https://sod-daggler-be.herokuapp.com/api/album/newAlbum/Data`
 
         const albumEnvio = {
@@ -209,17 +219,9 @@ const NewAlbumes = () => {
                 headers: {"Authorization": `${token}`}};
             fetch(`https://sod-daggler-be.herokuapp.com/api/album/${response.data.data._id}/updateCover`,options)
                 .then((res) => res.json())
-                .then(await (history.push({ pathname: `/albumes/subir-fotos/${response.data.data._id}`, state: {album}})))
-                
+                .then(await (history.push({ pathname: `/albumes/subir-fotos/${response.data.data._id}`, state: {album}})))           
         }
-        submitAlbum()
-
-        
-
-        
-
-
-        
+        submitAlbum()        
     }
 
     //*Consulta a la API por las categorias
@@ -377,7 +379,7 @@ const NewAlbumes = () => {
                                         {portadaMostrar
                                             ?
                                                 <img src={portadaMostrar} className="album-cover-uploader__img" alt="portada" htmlFor="inputPortada" />
-                                            : <h5 className="album-cover__h5">Subir Portada</h5>
+                                            :<h5 className="album-cover__h5">Subir Portada</h5>
                                         }
                                         <input
                                         type="file"

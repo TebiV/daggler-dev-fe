@@ -7,12 +7,23 @@ import reportWebVitals from './reportWebVitals';
 
 
 ReactDOM.render(
+<<<<<<< Updated upstream
   <React.StrictMode>
     
       <App />
     
     
   </React.StrictMode>,
+=======
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+    
+        <App />
+     
+    </PersistGate>
+  </Provider>
+  ,
+>>>>>>> Stashed changes
   document.getElementById('root')
 );
 
