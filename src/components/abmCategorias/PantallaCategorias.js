@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { apiGetCategories } from '../apis/apis';
 import NavbarAdmin from '../layout/NavbarAdmin';
 import Categoria from './Categoria';
 import DeleteCategoria from './DeleteCategoria';
@@ -20,7 +21,7 @@ function PantallaCategorias() {
     const [selectedCateg, selectCategoria] = useState({});
 
     async function getCategorias() {
-        const url = 'https://sod-daggler-be.herokuapp.com/api/category/allCategory'
+        const url = apiGetCategories;
         const resultado = await axios.get(url)
         setCategorias(resultado.data)
     }

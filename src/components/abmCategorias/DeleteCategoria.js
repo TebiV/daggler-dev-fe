@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Modal, Button } from 'react-bootstrap';
+import { apiDeleteCategory } from '../apis/apis';
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 function DeleteCategoria(props) {
 
@@ -7,7 +8,8 @@ function DeleteCategoria(props) {
     const [error, setError] = useState(false);
     
     async function handleEliminar() {
-        const url = `https://sod-daggler-be.herokuapp.com/api/category/${props.categoria._id}`
+        
+        const url = apiDeleteCategory(props.categoria._id);
 
         await fetch(
             url,

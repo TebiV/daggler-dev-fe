@@ -6,6 +6,7 @@ import NewPrecio from './NewPrecio';
 import Precio from './Precio';
 import EditPrecio from './EditPrecio';
 import DeletePrecio from './DeletePrecio';
+import { apiGetPrices } from '../apis/apis';
 function PantallaTamaniosPrecios() {
 
     const [precios, setPrecios] = useState([]);
@@ -22,7 +23,7 @@ function PantallaTamaniosPrecios() {
     const [selectedPrecio, selectPrecio] = useState({});
 
     async function getPrecios() {
-        const url = 'https://sod-daggler-be.herokuapp.com/api/price';
+        const url = apiGetPrices;
         await axios.get(url).then(res => setPrecios(res.data.data));
     }
 

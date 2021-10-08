@@ -1,6 +1,7 @@
 import { Modal } from 'react-bootstrap';
 import React, { useState } from 'react'
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+import { apiEditCategory } from '../apis/apis';
 
 function EditCategoria(props) {
 
@@ -22,7 +23,7 @@ function EditCategoria(props) {
 
     function editarCategoria() {
         if (nombre !== "") {
-            const url = `https://sod-daggler-be.herokuapp.com/api/category/${props.categoria._id}`;
+            const url = apiEditCategory(props.categoria._id);
 
             fetch(url, {
                 method: 'PUT',

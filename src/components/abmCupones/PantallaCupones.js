@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { apiGetCupones } from '../apis/apis';
 import NavbarAdmin from '../layout/NavbarAdmin';
 import Cupon from './Cupon';
 import DeleteCupon from './DeleteCupon';
@@ -33,7 +34,7 @@ function PantallaCupones() {
 
 
     async function getCupones() {
-        const url = 'https://sod-daggler-be.herokuapp.com/api/coupon/get';
+        const url = apiGetCupones;
         await axios.get(url, { headers: { 'Authorization': token } })
             .then((res) => {
                 setCupones(res.data.data);

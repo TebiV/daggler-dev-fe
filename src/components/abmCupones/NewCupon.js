@@ -2,7 +2,8 @@ import { Modal } from 'react-bootstrap';
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import './abmCupones_css.css';
-import axios from 'axios'
+import axios from 'axios';
+import {apiCreateCupon} from '../apis/apis';
 function NewCupon(props) {
 
     //token extraido de redux para mandar al server y crear el cupon
@@ -153,7 +154,7 @@ function NewCupon(props) {
     async function handleCrearCupon() {
         if (validateData()) {
 
-            const url = 'https://sod-daggler-be.herokuapp.com/api/coupon/new';
+            const url = apiCreateCupon;
 
             let body
 

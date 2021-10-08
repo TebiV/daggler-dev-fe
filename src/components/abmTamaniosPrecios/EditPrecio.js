@@ -1,6 +1,7 @@
 import { Modal, Button } from 'react-bootstrap';
 import React, { useState } from 'react'
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+import { apiEditPrice } from '../apis/apis';
 
 function EditPrecio(props) {
 
@@ -19,7 +20,7 @@ function EditPrecio(props) {
         if (nombre === "" || isNaN(precio)) {
             setError(true);
         } else {
-            const url = `https://sod-daggler-be.herokuapp.com/api/price/${props.precio._id}`;
+            const url = apiEditPrice(props.precio._id);
 
             fetch(url, {
                 method: 'PUT',

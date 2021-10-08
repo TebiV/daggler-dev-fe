@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { apiDeleteCupon } from '../apis/apis';
 
 function DeleteCupon(props) {
     
@@ -10,18 +11,15 @@ function DeleteCupon(props) {
     const fechaVencimiento = new Date(props.cupon.expireDate);
 
     async function handleEliminar() {
-        const url = 'https://sod-daggler-be.herokuapp.com/api/coupon/delete'
+        const url = apiDeleteCupon(props.cupon._id)
 
         await fetch(
             url,
             {
                 method: 'PUT',
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
                     'Authorization': token
-                },
-                body: JSON.stringify({ idCoupon: props.cupon._id })
+                }
             }
         ).then(()=>{
             props.getCupones();

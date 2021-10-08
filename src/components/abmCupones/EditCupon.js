@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import './abmCupones_css.css';
 import axios from 'axios'
+import { apiEditCupon } from '../apis/apis';
 
 function EditCupon(props) {
 
@@ -158,7 +159,7 @@ function EditCupon(props) {
     async function handleCrearCupon() {
         if (validateData()) {
 
-            const url = `https://sod-daggler-be.herokuapp.com/api/coupon/update/${props.cupon._id}`;
+            const url = apiEditCupon(props.cupon._id)
 
             let body = {
                 name: name,

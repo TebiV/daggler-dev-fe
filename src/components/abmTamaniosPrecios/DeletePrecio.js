@@ -1,10 +1,11 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap';
+import { apiDeletePrice } from '../apis/apis';
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 function DeletePrecio(props) {
 
     function handleEliminar() {
-        const url = `https://sod-daggler-be.herokuapp.com/api/price/${props.precio._id}`
+        const url = apiDeletePrice(props.precio._id);
 
         fetch(url,
             {

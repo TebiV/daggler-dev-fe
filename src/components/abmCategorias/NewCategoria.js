@@ -1,6 +1,7 @@
 import { Modal } from 'react-bootstrap';
 import React, { useState } from 'react'
 import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+import { apiCreateCategory } from '../apis/apis';
 
 function NewCategoria(props) {
 
@@ -20,7 +21,7 @@ function NewCategoria(props) {
 
     function crearCategoria() {
         if (nombre !== "") {
-            const url = 'https://sod-daggler-be.herokuapp.com/api/category/newcategory';
+            const url = apiCreateCategory;
             fetch(url, {
                 method: 'POST',
                 headers: {
