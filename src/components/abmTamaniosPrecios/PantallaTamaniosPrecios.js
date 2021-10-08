@@ -42,15 +42,16 @@ function PantallaTamaniosPrecios() {
             <NewPrecio mode="nuevo" show={showNew} handleClose={toggleNew} getPrecios={getPrecios} />
             <EditPrecio show={showEdit} handleClose={toggleEdit} getPrecios={getPrecios} precio={selectedPrecio}/>
             <DeletePrecio show={showDelete} handleClose={toggleDelete} borrar={borrarPrecioArray} precio={selectedPrecio}/>
+            
             <div className="container mt-5 mb-4">
-                <div className="row d-flex ">
+                <div className="row d-flex mx-2 mx-sm-0">
 
-                    <div className="col-sm-6 px-0">
-                        <h1 className="my-auto">Tamaños y Precios de Fotografías</h1>
+                    <div className="col-sm-9 px-0 text-center text-sm-start">
+                        <h1 className="my-auto">Tamaños y Precios</h1>
                     </div>
 
-                    <div className="col-sm-6 d-flex my-auto px-0">
-                        <button className="btn btn-primary ms-auto" onClick={toggleNew}><i className="fas fa-plus me-1"></i> Nuevo</button>
+                    <div className="col-sm-3 d-flex my-auto px-0 py-2 py-sm-0 ">
+                        <button className="btn btn-primary ms-auto col-12 col-sm-auto" onClick={toggleNew}><i className="fas fa-plus me-1"></i> Nuevo</button>
                     </div>
 
                 </div>

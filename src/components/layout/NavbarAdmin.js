@@ -1,15 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { rutaAdminAlbumes, rutaAdminEventos, rutaAdminLogout, rutaAdminPedidos, rutaAdminTamaniosPrecios, rutaAdminCategorias, rutaAdminCupones } from '../routes/RutasAdmin';
+import { rutaAdminAlbumes, rutaAdminLogout, rutaAdminPedidos, rutaAdminTamaniosPrecios, rutaAdminCategorias, rutaAdminCupones } from '../routes/RutasAdmin';
 import { useHistory } from 'react-router';
 
-const NavbarAdmin = () => {
+const Navbar = () => {
 
     const history = useHistory();
     const categoriasAdmin = [
         { id: "1", nombre: 'Álbumes', ruta: rutaAdminAlbumes },
         { id: "2", nombre: 'Pedidos', ruta: rutaAdminPedidos },
-        { id: "3", nombre: 'Eventos', ruta: rutaAdminEventos },
         { id: "4", nombre: 'Cupones', ruta: rutaAdminCupones }
         
     ]
@@ -87,4 +86,4 @@ const NavbarAdmin = () => {
     );
 }
 
-export default NavbarAdmin;
+export default Navbar;
