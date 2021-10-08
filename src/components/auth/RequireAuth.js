@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router';
 import { rutaAdminLogin, rutaAdminLogout } from '../routes/RutasAdmin';
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 
 //este componente sive para proteger las rutas del admin
 const RequireAuth = ({ Component }) => {
@@ -29,9 +28,10 @@ const RequireAuth = ({ Component }) => {
                     .then(response => { return response.json() })
                     .then(res => setIsTokenValid((res.itsTokenTrue)))
             }
+            console.log("pasa")
         }
         verifyTokenStillValid();
-    }, [])
+    }, [token])
 
     function handleClick() {
         //cuando se hace click en el boton redirike al logout para que se borre el tocken viejo

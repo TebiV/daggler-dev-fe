@@ -96,6 +96,8 @@ function NewCupon(props) {
 
         resetErrors();
 
+
+
         //chequear fecha no vacia
         if (day === '' || month === '' || year === '') {
             errorInvalidDate = true;
@@ -118,7 +120,6 @@ function NewCupon(props) {
             }
         }
 
-
         //chequear cantidad de usos >= 1
         if (uses < 1) {
             errorInvalidUses = true;
@@ -136,6 +137,11 @@ function NewCupon(props) {
             setInvalidDiscount(true);
         }
 
+        //chequear si es un nombre repetido
+        if (props.validateName()){
+            errorInvalidName = true;
+            setInvalidName(true);
+        }
 
         if (errorInvalidDate || errorInvalidDiscount || errorInvalidName || errorInvalidUses) {
             return false;
@@ -149,7 +155,7 @@ function NewCupon(props) {
 
             const url = 'https://sod-daggler-be.herokuapp.com/api/coupon/new';
 
-            let body = {}
+            let body
 
             if (name === "") {
                 body = {
@@ -177,7 +183,6 @@ function NewCupon(props) {
                     props.getCupones();
                     handleClose();
                 })
-
         }
     }
 

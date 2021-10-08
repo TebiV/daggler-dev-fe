@@ -3,6 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 function DeleteCupon(props) {
+    
     //token obtenido del store
     const token = useSelector(state => state.tokenReducer);
 
@@ -22,10 +23,7 @@ function DeleteCupon(props) {
                 },
                 body: JSON.stringify({ idCoupon: props.cupon._id })
             }
-        ).then(response => {
-            console.log(response)
-        })
-        .then(()=>{
+        ).then(()=>{
             props.getCupones();
             props.handleClose();
         })

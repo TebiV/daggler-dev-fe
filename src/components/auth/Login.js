@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { DAGGLER_ADMIN } from "../token tags/DAGGLER_ADMIN";
 import Error from "../layout/Error";
 import { rutaAdminAlbumes } from "../routes/RutasAdmin";
 import {useSelector, useDispatch} from 'react-redux';
@@ -66,8 +65,6 @@ function Login() {
             })
             console.error(error)
         })
-
-
     }
 
 

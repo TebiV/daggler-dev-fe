@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { rutaAdminCrearAlbum } from '../routes/RutasAdmin';
 import TarjetaAlbum from './TarjetaAlbum';
 import { useCategorias } from '../../context/CategoriasContext';
-import { apiDeleteAlbumId, apiDeleteAlbumIdd } from '../apis/apis';
-// import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+import { apiDeleteAlbumId } from '../apis/apis';
 import ModalConfirmacion from '../layout/ModalConfirmacion';
 import '../../css/ListadoAlbumes_css.css';
 import { useSelector } from 'react-redux';
@@ -39,7 +38,7 @@ const ListadoAlbumes = () => {
             setIsLoading(false)
         }
         getAlbumes()
-    }, [filtroCategoria])
+    }, [filtroCategoria, token])
 
     useEffect(() => {
         setAlbumesSearch(

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { rutaAdminAlbumes, rutaAdminEventos, rutaAdminLogout, rutaAdminPedidos, rutaAdminPrecios, rutaAdminTamaniosPrecios, rutaAdminCategorias, rutaAdminCupones } from '../routes/RutasAdmin';
+import { rutaAdminAlbumes, rutaAdminEventos, rutaAdminLogout, rutaAdminPedidos, rutaAdminTamaniosPrecios, rutaAdminCategorias, rutaAdminCupones } from '../routes/RutasAdmin';
 import { useHistory } from 'react-router';
 
 const NavbarAdmin = () => {
@@ -46,7 +46,7 @@ const NavbarAdmin = () => {
                             )
                         })}
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownConfiguracion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a className="nav-link dropdown-toggle" href="/#" id="navbarDropdownConfiguracion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Configuración
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdownConfiguracion">

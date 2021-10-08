@@ -17,9 +17,10 @@ const SubidaFotos = () => {
             const res = await axios.get(url)
             setAlbum(res.data[0])
             setIsLoading(false)
+            console.log("asd")
         }
         getSpecificAlbum(albumid.albumid)
-    }, [])
+    }, [albumid.albumid])
     return (
         <>
             {isLoading
