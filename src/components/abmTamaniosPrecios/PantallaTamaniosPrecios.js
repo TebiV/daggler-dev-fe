@@ -7,6 +7,8 @@ import Precio from './Precio';
 import EditPrecio from './EditPrecio';
 import DeletePrecio from './DeletePrecio';
 import { apiGetPrices } from '../apis/apis';
+
+
 function PantallaTamaniosPrecios() {
 
     const [precios, setPrecios] = useState([]);

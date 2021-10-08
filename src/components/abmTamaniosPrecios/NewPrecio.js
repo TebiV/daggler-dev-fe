@@ -1,15 +1,15 @@
 import { Modal } from 'react-bootstrap';
 import React, { useState } from 'react'
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 import { apiCreatePrice } from '../apis/apis';
+import { useSelector } from 'react-redux';
 
 function NewPrecio(props) {
 
+    const token = useSelector(state => state.tokenReducer);
 
     const [nombre, setNombre] = useState("");
     const [precio, setPrecio] = useState("");
     const [error, setError] = useState(false);
-
 
     function handleClose() {
         setNombre("");
@@ -29,13 +29,19 @@ function NewPrecio(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': window.localStorage.getItem(DAGGLER_ADMIN)
+                    'Authorization': token
                 },
-                body: JSON.stringify({ name: nombre, price: precio })
+                body: JSON.stringify({ name: nombre, price: parseInt(precio) })
             }).then(() => {
                 props.getPrecios();
                 handleClose();
             })
+        }
+    }
+
+    function handlePrecio(e){
+        if (!isNaN(e.target.value)){
+            setPrecio(e.target.value)
         }
     }
 
@@ -57,13 +63,12 @@ function NewPrecio(props) {
                     />
                     <h5>Precio ($):</h5>
                     <input
-                        type="number"
+                        type="text"
                         name="precio"
-                        defaultValue={null}
                         className="form-control"
                         placeholder="Ej: 150"
                         value={precio}
-                        onChange={(e) => { setPrecio(parseInt(e.target.value)) }}
+                        onChange={handlePrecio}
                     />
                 </form>
                 {error

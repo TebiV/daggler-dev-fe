@@ -1,13 +1,14 @@
 import { Modal, Button } from 'react-bootstrap';
-import React, { useState } from 'react'
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+import React, { useState } from 'react';
 import { apiEditPrice } from '../apis/apis';
+import { useSelector } from 'react-redux';
 
 function EditPrecio(props) {
 
+    const token = useSelector(state => state.tokenReducer);
 
-    const [nombre, setNombre] = useState(props.precio.name);
-    const [precio, setPrecio] = useState(props.precio.price);
+    const [nombre, setNombre] = useState("");
+    const [precio, setPrecio] = useState("");
 
     const [error, setError] = useState(false);
 
@@ -27,7 +28,7 @@ function EditPrecio(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': window.localStorage.getItem(DAGGLER_ADMIN)
+                    'Authorization': token
                 },
                 body: JSON.stringify({ name: nombre, price: precio })
             }).then(() => {
@@ -38,8 +39,13 @@ function EditPrecio(props) {
     }
 
     function handlePrecio(e) {
-        setPrecio(parseInt(e.target.value));
-        console.log(precio)
+        if (!isNaN(e.target.value)) {
+            setPrecio(e.target.value);
+        }
+    }
+
+    function handleNombre(e){
+        setNombre(e.target.value)
     }
 
     function handleShow() {
@@ -60,14 +66,13 @@ function EditPrecio(props) {
                         className="form-control mb-3"
                         placeholder="Ej: 25x40"
                         value={nombre}
-                        onChange={(e) => setNombre(e.target.value)}
+                        onChange={handleNombre}
                     />
 
                     <h5>Precio ($):</h5>
                     <input
                         type="number"
                         name="precio"
-                        defaultValue={null}
                         className="form-control"
                         placeholder="Ej: 150"
                         value={precio}

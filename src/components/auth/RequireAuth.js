@@ -28,7 +28,6 @@ const RequireAuth = ({ Component }) => {
                     .then(response => { return response.json() })
                     .then(res => setIsTokenValid((res.itsTokenTrue)))
             }
-            console.log("pasa")
         }
         verifyTokenStillValid();
     }, [token])

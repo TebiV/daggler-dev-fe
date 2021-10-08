@@ -1,10 +1,11 @@
 import { Modal } from 'react-bootstrap';
 import React, { useState } from 'react'
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 import { apiCreateCategory } from '../apis/apis';
+import { useSelector } from 'react-redux';
 
 function NewCategoria(props) {
 
+    const token = useSelector(state => state.tokenReducer);
 
     const [nombre, setNombre] = useState("");
 
@@ -27,7 +28,7 @@ function NewCategoria(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': window.localStorage.getItem(DAGGLER_ADMIN)
+                    'Authorization': token
                 },
                 body: JSON.stringify({ name: nombre })
             }).then(() => {
@@ -50,7 +51,7 @@ function NewCategoria(props) {
                 <Modal.Title>Nueva Categoría</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form autocomplete="off">
+                <form autoComplete="off">
                     <div className="d-flex">
                         <h5 className="my-auto me-2">Nombre:</h5>
                         <input

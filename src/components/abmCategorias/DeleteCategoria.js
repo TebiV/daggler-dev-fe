@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { Modal, Button } from 'react-bootstrap';
 import { apiDeleteCategory } from '../apis/apis';
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
+import { useSelector } from 'react-redux';
+
 function DeleteCategoria(props) {
+
+    const token = useSelector(state => state.tokenReducer);
 
     //si la categoria tiene albumes, pasa a true y se muestra un error
     const [error, setError] = useState(false);
@@ -18,7 +21,7 @@ function DeleteCategoria(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': window.localStorage.getItem(DAGGLER_ADMIN)
+                    'Authorization': token
                 },
                 body: JSON.stringify({ _id: props.categoria._id })
             }
@@ -52,7 +55,7 @@ function DeleteCategoria(props) {
                     {error
                         ?
                         <div className="alert alert-warning mb-0 mt-3">
-                            <b><i class="bi bi-exclamation-triangle">
+                            <b><i className="bi bi-exclamation-triangle">
                             </i> Esta categoría contiene álbumes. Por favor, borre los álbumes primero.</b>
                         </div>
                         :
@@ -64,7 +67,7 @@ function DeleteCategoria(props) {
                         Cancelar
                     </Button>
                     <Button variant="outline-danger" onClick={handleEliminar}>
-                        <i class="fas fa-trash"></i> Eliminar
+                        <i className="fas fa-trash"></i> Eliminar
                     </Button>
                 </Modal.Footer>
             </Modal>

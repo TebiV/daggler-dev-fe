@@ -1,12 +1,13 @@
 import { Modal } from 'react-bootstrap';
 import React, { useState } from 'react'
-import { DAGGLER_ADMIN } from '../token tags/DAGGLER_ADMIN';
 import { apiEditCategory } from '../apis/apis';
+import { useSelector } from 'react-redux';
 
 function EditCategoria(props) {
 
+    const token = useSelector(state => state.tokenReducer);
 
-    const [nombre, setNombre] = useState(props.categoria.name);
+    const [nombre, setNombre] = useState("");
 
     //sirve para mostrar un error en caso de que traten de crear una categ con campos incompletos
     const [error, setError] = useState(false);
@@ -30,7 +31,7 @@ function EditCategoria(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': window.localStorage.getItem(DAGGLER_ADMIN)
+                    'Authorization': token
                 },
                 body: JSON.stringify({ name: nombre })
             }).then(() => {
@@ -43,19 +44,24 @@ function EditCategoria(props) {
     }
 
     function handleNombre(e) {
-        setNombre(e.target.value);
+        const value = e.target.value
+        setNombre(value);
+    }
+
+    function handleShow(){
+        setNombre(props.categoria.name)
     }
 
     return (
         <>
 
-            <Modal show={props.show} onHide={handleClose} centered onShow={() => setNombre(props.categoria.name)}>
+            <Modal show={props.show} onHide={handleClose} centered onShow={handleShow}>
                 <Modal.Header >
                     <Modal.Title>Editar Categoría</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
 
-                    <form autocomplete="off">
+                    <form autoComplete="off">
                         <div className="d-flex">
                             <h5 className="my-auto me-2">Nombre:</h5>
                             <input
@@ -73,7 +79,7 @@ function EditCategoria(props) {
                     {error
                         ?
                         <div className="alert alert-warning mb-0 mt-3">
-                            <b><i class="bi bi-exclamation-triangle">
+                            <b><i className="bi bi-exclamation-triangle">
                             </i> Los campos no pueden quedar incompletos.</b>
                         </div>
                         :

@@ -1,37 +1,41 @@
+const urlHeroku = 'https://sod-daggler-be.herokuapp.com/api'
+const urlTebi = 'http://192.168.0.6:9000/api'
+const urlBase = urlTebi;
+
 //* ------- LOGIN Y AUTENTICACION
-export const apiLogin = `https://sod-daggler-be.herokuapp.com/api/auth/login`;
-export const apiVerifyToken = `https://sod-daggler-be.herokuapp.com/api/auth/middleware/verifyToken`;
+export const apiLogin = `${urlBase}/auth/login`;
+export const apiVerifyToken = `${urlBase}/auth/middleware/verifyToken`;
 
 
 //* ------- CATEGORIAS Y ALBUMES
 //ver todas las categorias
-export const apiAllCategory = `https://sod-daggler-be.herokuapp.com/api/category/allCategory`;
+export const apiAllCategory = `${urlBase}/category/allCategory`;
 
 //ver todos los albumes de una categoria
-export const apiAlbumesCategoria = (categoria) =>  `https://sod-daggler-be.herokuapp.com/api/album/${categoria}`;
+export const apiAlbumesCategoria = (categoria) =>  `${urlBase}/album/${categoria}`;
 
 //ver data de album en especifico
-export const apiAlbumId = (id) => `https://sod-daggler-be.herokuapp.com/api/album/${id}`;
+export const apiAlbumId = (id) => `${urlBase}/album/${id}`;
 
-export const apiDeleteAlbumId = (id) => `https://sod-daggler-be.herokuapp.com/api/album/${id}/delete`;
+export const apiDeleteAlbumId = (id) => `${urlBase}/album/${id}/delete`;
 
 //* ------- ABMC CUPONES
-export const apiGetCupones = 'https://sod-daggler-be.herokuapp.com/api/coupon/get';
-export const apiCreateCupon = 'https://sod-daggler-be.herokuapp.com/api/coupon/new';
-export const apiEditCupon = (albumId) => `https://sod-daggler-be.herokuapp.com/api/coupon/update/${albumId}`
-export const apiDeleteCupon = (albumId) => `https://sod-daggler-be.herokuapp.com/api/coupon/update/${albumId}`
+export const apiGetCupones = `${urlBase}/coupon/get`;
+export const apiCreateCupon = `${urlBase}/coupon/new`;
+export const apiEditCupon = (albumId) => `${urlBase}/coupon/update/${albumId}`
+export const apiDeleteCupon = (albumId) => `${urlBase}/coupon/update/${albumId}`
 
 
 //* ------- ABMC CATEGORIAS
-export const apiGetCategories = 'https://sod-daggler-be.herokuapp.com/api/category/allCategory';
-export const apiCreateCategory = 'https://sod-daggler-be.herokuapp.com/api/category/newcategory';
-export const apiEditCategory = (albumId) => `https://sod-daggler-be.herokuapp.com/api/category/${albumId}`;
-export const apiDeleteCategory = (albumId) => `https://sod-daggler-be.herokuapp.com/api/category/${albumId}`;
+export const apiGetCategories = `${urlBase}/category/allCategory`;
+export const apiCreateCategory = `${urlBase}/category/newcategory`;
+export const apiEditCategory = (albumId) => `${urlBase}/category/${albumId}`;
+export const apiDeleteCategory = (albumId) => `${urlBase}/category/${albumId}`;
 
 
 //* ------- ABMC PRECIOS
-export const apiGetPrices = 'https://sod-daggler-be.herokuapp.com/api/price';
-export const apiCreatePrice = 'https://sod-daggler-be.herokuapp.com/api/price';
-export const apiEditPrice = (precioId) => `https://sod-daggler-be.herokuapp.com/api/price/${precioId}`;
-export const apiDeletePrice = (precioId) => `https://sod-daggler-be.herokuapp.com/api/price/${precioId}`;
+export const apiGetPrices = `${urlBase}/price`;
+export const apiCreatePrice = `${urlBase}/price`;
+export const apiEditPrice = (precioId) => `${urlBase}/price/${precioId}`;
+export const apiDeletePrice = (precioId) => `${urlBase}/price/${precioId}`;
 
