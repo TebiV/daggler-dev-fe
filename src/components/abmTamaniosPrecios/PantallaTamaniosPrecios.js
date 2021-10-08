@@ -1,15 +1,17 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
-import NavbarAdmin from '../layout/NavbarAdmin';
+import Navbar from '../layout/Navbar';
 import NewPrecio from './NewPrecio';
 import Precio from './Precio';
 import EditPrecio from './EditPrecio';
 import DeletePrecio from './DeletePrecio';
 import { apiGetPrices } from '../apis/apis';
+import SpinnerAbm from '../layout/SpinnerAbm';
 
 
 function PantallaTamaniosPrecios() {
+    const [isLoading, setIsLoading] = useState(true);
 
     const [precios, setPrecios] = useState([]);
 
@@ -26,7 +28,12 @@ function PantallaTamaniosPrecios() {
 
     async function getPrecios() {
         const url = apiGetPrices;
-        await axios.get(url).then(res => setPrecios(res.data.data));
+        setIsLoading(true);
+        await axios.get(url)
+            .then((res) => {
+                setPrecios(res.data.data);
+                setIsLoading(false);
+            });
     }
 
     useEffect(() => {
@@ -38,11 +45,11 @@ function PantallaTamaniosPrecios() {
     }
     return (
         <>
-            <NavbarAdmin />
+            <Navbar />
             <NewPrecio mode="nuevo" show={showNew} handleClose={toggleNew} getPrecios={getPrecios} />
-            <EditPrecio show={showEdit} handleClose={toggleEdit} getPrecios={getPrecios} precio={selectedPrecio}/>
-            <DeletePrecio show={showDelete} handleClose={toggleDelete} borrar={borrarPrecioArray} precio={selectedPrecio}/>
-            
+            <EditPrecio show={showEdit} handleClose={toggleEdit} getPrecios={getPrecios} precio={selectedPrecio} />
+            <DeletePrecio show={showDelete} handleClose={toggleDelete} borrar={borrarPrecioArray} precio={selectedPrecio} />
+
             <div className="container mt-5 mb-4">
                 <div className="row d-flex mx-2 mx-sm-0">
 
@@ -57,9 +64,15 @@ function PantallaTamaniosPrecios() {
                 </div>
             </div>
             <div className="container overflow-auto" style={{ height: "68vh" }}>
-                <div className="row ">
-                    {precios.map(precio => <Precio key={precio._id} precio={precio} borrar={borrarPrecioArray} getPrecios={getPrecios} selectPrecio={selectPrecio} toggleEdit={toggleEdit} toggleDelete={toggleDelete} />)}
-                </div>
+                {
+                    isLoading
+                        ?
+                        <SpinnerAbm />
+                        :
+                        <div className="row ">
+                            {precios.map(precio => <Precio key={precio._id} precio={precio} borrar={borrarPrecioArray} getPrecios={getPrecios} selectPrecio={selectPrecio} toggleEdit={toggleEdit} toggleDelete={toggleDelete} />)}
+                        </div>
+                }
             </div>
         </>
     );

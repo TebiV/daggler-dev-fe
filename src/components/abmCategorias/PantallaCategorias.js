@@ -1,13 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { apiGetCategories } from '../apis/apis';
-import NavbarAdmin from '../layout/NavbarAdmin';
+import Navbar from '../layout/Navbar';
+import SpinnerAbm from '../layout/SpinnerAbm';
 import Categoria from './Categoria';
 import DeleteCategoria from './DeleteCategoria';
 import EditCategoria from './EditCategoria';
 import NewCategoria from './NewCategoria';
 
 function PantallaCategorias() {
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const [showNew, setShowNew] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
@@ -22,8 +25,13 @@ function PantallaCategorias() {
 
     async function getCategorias() {
         const url = apiGetCategories;
-        const resultado = await axios.get(url)
-        setCategorias(resultado.data)
+        await axios.get(url)
+            .then((res) => {
+                setCategorias(res.data)
+                setIsLoading(false)
+            })
+
+
     }
 
     useEffect(() => {
@@ -38,11 +46,11 @@ function PantallaCategorias() {
 
     return (
         <>
-            <NavbarAdmin />
+            <Navbar />
             <NewCategoria show={showNew} handleClose={toggleNew} getCategorias={getCategorias} />
             <EditCategoria show={showEdit} handleClose={toggleEdit} categoria={selectedCateg} getCategorias={getCategorias} />
-            <DeleteCategoria show={showDelete} handleClose={toggleDelete} categoria={selectedCateg} borrarCategoria={borrarCategoria}/>
-            
+            <DeleteCategoria show={showDelete} handleClose={toggleDelete} categoria={selectedCateg} borrarCategoria={borrarCategoria} />
+
             <div className="container mt-5 mb-4">
                 <div className="row d-flex mx-2 mx-sm-0">
 
@@ -56,9 +64,15 @@ function PantallaCategorias() {
                 </div>
             </div>
             <div className="container overflow-auto" style={{ height: "68vh" }}>
-                <div className="row ">
-                    {categorias.map(categoria => <Categoria key={categoria._id} categoria={categoria} selectCategoria={selectCategoria} toggleEdit={toggleEdit} toggleDelete={toggleDelete} />)}
-                </div>
+                {
+                    isLoading
+                        ?
+                        <SpinnerAbm />
+                        :
+                        <div className="row ">
+                            {categorias.map(categoria => <Categoria key={categoria._id} categoria={categoria} selectCategoria={selectCategoria} toggleEdit={toggleEdit} toggleDelete={toggleDelete} />)}
+                        </div>
+                }
             </div>
         </>
     );

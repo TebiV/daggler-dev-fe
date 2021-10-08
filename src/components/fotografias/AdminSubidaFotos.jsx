@@ -1,12 +1,12 @@
 import React from 'react'
-import NavbarAdmin from '../layout/NavbarAdmin'
+import Navbar from '../layout/Navbar'
 import SubidaFotos from './SubidaFotos'
 
 
 const AdminSubidaFotos = () => {
     return ( 
         <>
-            <NavbarAdmin/>
+            <Navbar/>
             <SubidaFotos/>
         </>
      );

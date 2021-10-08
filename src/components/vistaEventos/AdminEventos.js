@@ -1,11 +1,11 @@
 import React from 'react';
-import NavbarAdmin from '../layout/NavbarAdmin';
+import Navbar from '../layout/Navbar';
 
 const AdminEventos = () => {
 
     return (
         <>
-            <NavbarAdmin />
+            <Navbar />
             <h1>Eventos</h1>
         </>
     );

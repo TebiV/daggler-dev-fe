@@ -1,5 +1,5 @@
 import React from 'react'
-import NavbarAdmin from '../layout/NavbarAdmin'
+import Navbar from '../layout/Navbar'
 import ModificarAlbum from './ModificarAlbum'
 
 
@@ -7,7 +7,7 @@ const AdminModificarAlbum = () => {
     return ( 
         <>
             
-            <NavbarAdmin/>
+            <Navbar/>
             <ModificarAlbum/>
 
         </>

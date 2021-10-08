@@ -1,12 +1,12 @@
 import React from 'react';
 import NewAlbumes from './NewAlbumes';
-import NavbarAdmin from '../layout/NavbarAdmin';
+import Navbar from '../layout/Navbar';
  
 const AdminCrearAlbum = () => {
 
     return (
         <>
-            <NavbarAdmin />
+            <Navbar />
             <NewAlbumes />
         </>
     );

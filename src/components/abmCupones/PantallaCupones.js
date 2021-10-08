@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { apiGetCupones } from '../apis/apis';
-import NavbarAdmin from '../layout/NavbarAdmin';
+import Navbar from '../layout/Navbar';
+import SpinnerAbm from '../layout/SpinnerAbm';
 import Cupon from './Cupon';
 import DeleteCupon from './DeleteCupon';
 import DisabledCupon from './DisabledCupon';
@@ -14,6 +15,7 @@ import NewCupon from './NewCupon';
 function PantallaCupones() {
     const token = useSelector(state => state.tokenReducer);
 
+    const [isLoading, setIsLoading] = useState(true);
     const [cupones, setCupones] = useState([]);
 
     const [selectedCupon, setSelectedCupon] = useState({});
@@ -41,9 +43,11 @@ function PantallaCupones() {
 
     async function getCupones() {
         const url = apiGetCupones;
+        setIsLoading(true);
         await axios.get(url, { headers: { 'Authorization': token } })
             .then((res) => {
                 setCupones(res.data.data);
+                setIsLoading(false);
             });
 
     }
@@ -61,14 +65,14 @@ function PantallaCupones() {
         getCupones();
     }, [])
     return (<>
-        <NavbarAdmin />
+        <Navbar />
         <NewCupon show={showNew} handleClose={toggleNew} getCupones={getCupones} validateName={validateName} />
         <EditCupon show={showEdit} handleClose={toggleEdit} cupon={selectedCupon} getCupones={getCupones} validateName={validateName} />
         <DeleteCupon show={showDelete} handleClose={toggleDelete} cupon={selectedCupon} getCupones={getCupones} />
         <div className="container mt-5 mb-4">
             
             <div className="row d-flex mx-1 mx-sm-0">
-                <div className="col-sm-12 col-md-3 px-0 text-center text-sm-start my-2">
+                <div className="col-sm-12 col-md-3 px-0 text-center text-sm-start mb-2 mb-md-0">
                     <h1 className="my-auto">Cupones</h1>
                 </div>
 
@@ -86,7 +90,12 @@ function PantallaCupones() {
             </div>
         </div>
         <div className="container overflow-auto" style={{ height: "68vh" }}>
-            <div className="row ">
+            {
+                isLoading 
+                ?
+                <SpinnerAbm/>
+                :
+                <div className="row ">
                 {cupones.map(cupon => {
                     if (cupon.enable) {
                         return <Cupon key={cupon._id} cupon={cupon} select={setSelectedCupon} onDelete={toggleDelete} onEdit={toggleEdit} />
@@ -95,6 +104,16 @@ function PantallaCupones() {
                     }
                 })}
             </div>
+            }
+            {/* <div className="row ">
+                {cupones.map(cupon => {
+                    if (cupon.enable) {
+                        return <Cupon key={cupon._id} cupon={cupon} select={setSelectedCupon} onDelete={toggleDelete} onEdit={toggleEdit} />
+                    } else {
+                        return <DisabledCupon key={cupon._id} cupon={cupon} select={setSelectedCupon} onDelete={toggleDelete} onEdit={toggleEdit} show={showDisabledCupon} disabled/>
+                    }
+                })}
+            </div> */}
         </div>
     </>);
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import NavbarAdmin from '../layout/NavbarAdmin';
+import Navbar from '../layout/Navbar';
 import ListadoAlbumes from './ListadoAlbumes';
 
 
@@ -7,7 +7,7 @@ const AdminAlbumes = () => {
 
     return (
         <>
-            <NavbarAdmin />
+            <Navbar />
             <ListadoAlbumes />
 
         </>
