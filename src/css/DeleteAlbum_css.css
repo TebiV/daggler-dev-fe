@@ -1,0 +1,9 @@
+.img-delete-album {
+    width: 20rem;
+    height:20rem;
+    object-fit: cover;
+}
+
+.modal-delete-album {
+    width:22rem;
+}
