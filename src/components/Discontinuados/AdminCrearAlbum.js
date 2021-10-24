@@ -1,13 +1,13 @@
 import React from 'react';
-import NewAlbumes from './NewAlbumes';
 import Navbar from '../layout/Navbar';
- 
+import CreateAlbum from '../vistaAlbumes/CreateAlbum';
+
 const AdminCrearAlbum = () => {
 
     return (
         <>
             <Navbar />
-            <NewAlbumes />
+            <CreateAlbum />
         </>
     );
 }

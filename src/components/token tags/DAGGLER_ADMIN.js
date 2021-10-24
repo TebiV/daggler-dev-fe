@@ -1,1 +1,0 @@
-export const DAGGLER_ADMIN = 'DAGGLER_ADMIN';

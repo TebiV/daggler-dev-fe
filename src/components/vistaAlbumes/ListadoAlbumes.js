@@ -1,16 +1,25 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { rutaAdminCrearAlbum } from '../routes/RutasAdmin';
-import TarjetaAlbum from './TarjetaAlbum';
 import { useCategorias } from '../../context/CategoriasContext';
-import { apiDeleteAlbumId } from '../apis/apis';
-import ModalConfirmacion from '../layout/ModalConfirmacion';
 import '../../css/ListadoAlbumes_css.css';
 import { useSelector } from 'react-redux';
+import Album from './Album';
+import SpinnerAbm from '../layout/SpinnerAbm';
+import DeleteAlbum from './DeleteAlbum';
+import { useHistory } from 'react-router';
+import Navbar from '../layout/Navbar';
 
-const ListadoAlbumes = () => {
+
+function ListadoAlbumes() {
+
+    const history = useHistory();
     const token = useSelector(state => state.tokenReducer);
 
+    const [showDelete, setShowDelete] = useState(false);
+    function toggleDelete() {
+        setShowDelete(!showDelete)
+    }
     //hook que guarda los albumes
     const [albumes, setAlbumes] = useState([])
 
@@ -27,16 +36,19 @@ const ListadoAlbumes = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     //si el usuario hace clic en el boton eliminar de algun album, su id se guarda aca
-    const [albumAEliminar, setalbumAEliminar] = useState({})
-
+    const [selectedAlbum, setSelectedAlbum] = useState({})
+    function select(album) {
+        setSelectedAlbum(album)
+    }
     //obtiene los albumes segun el filtro seleccionado
+    const getAlbumes = async () => {
+        setIsLoading(true)
+        const url = `https://sod-daggler-be.herokuapp.com/api/album/${filtroCategoria}`
+        const resultado = await axios.get(url, { headers: { 'Authorization': token } })
+        setAlbumes(resultado.data)
+        setIsLoading(false)
+    }
     useEffect(() => {
-        const getAlbumes = async () => {
-            const url = `https://sod-daggler-be.herokuapp.com/api/album/${filtroCategoria}`
-            const resultado = await axios.get(url, {headers: {'Authorization': token}})
-            setAlbumes(resultado.data)
-            setIsLoading(false)
-        }
         getAlbumes()
     }, [filtroCategoria, token])
 
@@ -48,78 +60,52 @@ const ListadoAlbumes = () => {
         )
     }, [inputSearch])
 
-    function eliminarAlbum(albumId) {
-
-        const url = apiDeleteAlbumId(albumId)
-        console.log(url)
-        const h = new Headers();
-        h.append('Authorization', token);
-        fetch(url, {
-            method: 'DELETE',
-            headers: h
-        }).then(res => console.log(res))
-
-        setAlbumes(albumes.filter((album) =>
-            album._id !== albumId
-        ))
-    }
 
     return (
         <>
+            <Navbar />
+            <DeleteAlbum show={showDelete} handleClose={toggleDelete} album={selectedAlbum} getAlbumes={getAlbumes} />
+            <div className="container mt-5 mb-2">
+                <div className="row d-flex">
 
-            <div className="container mt-3">
+                    <div className="text-center text-md-start my-1 my-sm-auto col-md-auto">
+                        <h1 className="my-auto">Álbumes</h1>
+                    </div>
 
-                <ModalConfirmacion album={albumAEliminar} onEliminar={eliminarAlbum} />
 
-                <h1>Álbumes</h1>
-
-                <div className="mt-4 row px-2 px-sm-0">
-
-                    <div className="col-lg-5 col-sm-8 me-auto pe-1 d-flex" >
-
-                        {/* el ternary operator que aparece aca abajo sirve para mostrar un spinner 
-                        en el selector de categoria cuando aun no cargo los albumes, xq a veces 
-                        las categorias tmb se tardan en cargar y en el dropdown no se ve nada */}
-                        {isLoading ?
-                            <button className="btn btn-secondary">
-                                <div className="m-auto d-flex height-spinner d-flex flex-row">
-                                    <div className="spinner-border spinner-border-sm text-light m-auto py-auto" role="status">
-                                        <span className="visually-hidden">Cargando...</span>
-                                    </div>
-                                </div>
+                    <div className="col-auto my-1 my-sm-auto">
+                        <div className="dropdown">
+                            <button
+                                className="btn btn-light dropdown-toggle"
+                                type="button"
+                                id="dropdownFiltroCategoria"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                {filtroCategoria}
                             </button>
-                            :
-                            <div className="dropdown">
-                                <button
-                                    className="btn btn-light dropdown-toggle"
-                                    type="button"
-                                    id="dropdownFiltroCategoria"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    {filtroCategoria}
-                                </button>
-                                <ul className="dropdown-menu" aria-labelledby="dropdownFiltroCategoria">
-                                    {categorias.map(categoria => (
-                                        <li key={categoria._id}>
-                                            <button
+                            <ul className="dropdown-menu" aria-labelledby="dropdownFiltroCategoria">
+                                {categorias.map(categoria => (
+                                    <li key={categoria._id}>
+                                        <button
 
-                                                value={categoria.name}
-                                                className="dropdown-item"
-                                                onClick={selectCategoria}
-                                            >
-                                                {categoria.name}
-                                            </button>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        }
+                                            value={categoria.name}
+                                            className="dropdown-item"
+                                            onClick={selectCategoria}
+                                        >
+                                            {categoria.name}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
 
 
-                        <form className="d-flex flex-fill ps-3 " onSubmit={(e) => { e.preventDefault() }}>
+                    <div className="col-auto my-1 py-auto my-sm-auto col-sm-auto flex-fill flex">
+                        <form className="" onSubmit={(e) => { e.preventDefault() }}>
                             <input
-                                className="form-control me-2"
+                                className="form-control"
                                 type="search"
                                 value={inputSearch}
                                 onChange={(e) => setInputSearch(e.target.value)}
@@ -130,57 +116,41 @@ const ListadoAlbumes = () => {
                         </form>
                     </div>
 
-
-
-                    <div className="row col-lg-7 col-sm-4 col-12 m-0 mt-2 mt-sm-0 mt-md-0" >
-                        <button
-                            className="btn btn-warning col-xl-2 col-lg-3 col-sm-8 col-md-6 ms-sm-auto "
-                            id="aaasd"
-                            onClick={() => window.location.pathname = rutaAdminCrearAlbum}
-                        >
+                    <div className="my-1 d-flex justify-content-end col-12 col-sm-auto">
+                        <button className="btn btn-primary ms-auto col-12 col-sm-auto" onClick={() => history.push({ pathname: rutaAdminCrearAlbum })}>
                             <i className="fas fa-plus me-1"></i> Nuevo
                         </button>
-
                     </div>
                 </div>
-
-                {isLoading
-                    ?
-                    <div className="m-auto d-flex height-spinner" style={{ height: "72vh" }}>
-                        <div className="spinner-cargando-albumes spinner-border text-warning m-auto py-auto" role="status">
-                            <span className="visually-hidden">Cargando...</span>
-                        </div>
-                    </div>
-                    :
-
-
-                    (
-                        inputSearch.length > 0
-                            ?
-                            (albumesSearch.length > 0
-                                ?
-                                <div style={{ height: "72vh" }} className="overflow-auto mt-3 p-2">
-                                    {albumesSearch.map((album) => <TarjetaAlbum key={album._id} album={album} onEliminar={setalbumAEliminar} />)}
-                                </div>
-                                :
-                                <div className="m-auto d-flex" style={{ height: "72vh" }}>
-                                    <div className="text-danger m-auto text-center">
-                                        <h1 className="bi bi-x-circle m-auto icono-sinResultados"></h1>
-                                        <h3>Sin resultados</h3>
-                                    </div>
-                                </div>
-                            )
-                            :
-                            <div style={{ height: "72vh" }} className="overflow-auto mt-3 p-2">
-                                {albumes.map((album) => <TarjetaAlbum key={album._id} album={album} onEliminar={setalbumAEliminar} />)}
-                            </div>
-                    )
-                }
-
             </div>
 
-        </>
-    );
+            {isLoading
+                ?
+                <SpinnerAbm />
+                :
+                <div className="container overflow-auto" style={{ height: "75vh" }}>
+                    {inputSearch.length > 0
+                        ?
+                        (albumesSearch.length > 0
+                            ?
+                            <div className="row ">
+                                {albumesSearch.map(album => <Album key={album._id} album={album} select={select} onDelete={toggleDelete} />)}
+                            </div>
+                            :
+                            <div className="m-auto d-flex" style={{ height: "75vh" }}>
+                                <div className="text-danger m-auto text-center">
+                                    <h1 className="bi bi-x-circle m-auto icono-sinResultados"></h1>
+                                    <h3>Sin resultadosss</h3>
+                                </div>
+                            </div>
+                        )
+                        :
+                        <div className="row ">
+                            {albumes.map(album => <Album key={album._id} album={album} select={select} onDelete={toggleDelete} />)}
+                        </div>
+                    }
+                </div>
+            }
+        </>)
 }
-
 export default ListadoAlbumes;

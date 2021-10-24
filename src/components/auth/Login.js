@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Error from "../layout/Error";
 import { rutaAdminAlbumes } from "../routes/RutasAdmin";
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { SET_TOKEN } from "../../redux/actions/TokenActions";
 import { useHistory } from "react-router";
 
 function Login() {
     //redux things
-    const dispatch = useDispatch();    
+    const dispatch = useDispatch();
     const token = useSelector(state => state.tokenReducer);
     const history = useHistory();
     //hook con objeto que maneja el mail y contraseña ingresados
@@ -46,60 +46,64 @@ function Login() {
             },
             body: JSON.stringify({ email: email, password: password })
 
-        }).then(res => {return res.json()})
-        .then(response => {
-            // window.localStorage.setItem(DAGGLER_ADMIN, response.data.token);
-            // window.location.href = rutaAdminAlbumes;
-            dispatch({type:SET_TOKEN, token: response.data.token})
-            history.push(rutaAdminAlbumes);
-        }).catch(error => {
-            //muestra pantalla de error
-            setLoginFallido({
-                isError: true,
-                errorMessage: "El E-Mail o contraseña ingresados son incorrectos"
+        }).then(res => { return res.json() })
+            .then(response => {
+                // window.localStorage.setItem(DAGGLER_ADMIN, response.data.token);
+                // window.location.href = rutaAdminAlbumes;
+                dispatch({ type: SET_TOKEN, token: response.data.token })
+                history.push(rutaAdminAlbumes);
+            }).catch(error => {
+                //muestra pantalla de error
+                setLoginFallido({
+                    isError: true,
+                    errorMessage: "El E-Mail o contraseña ingresados son incorrectos"
+                })
+                //blanquea los inputs
+                setUser({
+                    email: "",
+                    password: ""
+                })
+                console.error(error)
             })
-            //blanquea los inputs
-            setUser({
-                email: "",
-                password: ""
-            })
-            console.error(error)
-        })
     }
 
 
     return (
         <>
             {loginFallido.isError ? <Error mensaje={loginFallido.errorMessage} setError={setLoginFallido} /> : null}
+            <div className="container-fluid d-flex justify-content-center align-items-center" style={{ width: "100vw", height: "100vh", background: "rgb(245,245,245" }}>
+                <div className="card text-center p-4 my-auto" style={{ width: "320px", borderRadius: "10px" }}>
+                    <form onSubmit={handleIniciarSesion}>
+                        <h3 className=" mb-4"><span style={{ color: '#E6AC00', fontWeight: '700' }}>Daggler</span> Studio</h3>
 
-            <div className="text-center" style={{ maxWidth: "320px", margin: "auto" }}>
-                <form onSubmit={handleIniciarSesion}>
+                        <h1 className="mb-4">Ingreso</h1>
 
-                    <h1 className="mt-4 mb-4">Ingreso</h1>
-                    <input
-                        className="form-control mb-2"
-                        type="email"
-                        placeholder="E-Mail"
-                        value={user.email}
-                        onChange={handleChange}
-                        name="email"
-                    />
-                    <input
-                        className="form-control"
-                        type="password"
-                        placeholder="Contraseña"
-                        value={user.password}
-                        onChange={handleChange}
-                        name="password"
-                    />
-                    <button
-                        type="submit"
-                        className="btn btn-warning btn-lg col-12 mt-4"
-                    >
-                        Ingresar
-                    </button>
-                    {token}
-                </form>
+
+                        <input
+                            className="form-control mb-2"
+                            type="email"
+                            placeholder="Email"
+                            value={user.email}
+                            onChange={handleChange}
+                            name="email"
+                        />
+                        <input
+                            className="form-control mb-4"
+                            type="password"
+                            placeholder="Contraseña"
+                            value={user.password}
+                            onChange={handleChange}
+                            name="password"
+                        />
+                        <button
+                            type="submit"
+                            className="btn btn-warning col-12"
+                            style={{ background: '#FFCF00' }}
+                        >
+                            Ingresar
+                        </button>
+                    </form>
+                </div>
             </div>
         </>
     );

@@ -53,8 +53,8 @@ function PantallaCupones() {
     }
 
     function validateName(name) {
-        const asd = cupones.filter(cupon => cupon.name === name)
-        if (asd.length !== 0) {
+        let repetidos = cupones.filter(cupon => cupon.name === name)
+        if (repetidos.length > 0) {
             return true;
         } else {
             return false;

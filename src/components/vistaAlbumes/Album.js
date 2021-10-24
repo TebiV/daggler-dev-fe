@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router'
 import '../../css/NewTarjetaAlbum_css.css'
-function NewTarjetaAlbum(props) {
+function Album(props) {
 
     const history = useHistory();
     function handleDelete() {
@@ -23,9 +23,10 @@ function NewTarjetaAlbum(props) {
 
                         <div className="col-12 col-xl-6 my-1 px-0 pe-xl-1">
                             <button className="btn btn-outline-danger btn-sm w-100" onClick={handleDelete}>
-                                <i className="fas fa-trash"/> Eliminar
+                                <i className="bi bi-trash" /> Eliminar
                             </button>
                         </div>
+                        
                         <div className="dropdown col-12 col-xl-6 my-1 px-0 ps-xl-1">
                             <button
                                 className="btn btn-primary btn-sm w-100"
@@ -33,24 +34,28 @@ function NewTarjetaAlbum(props) {
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                <i className="fas fa-edit" /> Editar
+                                <i className="bi bi-pencil-square" /> Editar
                             </button>
                             <ul className="dropdown-menu" aria-labelledby="editarDropdown">
                                 <li>
                                     <button
-                                        className="dropdown-item"
-                                        onClick={() => { history.push({ pathname: `/albumes/subir-fotos/${props.album._id}` }) }}
-                                    >Añadir Fotos
+                                        className="dropdown-item d-flex justify-content-between"
+                                        onClick={() => { history.push({ pathname: `/albumes/modificar-album/${props.album._id}` }) }}
+                                    >Editar Datos <i className="bi bi-pencil-square" />
                                     </button>
                                 </li>
                                 <li>
                                     <button
-                                        className="dropdown-item"
-                                        onClick={() => { history.push({ pathname: `/albumes/modificar-album/${props.album._id}` }) }}
-                                    >Modificar Datos
+                                        className="dropdown-item d-flex justify-content-between"
+                                        onClick={() => { history.push({ pathname: `/albumes/subir-fotos/${props.album._id}` }) }}
+                                    >Añadir Fotos <i className="bi bi-plus-circle" />
                                     </button>
                                 </li>
-                                <li><button className="dropdown-item">Eliminar Fotos</button></li>
+
+                                <li><button className="dropdown-item d-flex justify-content-between">
+                                    Borrar Fotos <i className="bi bi-trash" />
+                                </button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -61,4 +66,4 @@ function NewTarjetaAlbum(props) {
     );
 }
 
-export default NewTarjetaAlbum;
+export default Album;

@@ -1,0 +1,13 @@
+.EditAlbumData_password-message {
+    position: absolute;
+    font-size: 0.7rem;
+    
+}
+
+.EditAlbumData_button-ojito {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    position: absolute;
+    font-size: 1.5rem;
+    right: 1.2rem;
+}

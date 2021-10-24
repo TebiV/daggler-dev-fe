@@ -1,14 +1,14 @@
 import React from 'react'
 import Navbar from '../layout/Navbar'
 import ModificarAlbum from './ModificarAlbum'
-
+import EditAlbumData from '../vistaAlbumes/EditAlbumData'
 
 const AdminModificarAlbum = () => {
     return ( 
         <>
             
-            <Navbar/>
-            <ModificarAlbum/>
+            {/* <ModificarAlbum/> */}
+            <EditAlbumData/>
 
         </>
      );

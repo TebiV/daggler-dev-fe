@@ -84,7 +84,7 @@ function NewCupon(props) {
     }
 
     function handleName(e) {
-        setName(e.target.value);
+        setName(e.target.value.toUpperCase());
     }
 
     function handleDiscount(e) {
@@ -139,7 +139,7 @@ function NewCupon(props) {
         }
 
         //chequear si es un nombre repetido
-        if (props.validateName()){
+        if (props.validateName(name)){
             errorInvalidName = true;
             setInvalidName(true);
         }
@@ -201,18 +201,19 @@ function NewCupon(props) {
     }
 
     function title(title, errorHook, errorMessage) {
-        return <div className="d-flex justify-content-left">
-            <p className="mb-1">{title}</p>
+        return <div className="d-flex justify-content-between">
+            {/* <div className="col-3"><p className="mb-1">{title}</p></div> */}
             {errorHook ?
-                <p className="text-danger mb-1 ms-3"> <i className="bi bi-x-circle-fill"></i> {errorMessage}</p>
+                // <div className="col-9"><p className="text-danger mb-1 ms-3"> <i className="bi bi-x-circle-fill"></i> {errorMessage}</p></div>
+                <p className="text-danger mb-1"><i className="bi bi-x-circle-fill"/> {errorMessage ? errorMessage : title}</p>
                 :
-                null}
+                <p className="mb-1">{title}</p>}
         </div>
     }
 
 
     return (
-        <Modal show={props.show} onHide={handleClose}>
+        <Modal show={props.show} onHide={handleClose} centered>
             <Modal.Header >
                 <Modal.Title>Nuevo Cupón</Modal.Title>
             </Modal.Header>
@@ -220,12 +221,12 @@ function NewCupon(props) {
                 <form autoComplete="off">
                     <div className="mb-2">
 
-                        {title('Código', invalidName, 'El nombre ya fue usado')}
+                        {title('Código', invalidName, 'Código ya existente')}
                         <input
                             type="text"
                             name="name"
                             className="form-control mb-3"
-                            placeholder="Código (Por defecto se genera uno al azar)"
+                            placeholder="(Por defecto se genera uno al azar)"
                             value={name}
                             onChange={handleName}
                         />
@@ -244,7 +245,7 @@ function NewCupon(props) {
                         {title('Descuento', invalidDiscount, 'Descuento inválido')}
                         <div className="mb-3">
                             <div className="d-flex row">
-                                <div className="col-7">
+                                <div className="col-5">
                                     <input
                                         type="text"
                                         name="discount"
@@ -254,7 +255,7 @@ function NewCupon(props) {
                                         onChange={handleDiscount}
                                     />
                                 </div>
-                                <div className="col-5 d-flex justify-content-end align-items-center">
+                                <div className="col-7 d-flex justify-content-end align-items-center">
                                     <span>{isPorcentual ? "Porcentaje %" : "Pesos $"}</span>
                                     <label className="switch ms-2" value={isPorcentual} onChange={togglePorcentual}>
                                         <input type="checkbox" />
@@ -265,7 +266,7 @@ function NewCupon(props) {
                         </div>
 
 
-                        {title('Vencimiento', InvalidDate, 'Fecha de vencimiento inválida')}
+                        {title('Fecha de vencimiento', InvalidDate, 'Fecha de vencimiento inválida')}
                         <div className="d-flex ">
                             <input
                                 type="text" name="day" maxLength="2"
