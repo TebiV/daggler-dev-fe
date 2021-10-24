@@ -1,15 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { rutaAdminAlbumes, rutaAdminLogout, rutaAdminPedidos, rutaAdminTamaniosPrecios, rutaAdminCategorias, rutaAdminCupones } from '../routes/RutasAdmin';
+import { rutaAdminAlbumes, rutaAdminLogout, rutaAdminPedidos, rutaAdminTamaniosPrecios, rutaAdminCategorias, rutaAdminCupones, rutaAdminPrecios } from '../routes/RutasAdmin';
 import { useHistory } from 'react-router';
 
 const Navbar = () => {
 
     const history = useHistory();
-    const categoriasAdmin = [
+    const itemsNavbar = [
         { id: "1", nombre: 'Álbumes', ruta: rutaAdminAlbumes },
         { id: "2", nombre: 'Pedidos', ruta: rutaAdminPedidos },
-        { id: "4", nombre: 'Cupones', ruta: rutaAdminCupones }
+        { id: "3", nombre: 'Cupones', ruta: rutaAdminCupones },
+        { id: "4", nombre: 'Categorías', ruta: rutaAdminCategorias },
+        { id: "5", nombre: 'Tamaños y precios', ruta: rutaAdminTamaniosPrecios },
         
     ]
     return (
@@ -32,39 +34,18 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent2">
 
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        {categoriasAdmin.map((categoria) => {
+                        {itemsNavbar.map((item) => {
                             return (
                                 <NavLink
-                                    key={categoria.id}
-                                    to={categoria.ruta}
+                                    key={item.id}
+                                    to={item.ruta}
                                     className="nav-link"
                                     activeClassName="active"
                                 >
-                                    {categoria.nombre}
+                                    {item.nombre}
                                 </NavLink>
                             )
                         })}
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="/#" id="navbarDropdownConfiguracion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Configuración
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdownConfiguracion">
-                                <li>
-                                    <button
-                                        className="dropdown-item"
-                                        onClick={() => { history.push({ pathname: rutaAdminTamaniosPrecios }) }}
-                                    >Tamaños y Precios
-                                    </button>
-                                </li>
-                                <li>
-                                    <button
-                                        className="dropdown-item"
-                                        onClick={() => { history.push({ pathname: rutaAdminCategorias }) }}
-                                    >Categorías
-                                    </button>
-                                </li>
-                            </ul>
-                        </li>
                     </ul>
                     <div className="navbar-nav btn-group ms-auto">
                         <span

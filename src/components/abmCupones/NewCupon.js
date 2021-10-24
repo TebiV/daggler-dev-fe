@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import './abmCupones_css.css';
 import axios from 'axios';
-import {apiCreateCupon} from '../apis/apis';
+import { apiCreateCupon } from '../apis/apis';
 function NewCupon(props) {
 
     //token extraido de redux para mandar al server y crear el cupon
@@ -139,7 +139,7 @@ function NewCupon(props) {
         }
 
         //chequear si es un nombre repetido
-        if (props.validateName(name)){
+        if (props.validateName(name)) {
             errorInvalidName = true;
             setInvalidName(true);
         }
@@ -205,7 +205,7 @@ function NewCupon(props) {
             {/* <div className="col-3"><p className="mb-1">{title}</p></div> */}
             {errorHook ?
                 // <div className="col-9"><p className="text-danger mb-1 ms-3"> <i className="bi bi-x-circle-fill"></i> {errorMessage}</p></div>
-                <p className="text-danger mb-1"><i className="bi bi-x-circle-fill"/> {errorMessage ? errorMessage : title}</p>
+                <p className="text-danger mb-1"><i className="bi bi-x-circle-fill" /> {errorMessage ? errorMessage : title}</p>
                 :
                 <p className="mb-1">{title}</p>}
         </div>
