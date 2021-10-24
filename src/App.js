@@ -18,7 +18,7 @@ import {
 } from './components/routes/RutasAdmin';
 
 
-import ListadoAlbumes from './components/vistaAlbumes/ListadoAlbumes';
+import ListadoAlbumes from './components/abmAlbumes/ListadoAlbumes';
 
 
 import { CategoriasProvider } from './context/CategoriasContext';
