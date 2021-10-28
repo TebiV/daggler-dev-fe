@@ -4,7 +4,6 @@ import { useHistory, useParams } from 'react-router-dom'
 import '../../css/EditAlbumData_css.css'
 import '../../css/BootstrapOverride.css'
 import { useSelector } from 'react-redux';
-import Navbar from '../layout/Navbar';
 import { rutaAdminAlbumes } from '../routes/RutasAdmin';
 
 const EditAlbumData = () => {
@@ -226,7 +225,6 @@ const EditAlbumData = () => {
     }
 
     return <>
-        <Navbar />
         <div className="container mt-5">
             {/* TITULO */}
             <h1 className="my-auto text-center mb-3">Editar datos de álbum</h1>

@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { apiGetCupones } from '../apis/apis';
-import Navbar from '../layout/Navbar';
 import SpinnerAbm from '../layout/SpinnerAbm';
 import Cupon from './Cupon';
 import DeleteCupon from './DeleteCupon';
@@ -65,7 +64,6 @@ function PantallaCupones() {
         getCupones();
     }, [])
     return (<>
-        <Navbar />
         <NewCupon show={showNew} handleClose={toggleNew} getCupones={getCupones} validateName={validateName} />
         <EditCupon show={showEdit} handleClose={toggleEdit} cupon={selectedCupon} getCupones={getCupones} validateName={validateName} />
         <DeleteCupon show={showDelete} handleClose={toggleDelete} cupon={selectedCupon} getCupones={getCupones} />

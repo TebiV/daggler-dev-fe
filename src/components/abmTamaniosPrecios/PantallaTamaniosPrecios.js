@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import Navbar from "../layout/Navbar";
 import NewPrecio from "./NewPrecio";
 import Precio from "./Precio";
 import EditPrecio from "./EditPrecio";
@@ -48,7 +47,6 @@ function PantallaTamaniosPrecios() {
   }
   return (
     <>
-      <Navbar />
       <NewPrecio
         mode="nuevo"
         show={showNew}

@@ -8,10 +8,9 @@ import Album from './Album';
 import SpinnerAbm from '../layout/SpinnerAbm';
 import DeleteAlbum from './DeleteAlbum';
 import { useHistory } from 'react-router';
-import Navbar from '../layout/Navbar';
 
 
-function ListadoAlbumes() {
+function PantallaAlbumes() {
 
     const history = useHistory();
     const token = useSelector(state => state.tokenReducer);
@@ -63,7 +62,6 @@ function ListadoAlbumes() {
 
     return (
         <>
-            <Navbar />
             <DeleteAlbum show={showDelete} handleClose={toggleDelete} album={selectedAlbum} getAlbumes={getAlbumes} />
             <div className="container mt-5 mb-2">
                 <div className="row d-flex">
@@ -153,4 +151,4 @@ function ListadoAlbumes() {
             }
         </>)
 }
-export default ListadoAlbumes;
+export default PantallaAlbumes;

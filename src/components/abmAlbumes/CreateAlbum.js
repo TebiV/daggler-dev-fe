@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import '../../css/CreateAlbum.css'
 import '../../css/BootstrapOverride.css'
 import { useSelector } from 'react-redux';
-import Navbar from '../layout/Navbar';
 
 const CreateAlbum = () => {
 
@@ -201,7 +200,6 @@ const CreateAlbum = () => {
     }
 
     return <>
-        <Navbar />
         <div className="container mt-5">
             {/* TITULO */}
             <h1 className="my-auto text-center mb-3">Nuevo álbum</h1>

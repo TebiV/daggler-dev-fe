@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import Navbar from "../layout/Navbar";
 import SpinnerAbm from "../layout/SpinnerAbm";
 import Pedido from "./Pedido";
 
 const PantallaPedidos = () => {
 
   const [isLoading, setIsLoading] = useState(false)
-  const [pedidos, setPedidos] = useState([1])
+  const [pedidos, setPedidos] = useState([1,1,1,1,1,1,1,1])
 
   async function getPedidos(){
     
@@ -14,7 +13,6 @@ const PantallaPedidos = () => {
 
   return (
     <>
-      <Navbar />
       <div className="container mt-5 mb-4">
         <div className="row d-flex mx-2 mx-sm-0">
           <div className="col-sm-9 px-0 text-center text-sm-start">

@@ -1,12 +1,13 @@
 import React from 'react'
 import { useHistory } from 'react-router'
 import '../../css/NewTarjetaAlbum_css.css'
+import { rutaAdminDeleteFotos } from '../routes/RutasAdmin';
 function Album(props) {
 
     const history = useHistory();
     function handleDelete() {
         props.select(props.album)
-        props.onDelete()
+        props.onDelete() 
     }
 
     return (
@@ -51,7 +52,8 @@ function Album(props) {
                                 </button>
                             </li>
 
-                            <li><button className="dropdown-item d-flex justify-content-between">
+                            <li><button className="dropdown-item d-flex justify-content-between"
+                            onClick={() => { history.push({ pathname: `/albumes/borrar-fotos/${props.album._id}`}) }}>
                                 Borrar Fotos <i className="bi bi-trash" />
                             </button>
                             </li>

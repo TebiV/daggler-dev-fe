@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Modal, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import '../../css/DeleteAlbum_css.css';
-import { apiDeleteAlbumId } from '../apis/apis';
+import { apiDeleteAlbum } from '../apis/apis';
 import axios from 'axios';
 function DeleteAlbum(props) {
 
@@ -12,7 +12,7 @@ function DeleteAlbum(props) {
     const [error, setError] = useState(false);
 
     async function deleteAlbum() {
-        const url = apiDeleteAlbumId(props.album._id);
+        const url = apiDeleteAlbum(props.album._id);
         await axios.delete(url, { headers: { 'Authorization': token } })
             .then(() => {
                 props.getAlbumes();

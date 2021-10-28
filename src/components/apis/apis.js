@@ -8,29 +8,29 @@ export const apiVerifyToken = `${urlBase}/auth/middleware/verifyToken`;
 
 
 //* ------- CATEGORIAS Y ALBUMES
-//ver todas las categorias
-export const apiAllCategory = `${urlBase}/category/allCategory`;
 
 //ver todos los albumes de una categoria
 export const apiAlbumesCategoria = (categoria) =>  `${urlBase}/album/${categoria}`;
 
 //ver data de album en especifico
-export const apiAlbumId = (id) => `${urlBase}/album/${id}`;
+export const apiGetAlbumData = (albumId) => `${urlBase}/album/specificAlbum/${albumId}`;
 
-export const apiDeleteAlbumId = (id) => `${urlBase}/album/${id}/delete`;
+export const apiDeleteAlbum = (albumId) => `${urlBase}/album/${albumId}/delete`;
+export const apiGetPhotosFromAlbum = (albumId) => `${urlBase}/album/${albumId}/photos`;
+export const apiDeleteAlbumPhoto = (albumId, photoId) => `${urlBase}/album/${albumId}/${photoId}`;
 
 //* ------- ABMC CUPONES
 export const apiGetCupones = `${urlBase}/coupon/get`;
 export const apiCreateCupon = `${urlBase}/coupon/new`;
-export const apiEditCupon = (albumId) => `${urlBase}/coupon/update/${albumId}`
-export const apiDeleteCupon = (albumId) => `${urlBase}/coupon/delete/${albumId}`
+export const apiEditCupon = (cuponId) => `${urlBase}/coupon/update/${cuponId}`
+export const apiDeleteCupon = (cuponId) => `${urlBase}/coupon/delete/${cuponId}`
 
 
 //* ------- ABMC CATEGORIAS
 export const apiGetCategories = `${urlBase}/category/allCategory`;
 export const apiCreateCategory = `${urlBase}/category/newcategory`;
-export const apiEditCategory = (albumId) => `${urlBase}/category/${albumId}`;
-export const apiDeleteCategory = (albumId) => `${urlBase}/category/${albumId}`;
+export const apiEditCategory = (categoryId) => `${urlBase}/category/${categoryId}`;
+export const apiDeleteCategory = (categoryId) => `${urlBase}/category/${categoryId}`;
 
 
 //* ------- ABMC PRECIOS

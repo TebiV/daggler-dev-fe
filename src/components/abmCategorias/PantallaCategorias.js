@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { apiGetCategories } from '../apis/apis';
-import Navbar from '../layout/Navbar';
 import SpinnerAbm from '../layout/SpinnerAbm';
 import Categoria from './Categoria';
 import DeleteCategoria from './DeleteCategoria';
@@ -46,7 +45,6 @@ function PantallaCategorias() {
 
     return (
         <>
-            <Navbar />
             <NewCategoria show={showNew} handleClose={toggleNew} getCategorias={getCategorias} />
             <EditCategoria show={showEdit} handleClose={toggleEdit} categoria={selectedCateg} getCategorias={getCategorias} />
             <DeleteCategoria show={showDelete} handleClose={toggleDelete} categoria={selectedCateg} borrarCategoria={borrarCategoria} />
