@@ -3,14 +3,6 @@ import '../../../css/DeleteAlbumPhotos_css.css'
 const Photo = (props) => {
 
     const [selected, setSelected] = useState(false);
-    function handleCheck(e) {
-        setSelected(e.target.checked);
-        if (e.target.checked) {
-            props.select(props.photo)
-        } else {
-            props.unselect(props.photo)
-        }
-    }
 
     function handleImg() {
         if (!selected) {
@@ -23,7 +15,7 @@ const Photo = (props) => {
     return <>
         <div className="col-md-3 col-xl-2 col-4 p-1" style={{ position: 'relative' }}>
             <div className={selected ? 'delete-photo_border-highlight' : 'delete-photo_border'}>
-                <button className="delete-photo_button-expand">
+                <button className="delete-photo_button-expand" onClick={()=>props.maximize(props.photo.urlMax)}>
                     <i className="bi bi-arrows-fullscreen" />
                 </button>
 

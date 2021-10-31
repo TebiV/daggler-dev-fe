@@ -1,0 +1,42 @@
+ .img-photo-delete {
+     border-radius: 10px;
+     width: 100%;
+     max-height: 90vh;
+     object-fit: contain;
+     background-color: rgba(0,0,0,0);
+ }
+
+ .content-class {
+    background-color: rgba(0,0,0,0);
+    border:none;
+    width:fit-content;
+ }
+
+ .button-close-photo {
+     position: absolute;
+     right: 15px;
+     top: 15px;
+     width: 3rem;
+     height: 3rem;
+     border-radius: 35rem;
+     font-size: 2rem;
+     padding: 0;
+     color: rgba(255, 255,255, 0.8);
+     background-color: rgba(0, 0, 0, 0.8);
+     border: 2px solid rgba(255, 255,255, 0.8);
+     transition: all .4s;
+
+ }
+ .button-close-photo:hover {
+    background-color: white;
+    color:black;
+ }
+
+ .delete-photo_close-icon {
+     margin: 0;
+     padding: 0;
+     text-align: center;
+     justify-content: center;
+     line-height: 0;
+ }
+

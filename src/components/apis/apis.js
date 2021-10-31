@@ -17,7 +17,8 @@ export const apiGetAlbumData = (albumId) => `${urlBase}/album/specificAlbum/${al
 
 export const apiDeleteAlbum = (albumId) => `${urlBase}/album/${albumId}/delete`;
 export const apiGetPhotosFromAlbum = (albumId) => `${urlBase}/album/${albumId}/photos`;
-export const apiDeleteAlbumPhoto = (albumId, photoId) => `${urlBase}/album/${albumId}/${photoId}`;
+export const apiDeleteAlbumPhotos = (albumId) => `${urlBase}/album/${albumId}/deletePhotos`
+
 
 //* ------- ABMC CUPONES
 export const apiGetCupones = `${urlBase}/coupon/get`;

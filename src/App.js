@@ -15,8 +15,10 @@ import {
   rutaAdminModificarAlbum,
   rutaAdminPedidos,
   rutaAdminSubirFotos,
-  rutaAdminTamaniosPrecios
+  rutaAdminTamaniosPrecios  
 } from './components/routes/RutasAdmin';
+
+
 
 
 import PantallaAlbumes from './components/abmAlbumes/PantallaAlbumes';
