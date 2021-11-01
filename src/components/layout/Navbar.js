@@ -15,9 +15,9 @@ const Navbar = () => {
         
     ]
     return (
-        <nav className="navbar  navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar  navbar-expand-lg navbar-dark ">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/"> <span style={{ color: '#E6AC00', fontWeight: '700' }}>Daggler</span> Studio </a>
+                <a className="navbar-brand" href="/"> <img src="../../../Logoboton.png" alt="logo" href="/" className="ms-3" style={{ height: '3rem'}}/> </a>
 
                 <button
                     className="navbar-toggler"
@@ -58,7 +58,7 @@ const Navbar = () => {
                         </span>
                         <ul className=" dropdown-menu dropdown-menu-end" aria-labelledby="dropdownPerfil">
                             <li><button className="dropdown-item" href="#">Cambiar contraseña</button></li>
-                            <li><button className="dropdown-item" onClick={() => { history.push({ pathname: rutaAdminLogout }) }}><b><i className="fas fa-power-off"></i> Cerrar Sesión</b> </button></li>
+                            <li><button className="dropdown-item d-flex justify-content-between" onClick={() => { history.push({ pathname: rutaAdminLogout }) }}>Cerrar Sesión <i className="fas fa-power-off my-auto"/> </button></li>
                         </ul>
                     </div>
                 </div>

@@ -53,7 +53,7 @@ function PantallaCategorias() {
                 <div className="row d-flex mx-2 mx-sm-0">
 
                     <div className="col-sm-9 px-0 text-center text-sm-start">
-                        <h1 className="my-auto">Categorías</h1>
+                        <h1 className="my-auto text-light">Categorías</h1>
                     </div>
 
                     <div className="col-sm-3 d-flex my-auto px-0 py-2 py-sm-0 ">

@@ -1,59 +1,232 @@
-.form-control{
-    border: 1px solid rgb(63, 62, 62);
+.form-control {
+    border: none;
+    background-color: rgb(71, 71, 86);
     border-radius: 35px;
+    color: white;
+
 }
 
-.form-control:focus{
-  
-    box-shadow:0 0 0 .2rem rgba(255,193,7, 0.5);
-    border-color: rgb(255,193,7);
-}
-.btn{
-    border-radius: 35px;
+.form-control:focus {
+    box-shadow: 0 0 0 .2rem #B40CC2;
+    border: none;
+    color: white;
+    background-color: #453847;
 }
 
-.btn-warning{
+.form-control::placeholder {
+    color: rgb(177, 177, 177);
+}
+
+.form-control:-webkit-autofill:active {
+
+    background-color: red;
+    color: blue;
+}
+
+
+
+.btn {
+    border-radius: 35px;
+    color: #fff;
+    cursor: pointer;
+    background-size: 400% 100%;
+    transition: all .4s;
+    border: none;
+}
+
+.btn:hover {
+    background-position: 100% 0;
+    transition: all .4s;
+}
+
+.btn-primary {
+    background-image: linear-gradient(to right, rgb(71, 71, 86), rgb(71, 71, 86), #B40CC2, #F572B9);
+}
+
+.btn-primary:focus {
+    box-shadow: none;
+}
+
+.btn-secondary {
+    background-image: linear-gradient(to right, rgb(71, 71, 86), rgb(71, 71, 86), #626262, #c2c2c2);
+}
+
+.btn-secondary:focus {
+    box-shadow: none;
+}
+
+.btn-danger {
+    background-image: linear-gradient(to right, rgb(71, 71, 86), rgb(71, 71, 86), #da1226, #ff485a);
+}
+
+.btn-danger:focus {
+    box-shadow: none;
+}
+
+.btn-warning {
     background-color: #ffc107;
-    font-weight:bold;
-}
-.btn-warning:hover{
-    background-color: #e6ac00;
-    font-weight:bold;
+    font-weight: bold;
 }
 
-.btn-light{
+.btn-warning:hover {
+    background-color: #e6ac00;
+    font-weight: bold;
+}
+
+.btn-light {
     background-color: #e7e7e7;
     font-weight: bold;
 }
-.btn-light:hover{
+
+.btn-light:hover {
     background-color: #cdcdcd;
-    font-weight:bold;
+    font-weight: bold;
 }
 
-.form-check-input:focus{
+.form-check-input:focus {
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.726)
 }
 
-.active{
+.active {
     text-underline-offset: 5px;
-    text-decoration:underline;
+    font-weight: 600;
+    text-decoration: 2px underline #B40CC2;
 }
-.font-weight-bold{
+
+
+.font-weight-bold {
     font-weight: bold;
 }
-.navbar-light{
-    box-shadow: 1px 3px 5px #b0b0b0;
+
+.navbar-dark {
+    box-shadow: none;
+    background-color: #181818;
 }
+
+
 
 .card {
     border-radius: 10px;
+    background-color: #282830;
+    border: 1px solid #34343f;
+    color: white;
+}
+
+.card-header {
+    border-bottom: 1px solid #34343f;
+}
+
+.bottom-squared {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
+
 .btn-inferior {
     border-radius: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
 
-  
+
+.dropdown-menu {
+    background-color: #1f2022;
+    border: 1px solid #303235;
+
+}
+
+.dropdown-item {
+    color: white;
+}
+
+.dropdown-item:hover {
+    background-color: #453847;
+    color: white;
+    border: 10px rgba(255, 255, 255, 0.9);
+}
+
+.modal-content {
+    background-color: #1f2022;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid #303235;
+}
+
+.modal-header {
+    border-bottom: 1px solid #303235;
+}
+
+.modal-footer {
+    border-top: 1px solid #303235;
+}
+
+
+.alert {
+    /* border-radius: 100px; */
+}
+.alert-danger {
+    color: white;
+    background-color: rgb(153, 34, 44);
+    border: 2px solid rgb(220, 53, 69);
+}
+
+.alert-success {
+    color: white;
+    background-color: rgb(20, 109, 68);
+    border: 2px solid rgb(25, 135, 84);
+}
+
+.alert-warning {
+    color: white;
+    background-color: rgb(177, 133, 0);
+    border: 2px solid rgb(255, 193, 7);
+}
+
+.alert-primary {
+    color: white;
+    background-color: rgb(16, 78, 170);
+    border: 2px solid rgb(13, 110, 253);
+}
+
+.alert-info {
+    background-color: rgba(0, 0, 0, 0);
+    color: #F572B9;
+    border: 2px solid #F572B9;
+}
+
+.alert-secondary {
+    color: white;
+    background-color: rgb(57, 56, 60);
+    border: 2px solid #6c757d;
+
+}
+
+
+.form-check-input{
+    background-color:rgb(71, 71, 86) ;
+    border: 1px solid rgb(122, 122, 143);
+}
+
+.form-check-input:checked {
+    background-color:  #F572B9;
+    border: 1px solid #F572B9;
+}
+
+.btn-close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 35rem;
+    font-size: 2rem;
+    padding: 0;
+    color: rgba(255, 255,255, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(255, 255,255, 0.8);
+    transition: all .4s;
+
+}
+.btn-:hover {
+   background-color: white;
+   color:black;
+}

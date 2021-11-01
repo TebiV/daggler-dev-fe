@@ -67,14 +67,14 @@ function PantallaAlbumes() {
                 <div className="row d-flex">
 
                     <div className="text-center text-md-start my-1 my-sm-auto col-md-auto">
-                        <h1 className="my-auto">Álbumes</h1>
+                        <h1 className="my-auto text-light">Álbumes</h1>
                     </div>
 
 
                     <div className="col-auto my-1 my-sm-auto">
                         <div className="dropdown">
                             <button
-                                className="btn btn-light dropdown-toggle"
+                                className="btn btn-secondary dropdown-toggle"
                                 type="button"
                                 id="dropdownFiltroCategoria"
                                 data-bs-toggle="dropdown"
@@ -104,7 +104,7 @@ function PantallaAlbumes() {
                         <form className="" onSubmit={(e) => { e.preventDefault() }}>
                             <input
                                 className="form-control"
-                                type="search"
+                                type="text"
                                 value={inputSearch}
                                 onChange={(e) => setInputSearch(e.target.value)}
                                 placeholder={"Buscar álbum..."}

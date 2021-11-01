@@ -71,11 +71,11 @@ function PantallaCupones() {
             
             <div className="row d-flex mx-1 mx-sm-0">
                 <div className="col-sm-12 col-md-3 px-0 text-center text-sm-start mb-2 mb-md-0">
-                    <h1 className="my-auto">Cupones</h1>
+                    <h1 className="my-auto text-light">Cupones</h1>
                 </div>
 
                 <div className="col-8 col-md-7 px-0 d-flex align-items-center justify-content-start justify-content-md-end">
-                    <span>Mostrar expirados</span>
+                    <span className="text-light">Mostrar expirados</span>
                     <label className="switch ms-2 col-4" >
                         <input type="checkbox" value={showDisabledCupon} onChange={toggleShowDisabledCupon}/>
                         <span className="slider round"></span>

@@ -202,7 +202,7 @@ const CreateAlbum = () => {
     return <>
         <div className="container mt-5">
             {/* TITULO */}
-            <h1 className="my-auto text-center mb-3">Nuevo álbum</h1>
+            <h1 className="my-auto text-center mb-3 text-light">Nuevo álbum</h1>
 
             <div className="row px-2 d-flex justify-content-center">
                 <div className="col-md-6 col-lg-5">
@@ -261,7 +261,7 @@ const CreateAlbum = () => {
 
                                     <input
                                         type={showPassword ? "text" : "password"}
-                                        autoComplete="off"
+                                        autoComplete="new-password"
                                         placeholder="Contraseña"
                                         className="form-control"
                                         name="password"
@@ -272,7 +272,7 @@ const CreateAlbum = () => {
                                     <button className={"EditAlbumData_button-ojito"}
                                         disabled={!album.privadoCheckbox}
                                         onClick={toggleShowPassword}>
-                                        <i className={showPassword ? "bi bi-eye" : "bi bi-eye-slash"} />
+                                        <i className={showPassword ? "bi bi-eye text-light" : "bi bi-eye-slash text-light"} />
                                     </button>
 
                                 </div>
@@ -297,7 +297,7 @@ const CreateAlbum = () => {
                                     <button className={"EditAlbumData_button-ojito"}
                                         disabled={!album.privadoCheckbox}
                                         onClick={toggleShowPassword}>
-                                        <i className={showPassword ? "bi bi-eye" : "bi bi-eye-slash"} />
+                                        <i className={showPassword ? "bi bi-eye text-light" : "bi bi-eye-slash text-light"} />
                                     </button>
 
                                 </div>
@@ -311,9 +311,9 @@ const CreateAlbum = () => {
                         <div className="album-cover-uploader_div mx-auto">
                             {portadaMostrar
                                 ?
-                                <img src={portadaMostrar} className="album-cover-uploader__img " alt="portada" />
+                                <img src={portadaMostrar} className="album-cover-uploader__img" alt="portada" />
                                 : <div className="my-auto">
-                                    <h1 className="text-center"><i className="bi bi-camera"></i> Portada</h1>
+                                    <h1 className="text-center text-light"><i className="bi bi-camera"></i> Portada</h1>
                                     {invalidCover && <h6 className="text-danger"><i className="bi bi-exclamation-circle-fill" /> Seleccione una portada</h6>}
                                 </div>
                             }

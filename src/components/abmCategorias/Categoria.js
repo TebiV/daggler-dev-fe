@@ -13,7 +13,7 @@ function Categoria(props) {
 
     return (
         <div className="col-md-4 col-xl-3 col-6 my-2">
-            <div className="card">
+            <div className="card bottom-squared">
                 <div className="card-body">
                     <h3 className="card-title text-center">{props.categoria.name}</h3>                    
                 </div>
@@ -22,7 +22,7 @@ function Categoria(props) {
                 <button className="col-6 btn btn-primary btn-sm btn-inferior" onClick={handleEdit}>
                     Editar
                 </button>
-                <button className="col-6 btn btn-outline-danger btn-sm btn-inferior" onClick={handleDelete}>
+                <button className="col-6 btn btn-danger btn-sm btn-inferior" onClick={handleDelete}>
                     Eliminar
                 </button>
             </div>

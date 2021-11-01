@@ -227,7 +227,7 @@ const EditAlbumData = () => {
     return <>
         <div className="container mt-5">
             {/* TITULO */}
-            <h1 className="my-auto text-center mb-3">Editar datos de álbum</h1>
+            <h1 className="my-auto text-center mb-3 text-light">Editar datos de álbum</h1>
 
             <div className="row px-2 d-flex justify-content-center">
                 <div className="col-md-6 col-lg-5">

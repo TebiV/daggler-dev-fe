@@ -15,10 +15,10 @@ function Precio(props) {
     return (
 
         <div className="col-lg-4 col-xl-3 col-md-6 my-2">
-            <div className="card " >
+            <div className="card bottom-squared" >
                 <div className="card-body ">
                     <h3 className="card-title text-center">{props.precio.name}</h3>
-                    <p className="card-text">Precio: ${props.precio.price}</p>
+                    <p className="card-text text-secondary">Precio: ${props.precio.price}</p>
                 </div>
             </div>
 
@@ -26,7 +26,7 @@ function Precio(props) {
                 <button className="col-6 btn btn-primary btn-sm btn-inferior" onClick={handleEditar}>
                     Editar
                 </button>
-                <button className="col-6 btn btn-outline-danger btn-sm btn-inferior" onClick={handleEliminar}>
+                <button className="col-6 btn btn-danger btn-sm btn-inferior" onClick={handleEliminar}>
                     Eliminar
                 </button>
             </div>

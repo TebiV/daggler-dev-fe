@@ -1,0 +1,14 @@
+.logo-login {
+    width: 10rem;
+    margin-bottom: 3rem;
+    margin-top:1rem;
+}
+
+.card-login {
+    width: 25rem;
+}
+
+.container-login {
+    width: 100vw;
+    height: 90vh;
+}

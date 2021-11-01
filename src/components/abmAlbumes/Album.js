@@ -12,7 +12,7 @@ function Album(props) {
 
     return (
         <div className="col-md-4 col-lg-3 col-6 my-1">
-            <div className="card mt-2">
+            <div className="card bottom-squared mt-2">
 
                 <div className="card-body">
                     <h5 className="card-title mb-3">{props.album.name}</h5>
@@ -59,8 +59,8 @@ function Album(props) {
                             </li>
                         </ul>
                     </div>
-                    <button className="btn btn-outline-danger btn-sm btn-inferior col-6" onClick={handleDelete}>
-                        Eliminar
+                    <button className="btn btn-danger btn-sm btn-inferior col-6" onClick={handleDelete}>
+                         Eliminar
                     </button>
                 </div>
             </div>

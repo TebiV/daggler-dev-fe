@@ -37,11 +37,11 @@ function DeleteAlbum(props) {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
+                <button className="btn btn-outline-danger" onClick={deleteAlbum}>
+                        <i className="fas fa-trash"></i> Eliminar
+                    </button>
                     <button className="btn btn-primary" onClick={handleClose}>
                         Cancelar
-                    </button>
-                    <button className="btn btn-outline-danger" onClick={deleteAlbum}>
-                        <i className="fas fa-trash"></i> Eliminar
                     </button>
                 </Modal.Footer>
             </Modal>

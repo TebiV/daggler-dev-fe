@@ -4,6 +4,7 @@ import { rutaAdminAlbumes } from "../routes/RutasAdmin";
 import { useSelector, useDispatch } from 'react-redux';
 import { SET_TOKEN } from "../../redux/actions/TokenActions";
 import { useHistory } from "react-router";
+import '../../css/Login_css.css'
 
 function Login() {
     //redux things
@@ -71,12 +72,10 @@ function Login() {
     return (
         <>
             {loginFallido.isError ? <Error mensaje={loginFallido.errorMessage} setError={setLoginFallido} /> : null}
-            <div className="container-fluid d-flex justify-content-center align-items-center" style={{ width: "100vw", height: "100vh", background: "rgb(245,245,245" }}>
-                <div className="card text-center p-4 my-auto" style={{ width: "320px", borderRadius: "10px" }}>
+            <div className="container d-flex justify-content-center align-items-center container-login">
+                <div className="card text-center p-4 my-auto card-login" >
                     <form onSubmit={handleIniciarSesion}>
-                        <h3 className=" mb-4"><span style={{ color: '#E6AC00', fontWeight: '700' }}>Daggler</span> Studio</h3>
-
-                        <h1 className="mb-4">Ingreso</h1>
+                        <img src="../../../Logoboton.png" alt="logo" className="logo-login"/>
 
 
                         <input
@@ -96,9 +95,7 @@ function Login() {
                             name="password"
                         />
                         <button
-                            type="submit"
-                            className="btn btn-warning col-12"
-                            style={{ background: '#FFCF00' }}
+                            className="btn btn-primary col-12"
                         >
                             Ingresar
                         </button>

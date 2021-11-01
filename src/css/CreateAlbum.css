@@ -118,11 +118,12 @@
 
   .album-cover-uploader_div{
     display: flex;
-    background-color: #f3f3f3;
+    background-color: #282830;
     width: 19rem;
     height: 24.9rem;
     border-radius: 10px;
-    border: 0.5px solid black;
+    border:1px solid #34343f;
+
     z-index: 0;
     overflow: hidden;
     align-content: center;
