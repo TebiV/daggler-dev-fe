@@ -1,0 +1,38 @@
+.project__input{
+    opacity: 100%;
+    visibility: initial;
+    position: absolute;
+}
+.project__label{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+}
+.project__div{
+    position: relative;
+    height: 20rem;
+    width: 100%;
+    background-color: #282830;
+    border-radius: 10px;
+
+
+}
+.plus-project{
+    
+    width: 100%;
+    height: 100%;
+    margin: auto auto;
+    font-size: 43px;
+    
+    color: white;
+}
+.plus-fs-button{
+    background-color: #0000;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+}

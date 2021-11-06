@@ -13,6 +13,7 @@ export const rutaAdminCupones = '/cupones';
 export const rutaAdminTamaniosPrecios = '/tamanos-y-precios';
 export const rutaAdminLogin = '/login';
 export const rutaAdminLogout = '/logout';
+export const rutaAdminHomepage = '/homepage'
 
 
 export const rutaAdminCategorias = '/categorias';

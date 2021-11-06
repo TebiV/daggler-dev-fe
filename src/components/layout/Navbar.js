@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { rutaAdminAlbumes, rutaAdminLogout, rutaAdminPedidos, rutaAdminTamaniosPrecios, rutaAdminCategorias, rutaAdminCupones, rutaAdminPrecios } from '../routes/RutasAdmin';
+import { rutaAdminAlbumes, rutaAdminLogout, rutaAdminPedidos, rutaAdminTamaniosPrecios, rutaAdminCategorias, rutaAdminCupones, rutaAdminPrecios, rutaAdminHomepage } from '../routes/RutasAdmin';
 import { useHistory } from 'react-router';
 
 const Navbar = () => {
@@ -12,7 +12,7 @@ const Navbar = () => {
         { id: "3", nombre: 'Cupones', ruta: rutaAdminCupones },
         { id: "4", nombre: 'Categorías', ruta: rutaAdminCategorias },
         { id: "5", nombre: 'Tamaños y precios', ruta: rutaAdminTamaniosPrecios },
-        { id: "6", nombre: 'Homepage', ruta: "asdasd" },
+        { id: "6", nombre: 'Homepage', ruta: rutaAdminHomepage },
         
     ]
     return (

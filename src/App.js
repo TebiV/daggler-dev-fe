@@ -15,7 +15,8 @@ import {
   rutaAdminModificarAlbum,
   rutaAdminPedidos,
   rutaAdminSubirFotos,
-  rutaAdminTamaniosPrecios  
+  rutaAdminTamaniosPrecios,
+  rutaAdminHomepage  
 } from './components/routes/RutasAdmin';
 
 
@@ -35,6 +36,7 @@ import EditAlbumData from './components/abmAlbumes/EditAlbumData';
 import PantallaPedidos from './components/pedidos/PantallaPedidos';
 import { useSelector } from 'react-redux';
 import DeleteAlbumPhotos from './components/abmAlbumes/deleteAlbumPhotos/DeleteAlbumPhotos';
+import HomepageConfig from './components/configHomepage/HomepageConfig';
 
 
 function App() {
@@ -61,6 +63,7 @@ function App() {
             <Route exact path={rutaAdminCategorias} component={() => <RequireAuth Component={PantallaCategorias} />} />
             <Route exact path={rutaAdminCupones} component={() => <RequireAuth Component={PantallaCupones} />} />
             <Route exact path={rutaAdminDeleteFotos} component={() => <RequireAuth Component={DeleteAlbumPhotos} />} />
+            <Route exact path={rutaAdminHomepage} component={()=> <RequireAuth Component={HomepageConfig} />} />
 
 
           </Switch>

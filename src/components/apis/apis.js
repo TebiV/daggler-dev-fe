@@ -40,3 +40,7 @@ export const apiCreatePrice = `${urlBase}/price`;
 export const apiEditPrice = (precioId) => `${urlBase}/price/${precioId}`;
 export const apiDeletePrice = (precioId) => `${urlBase}/price/${precioId}`;
 
+
+//* --------CONFIG HOMEPAGE
+export const apiUploadBackground = `${urlBase}/home/updatePhoto`
+
