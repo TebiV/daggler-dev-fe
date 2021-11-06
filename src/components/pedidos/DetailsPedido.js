@@ -13,16 +13,15 @@ const DetailsPedido = (props) => {
 	}
 	return (
 		<>
-			<Modal show={props.show} onHide={props.handleClose} centered dialogClassName="modal-fullscreen">
+			<Modal show={props.show} onHide={props.handleClose} centered dialogClassName="modal-lg" >
 				<Modal.Header closeButton>
 					<h1 className="my-auto">PEDIDO N° {props.pedido.pedido}</h1>
 				</Modal.Header>
-				<Modal.Body>
+				<Modal.Body >
 					<div className="container">
 						<div className="row justify-content-between">
 							<div className="d-flex row m-0 p-0 justify-content-between">
 								<div className="d-flex row m-0 p-0 col-md-auto">
-									
 									<div className="col-12 col-sm-6 col-md-auto pt-3 px-3">
 										<div className="alert alert-info p-1 m-0 text-center">
 											{props.pedido.shipping ? (
@@ -38,7 +37,7 @@ const DetailsPedido = (props) => {
 											)}
 										</div>
 									</div>
-                                    <div className="col-12 col-sm-6 col-md-auto p-3 px-3">
+									<div className="col-12 col-sm-6 col-md-auto p-3 px-3">
 										<StatePedido state={props.pedido.state} />
 									</div>
 								</div>
@@ -103,14 +102,13 @@ const DetailsPedido = (props) => {
 										<h3 className="my-1 text-center">Observaciones</h3>
 									</div>
 									<div className="card-body">
-										<h5>{props.pedido.notes.length >0 ? props.pedido.notes : "Sin observaciones."}</h5>
+										<h5>{props.pedido.notes.length > 0 ? props.pedido.notes : "Sin observaciones."}</h5>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</Modal.Body>
-				<Modal.Footer></Modal.Footer>
 			</Modal>
 		</>
 	);

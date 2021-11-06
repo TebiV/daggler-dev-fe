@@ -215,7 +215,7 @@ function EditCupon(props) {
 
 
     return (
-        <Modal show={props.show} onHide={handleClose} onShow={handleShow}>
+        <Modal show={props.show} onHide={handleClose} onShow={handleShow} centered>
             <Modal.Header >
                 <Modal.Title>Editar Cupón</Modal.Title>
             </Modal.Header>

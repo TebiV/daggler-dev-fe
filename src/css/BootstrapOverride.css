@@ -1,26 +1,20 @@
 .form-control {
-    border: none;
-    background-color: rgb(71, 71, 86);
+    border: 2px solid rgb(59, 59, 71);
+    background-color: rgb(29,30,32);
     border-radius: 35px;
     color: white;
 
 }
 
 .form-control:focus {
-    box-shadow: 0 0 0 .2rem #B40CC2;
-    border: none;
+    box-shadow: 0 0 0 .1rem #B40CC2;
+    border: 2px solid #B40CC2;
     color: white;
     background-color: #453847;
 }
 
 .form-control::placeholder {
     color: rgb(177, 177, 177);
-}
-
-.form-control:-webkit-autofill:active {
-
-    background-color: red;
-    color: blue;
 }
 
 
@@ -30,21 +24,22 @@
     color: #fff;
     cursor: pointer;
     background-size: 400% 100%;
-    transition: all .4s;
+    transition: focus .4s;
     border: none;
 }
 
 .btn:hover {
-    background-position: 100% 0;
+    background-position: 100% 0 ;
     transition: all .4s;
 }
 
 .btn-primary {
-    background-image: linear-gradient(to right, rgb(71, 71, 86), rgb(71, 71, 86), #B40CC2, #F572B9);
+    background-image: linear-gradient(to right, rgb(59, 59, 71), rgb(59, 59, 71), #B40CC2, #F572B9);
 }
 
 .btn-primary:focus {
     box-shadow: none;
+    background-position: 100% 0 ;
 }
 
 .btn-secondary {
@@ -53,14 +48,18 @@
 
 .btn-secondary:focus {
     box-shadow: none;
+    background-position: 100% 0 ;
+
 }
 
 .btn-danger {
-    background-image: linear-gradient(to right, rgb(71, 71, 86), rgb(71, 71, 86), #da1226, #ff485a);
+    background-image: linear-gradient(to right, rgb(59, 59, 71), rgb(59, 59, 71), #da1226, #ff485a);
 }
 
 .btn-danger:focus {
     box-shadow: none;
+    background-position: 100% 0 ;
+
 }
 
 .btn-warning {
@@ -145,7 +144,7 @@
 }
 
 .modal-content {
-    background-color: #1f2022;
+    background-color: rgb(40,40,48);
     color: white;
     border-radius: 10px;
     border: 1px solid #303235;
@@ -158,10 +157,8 @@
 .modal-footer {
     border-top: 1px solid #303235;
 }
-
-
-.alert {
-    /* border-radius: 100px; */
+.modal-lg {
+    width:90%;
 }
 .alert-danger {
     color: white;
@@ -211,22 +208,21 @@
     border: 1px solid #F572B9;
 }
 
-.btn-close {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 35rem;
-    font-size: 2rem;
-    padding: 0;
-    color: rgba(255, 255,255, 0.8);
-    background-color: rgba(0, 0, 0, 0.8);
-    border: 2px solid rgba(255, 255,255, 0.8);
-    transition: all .4s;
+/*Scrollbar*/
+::-webkit-scrollbar{
+    width: 1rem;
+    
+    
+}
+::-webkit-scrollbar-track {
+    background: #282830;
+    border-radius: 7px;
+}
+::-webkit-scrollbar-thumb {
+    background: #414347;
+    border-radius: 7px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 
-}
-.btn-:hover {
-   background-color: white;
-   color:black;
-}

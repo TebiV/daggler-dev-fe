@@ -4,6 +4,7 @@
   display: inline-block;
   width: 60px;
   height: 34px;
+  
 }
 
 /* Hide default HTML checkbox */
@@ -21,7 +22,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #2f2e2e;
+  background-color: rgb(59, 59, 71);
   -webkit-transition: .4s;
   transition: all .4s;
 }
@@ -43,7 +44,8 @@ input:checked+.slider {
 }
 
 input:focus+.slider {
-  box-shadow: 0 0 1px #B40CC2;
+  /* box-shadow: 0 0 1px #B40CC2; */
+  box-shadow: none;
 }
 
 input:checked+.slider:before {

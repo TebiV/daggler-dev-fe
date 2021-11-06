@@ -12,6 +12,7 @@ const Navbar = () => {
         { id: "3", nombre: 'Cupones', ruta: rutaAdminCupones },
         { id: "4", nombre: 'Categorías', ruta: rutaAdminCategorias },
         { id: "5", nombre: 'Tamaños y precios', ruta: rutaAdminTamaniosPrecios },
+        { id: "6", nombre: 'Homepage', ruta: "asdasd" },
         
     ]
     return (
