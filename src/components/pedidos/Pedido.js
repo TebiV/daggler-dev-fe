@@ -2,7 +2,7 @@ import React from "react";
 import StatePedido from "./StatePedido";
 
 const Pedido = (props) => {
-	const stringDate = props.pedido.date.getDate() + "/" + props.pedido.date.getMonth() + "/" + props.pedido.date.getFullYear();
+	const stringDate = props.pedido.date.getDate() + "/" + (props.pedido.date.getMonth()+1) + "/" + props.pedido.date.getFullYear();
 	const stringName = props.pedido.lastname[0].toUpperCase() + props.pedido.lastname.slice(1).toLowerCase() + ", " + props.pedido.name[0].toUpperCase() + props.pedido.name.slice(1).toLowerCase();
 
 	return (

@@ -25,6 +25,7 @@ export const apiGetCupones = `${urlBase}/coupon/get`;
 export const apiCreateCupon = `${urlBase}/coupon/new`;
 export const apiEditCupon = (cuponId) => `${urlBase}/coupon/update/${cuponId}`
 export const apiDeleteCupon = (cuponId) => `${urlBase}/coupon/delete/${cuponId}`
+export const apiGetCuponById = (cuponId) => `${urlBase}/coupon/getSpecific/${cuponId}`
 
 
 //* ------- ABMC CATEGORIAS

@@ -1,37 +1,40 @@
-import React from 'react'
-import '../../css/BootstrapOverride.css'
+import React from "react";
+import "../../css/BootstrapOverride.css";
 
 function DisabledCupon(props) {
+	let fechaVencimiento = props.cupon.expireDate.slice(0, 10).split("-");
 
-    let fechaVencimiento = props.cupon.expireDate.slice(0,10).split('-')
+	let visibility = props.show ? "" : "none";
 
-    let visibility = props.show ? "" : "none"
-
-    return (
-        <> <div className="col-lg-4 col-xl-3 col-md-6 my-1" style={{display: visibility}}>
-            <div className="card my-2" style={{backgroundColor: "rgb(245,245,245)"}}>
-                <div className="card-body ">
-                    <h4 className="card-title text-center mb-3">{props.cupon.name}</h4>
-                    <h5 className="">Descuento: <b>{props.cupon.itsPorcentual ? (props.cupon.price + "%") : ("$" + props.cupon.price)}</b></h5>
-                    <h6 className="">Vencimiento: <b>{fechaVencimiento[2] + "/" + fechaVencimiento[1] + "/" + fechaVencimiento[0]}</b></h6>
-                    <h6 className="">Usos restantes: <b>{props.cupon.uses}</b></h6>
-                    <div className="row mx-0 mt-3">
-                        <div className="col-6 pe-2 ps-0">
-                            <button className="btn btn-primary btn-sm w-100 disabled">
-                                <i className="fas fa-edit"></i> Editar
-                            </button>
-                        </div>
-                        <div className="col-6 pe-0 ps-2">
-                            <button className="btn btn-outline-danger btn-sm w-100 disabled">
-                                <i className="fas fa-trash"></i> Eliminar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </>
-    );
+	return (
+		<>
+			<div className="col-lg-4 col-xl-3 col-md-6 my-2 " style={{ display: visibility }}>
+				<div className="card bottom-squared" style={{ backgroundColor: '#1f2022'}}>
+					<div className="card-header ">
+						<h4 className="card-title text-center my-1 text-secondary">
+							<span>{props.cupon.name}</span> - {props.cupon.itsPorcentual ? props.cupon.price + "%" : "$" + props.cupon.price}
+						</h4>
+					</div>
+					<div className="card-body">
+						<h6 className="text-secondary">
+							Vencimiento: <b>{fechaVencimiento[2] + "/" + fechaVencimiento[1] + "/" + fechaVencimiento[0]}</b>
+						</h6>
+						<h6 className="text-secondary">
+							Usos restantes: <b>{props.cupon.uses}</b>
+						</h6>
+					</div>
+				</div>
+				<div className="btn-group w-100">
+					<button className="col-6 btn btn-primary btn-sm btn-inferior disabled">
+						Editar
+					</button>
+					<button className="col-6 btn btn-danger btn-sm btn-inferior disabled">
+						Eliminar
+					</button>
+				</div>
+			</div>
+		</>
+	);
 }
 
 export default DisabledCupon;
